@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Live.me Demo: iOS-åºç¡ç­-SDK-å¼åæå</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Live.me Demo
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('md_i_o_s-_xC3_xA5_xC2_x9F_xC2_xBA_xC3_xA7_xC2_xA1_xC2_x80_xC3_xA7_xC2_x8F_xC2_xAD-_s_d_k-_xC3_xA76d5e6f19d3cda84ec287c6dd5dacc96.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">iOS-åºç¡ç­-SDK-å¼åæå </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h2>1.概述</h2>
+<p>CC基础版SDK 是一个适用于iOS平台的云课堂SDK，使用此SDK可以与CC视频云服务进行对接，在iOS端使用CC视频的云课堂功能。</p>
+<h3>1.1 功能特性</h3>
+<table class="doxtable">
+<tr>
+<th align="left">功能 </th><th align="left">描述 </th><th align="left">备注  </th></tr>
+<tr>
+<td align="left">推流 </td><td align="left">支持推流到服务器 </td><td align="left"></td></tr>
+<tr>
+<td align="left">拉流 </td><td align="left">支持从服务器订阅流 </td><td align="left"></td></tr>
+<tr>
+<td align="left">获取流状态 </td><td align="left">支持获取流的状态(发报数、收报数、丢包数、延时) </td><td align="left"></td></tr>
+<tr>
+<td align="left">前后摄像头切换 </td><td align="left">支持手机前后摄像头切换 </td><td align="left"></td></tr>
+<tr>
+<td align="left">后台播放 </td><td align="left">支持直播退到后台只播放音频 </td><td align="left"></td></tr>
+<tr>
+<td align="left">支持https协议 </td><td align="left">支持接口https请求 </td><td align="left"></td></tr>
+</table>
+<h3>1.2 阅读对象</h3>
+<p>本文档为技术文档，需要阅读者：</p>
+<ul>
+<li>具备基本的iOS开发能力</li>
+<li>准备接入CC视频的云课堂SDK相关功能</li>
+</ul>
+<h3>1.3 SDK架构</h3>
+<ul>
+<li>支持的CPU架构有armv7,arm64</li>
+<li>支持的最低系统版本iOS8</li>
+</ul>
+<h2>2.开发准备</h2>
+<p>开发所需相关账号请咨询CC视频客户人员提供；</p>
+<h3>2.1 开发环境</h3>
+<ul>
+<li>Xcode : iOS 开发IDE</li>
+</ul>
+<p>### 2.2 Xcode配置 </p><div class="fragment"><div class="line">1. Build Settings   -&gt;    Build Options  -&gt;   Enable Bitcode   -&gt;       NO</div></div><!-- fragment --><div class="fragment"><div class="line">2. Build Settings -&gt; Always Enbed Swift Standar Libraries -&gt;YES</div></div><!-- fragment --><div class="fragment"><div class="line">3. 工程加入动态库 CCClassRoomBasic.framework</div></div><!-- fragment --><div class="fragment"><div class="line">4. 添加需要的系统库:VideoToolbox.framework、libstdc++.tbd、libicucore.tbd</div></div><!-- fragment --><div class="fragment"><div class="line">5. General-&gt;Embedded Binaries中添加动态库 CCClassRoomBasic.framework</div></div><!-- fragment --><div class="fragment"><div class="line">6. Build Settings   -&gt;   Other Linker Flags 添加-ObjC</div></div><!-- fragment --><div class="fragment"><div class="line">7. Capabilities -&gt; Background Modes -&gt; Audio，AirPlay，And Picture in Picture</div></div><!-- fragment --><div class="fragment"><div class="line">8. Info.plist 增加Privacy - Microphone Usage Description、Privacy - Photo Library Usage Description、Privacy - Camera Usage Description、Privacy - Calendars Usage Description</div></div><!-- fragment --><h2>3.快速集成</h2>
+<p>注：快速集成主要提供的是推流和拉流(核心功能)。 基本的直播流程可参考Demo的 loginAction 功能函数；</p>
+<p>首先，需要下载最新版本的SDK，下载地址为：<a href="https://github.com/CCVideo/Live_Android_Play_SDK">Live_iOS_Play_SDK</a></p>
+<h3>3.1 导入framework</h3>
+<table class="doxtable">
+<tr>
+<th align="left">名称 </th><th align="left">描述  </th></tr>
+<tr>
+<td align="left">CCClassRoomBasic.framework </td><td align="left">云课堂业务SDK </td></tr>
+</table>
+<h3>3.2 framework添加Embedded Binaries</h3>
+<p>由于framework是动态库需要将CCClassRoomBasic.framework添加到Embedded Binaries</p>
+<h3>3.3 配置依赖系统库</h3>
+<p>工程需要下列系统库:libz.thd、libstdc++.thd、libicucore.thd、VideoToolBox.framework </p><h3>3.4 创建SDK实例</h3>
+<p>在需要使用SDK的文件引入头文件</p>
+<div class="fragment"><div class="line">import &lt;CCClassRoomBasic/CCClassRoomBasic.h&gt;</div></div><!-- fragment --><p>创建SDK实例： </p><div class="fragment"><div class="line">- (void)createBasic</div><div class="line">{</div><div class="line">    CCEncodeConfig *config = [[CCEncodeConfig alloc] init];</div><div class="line">    config.reslution = CCResolution_HIGH;</div><div class="line"></div><div class="line">    self.streamerBasic = [CCStreamerBasic sharedStreamer];</div><div class="line">    self.streamerBasic.videoMode = CCVideoPortrait;</div><div class="line">    [self.streamerBasic addObserver:self];</div><div class="line">}</div></div><!-- fragment --><p> 系统代理回调</p>
+<div class="fragment"><div class="line">//视频流add回调</div><div class="line">#define WS(weakSelf)  __weak __typeof(&amp;*self)weakSelf = self;</div><div class="line">#pragma mark - 流</div><div class="line">- (void)onServerDisconnected</div><div class="line">{</div><div class="line">    [self.streamerBasic leave:^(BOOL result, NSError *error, id info) {</div><div class="line"></div><div class="line">    }];</div><div class="line">    WS(ws);</div><div class="line">    dispatch_async(dispatch_get_main_queue(), ^{</div><div class="line">      //退出当前控制器</div><div class="line">      [ws.navigationController popViewControllerAnimated:NO];</div><div class="line">    });</div><div class="line">}</div><div class="line"></div><div class="line">- (void)onStreamAdded:(CCStream*)stream</div><div class="line">{</div><div class="line">    if ([stream.userID isEqualToString:self.stremer.userID])</div><div class="line">    {</div><div class="line">        //自己的流不订阅</div><div class="line">        self.localStream = stream;</div><div class="line">        return;</div><div class="line">    }</div><div class="line">    if (stream.type == CCStreamType_Mixed)</div><div class="line">    {</div><div class="line">        self.mixedStream = stream;</div><div class="line">    }</div><div class="line">    //订阅视频流</div><div class="line">    [self autoSub:stream];</div><div class="line">}</div><div class="line"></div><div class="line">- (void)onStreamRemoved:(CCStream*)stream</div><div class="line">{</div><div class="line">    if ([stream.userID isEqualToString:self.stremer.userID])</div><div class="line">    {</div><div class="line">        //自己的流没有订阅</div><div class="line">        return;</div><div class="line">    }</div><div class="line">    [self autoUnSub:stream];</div><div class="line">}</div><div class="line"></div><div class="line">- (void)onStreamError:(NSError *)error forStream:(CCStream *)stream</div><div class="line">{</div><div class="line">    CCLog(@&quot;%s__%d__%@__%@&quot;, __func__, __LINE__, error, stream.streamID);</div><div class="line">}</div><div class="line"></div><div class="line">- (void)autoSub:(CCStream *)stream</div><div class="line">{</div><div class="line">    WS(ws);</div><div class="line">  [self.stremer subcribeWithStream:stream qualityLevel:0 completion:^(BOOL result, NSError *error, id info) {</div><div class="line">        if (result)</div><div class="line">        {</div><div class="line">            [weakSelf.streamView showStreamView:info];</div><div class="line">        }</div><div class="line">        else</div><div class="line">        {</div><div class="line">            [weakSelf showError:error];</div><div class="line">        }</div><div class="line">    }];</div><div class="line">}</div></div><!-- fragment --> <h3>3.5 加入直播间和直播间开始结束的接口</h3>
+<p>加入直播间的接口 </p><div class="fragment"><div class="line">CCEncodeConfig *config = [[CCEncodeConfig alloc] init];</div><div class="line">config.reslution = CCResolution_HIGH;</div><div class="line">//具体参见demo</div><div class="line">NSString *authSessionID = self.info[@&quot;data&quot;][@&quot;sessionid&quot;];</div><div class="line">NSString *user_id = self.info[@&quot;data&quot;][@&quot;userid&quot;];</div><div class="line">self.stremer = [[CCStreamerBasic alloc] init];</div><div class="line">self.stremer.videoMode = CCVideoPortrait;</div><div class="line">[self.stremer addObserver:self];</div><div class="line">[self.stremer joinWithAccountID:self.viewerId sessionID:authSessionID config:config areaCode:nil events:@[@&quot;connect&quot;,                     @&quot;disconnect&quot;,@&quot;reconnecting&quot;,@&quot;reconnect_failed&quot;,@&quot;reconnect&quot;] completion:^(BOOL result, NSError *error, id info) {</div><div class="line"></div><div class="line"></div><div class="line">}];</div></div><!-- fragment --><p> 开始直播 </p><div class="fragment"><div class="line">[weakSelf.stremer startLive:^(BOOL result, NSError *error, id info) {</div><div class="line">                       if (result)</div><div class="line">                       {</div><div class="line">                           CCLog(@&quot;%s__%d&quot;, __func__, __LINE__);</div><div class="line">                       }</div><div class="line">                       else</div><div class="line">                       {</div><div class="line">                           [weakSelf showError:error];</div><div class="line">                       }</div><div class="line">                   }];</div></div><!-- fragment --><p>结束直播 </p><div class="fragment"><div class="line">- (void)stopLive</div><div class="line">{</div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line">    [self.stremer stopLive:^(BOOL result, NSError *error, id info) {</div><div class="line">        if (result)</div><div class="line">        {</div><div class="line">            CCLog(@&quot;%s__%d&quot;, __func__, __LINE__);</div><div class="line">        }</div><div class="line">        else</div><div class="line">        {</div><div class="line">            [weakSelf showError:error];</div><div class="line">        }</div><div class="line">    }];</div><div class="line">}</div></div><!-- fragment --><h3>3.6 推流调用接口</h3>
+<p>推流 </p><div class="fragment"><div class="line">- (void)publish</div><div class="line">{</div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line">    [self.stremer publish:^(BOOL result, NSError *error, id info) {</div><div class="line">        if (result)</div><div class="line">        {</div><div class="line">            CCLog(@&quot;%s__%d&quot;, __func__, __LINE__);</div><div class="line">        }</div><div class="line">        else</div><div class="line">        {</div><div class="line">            [weakSelf showError:error];</div><div class="line">        }</div><div class="line">    }];</div><div class="line">}</div></div><!-- fragment --><h3>3.7 结束推流接口</h3>
+<div class="fragment"><div class="line">- (void)unpublish</div><div class="line">{</div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line">    [self.stremer unPublish:^(BOOL result, NSError *error, id info) {</div><div class="line">        if (result)</div><div class="line">        {</div><div class="line">            CCLog(@&quot;%s__%d&quot;, __func__, __LINE__);</div><div class="line">        }</div><div class="line">        else</div><div class="line">        {</div><div class="line">            [weakSelf showError:error];</div><div class="line">        }</div><div class="line">    }];</div><div class="line">}</div></div><!-- fragment --><h3>3.8 订阅流接口调用</h3>
+<div class="fragment"><div class="line">- (void)autoSub:(CCStream *)stream</div><div class="line">{</div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line">    [self.stremer subcribeWithStream:stream qualityLevel:0 completion:^(BOOL result, NSError *error, id info) {</div><div class="line">        if (result)</div><div class="line">        {</div><div class="line">            [weakSelf.streamView showStreamView:info];</div><div class="line">        }</div><div class="line">        else</div><div class="line">        {</div><div class="line">            [weakSelf showError:error];</div><div class="line">        }</div><div class="line">    }];</div><div class="line">}</div></div><!-- fragment --><h3>3.9 取消订阅流接口调用</h3>
+<div class="fragment"><div class="line">- (void)autoUnSub:(CCStream *)stream</div><div class="line">{</div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line">    [self.stremer unsubscribeWithStream:stream completion:^(BOOL result, NSError *error, id info) {</div><div class="line">        if (result)</div><div class="line">        {</div><div class="line">            [weakSelf.streamView removeStreamView:info];</div><div class="line">        }</div><div class="line">        else</div><div class="line">        {</div><div class="line">            [weakSelf showError:error];</div><div class="line">        }</div><div class="line">    }];</div><div class="line">}</div></div><!-- fragment --><h3>3.10 切换摄像头接口调用</h3>
+<div class="fragment"><div class="line">- (void)changeCamera</div><div class="line">{</div><div class="line">    [self.stremer setCameraType:self.cameraIsBack ? AVCaptureDevicePositionBack : AVCaptureDevicePositionFront];</div><div class="line">}</div></div><!-- fragment --><h2>4.功能使用</h2>
+<h3>4.1 预览</h3>
+<p>预览是将初始化相机的流渲染出来： </p><div class="fragment"><div class="line">- (void)startPreview:(CCComletionBlock)completion;</div></div><!-- fragment --><h3>4.2 开始直播</h3>
+<p>点击开始直播，成功以后，进行推流和拉流操作：</p><ul>
+<li>开始直播方法 <div class="fragment"><div class="line">- (BOOL)startLive:(CCComletionBlock)completion;</div></div><!-- fragment --> <h3>4.3 结束直播</h3>
+</li>
+</ul>
+<p>结束当前直播：</p><ul>
+<li>结束直播方法 <div class="fragment"><div class="line">- (BOOL)stopLive:(CCComletionBlock)completion;</div></div><!-- fragment --> <h3>4.4 推流/取消推流</h3>
+</li>
+</ul>
+<p>推本地相机的流到服务器：</p><ul>
+<li>推流的方法 <div class="fragment"><div class="line">- (BOOL)publish:(CCComletionBlock)completion;</div></div><!-- fragment --></li>
+</ul>
+<p>取消推相机本地流到服务器：</p><ul>
+<li>取消推流的方法 <div class="fragment"><div class="line">- (BOOL)unPublish:(CCComletionBlock)completion;</div></div><!-- fragment --> <h3>4.5 拉流/取消拉流</h3>
+</li>
+</ul>
+<p>从服务端拉流：</p><ul>
+<li>拉流方法 <div class="fragment"><div class="line">- (BOOL)subcribeWithStream:(CCStream *)stream qualityLevel:(int)level completion:(CCComletionBlock)completion;</div></div><!-- fragment --> 取消从服务端拉流：</li>
+<li>取消拉流方法 <div class="fragment"><div class="line">- (BOOL)unsubscribeWithStream:(CCStream *)stream completion:(CCComletionBlock)completion;</div></div><!-- fragment --> <h3>4.6 添加RTMP推流/取消RTMP推流</h3>
+</li>
+</ul>
+<p>添加RTMP流到服务端：</p><ul>
+<li>添加RTMP流方法 <div class="fragment"><div class="line">- (BOOL)addExternalOutput:(NSString*)url completion:(CCComletionBlock)completion;</div></div><!-- fragment --></li>
+</ul>
+<p>取消RTMP流到服务端：</p>
+<ul>
+<li>取消添加RTMP流方法 <div class="fragment"><div class="line">- (BOOL)removeExternalOutput:(NSString *)url completion:(CCComletionBlock)completion;</div></div><!-- fragment --></li>
+</ul>
+<h3>4.7 切换摄像头</h3>
+<p>切换摄像头，前置摄像头和后置摄像头：</p>
+<ul>
+<li>切换摄像头方法 <div class="fragment"><div class="line">- (BOOL)setCameraType:(AVCaptureDevicePosition)pos;</div></div><!-- fragment --></li>
+</ul>
+<h3>4.8 开启视频/关闭视频</h3>
+<p>开启本地视频流，也就是相机采集的视频：</p>
+<ul>
+<li>开启相机视频方法</li>
+</ul>
+<div class="fragment"><div class="line">- (void)enableVideo;</div></div><!-- fragment --><p>关闭本地视频，也就是关闭相机采集的视频：</p>
+<ul>
+<li>关闭相机视频方法 <div class="fragment"><div class="line">- (void)disableVideo;</div></div><!-- fragment --> <h3>4.9 开启音频/关闭音频</h3>
+</li>
+</ul>
+<p>开启本地视频流的音频，也就是相机采集的音频流：</p>
+<ul>
+<li>开启本地音频方法</li>
+</ul>
+<div class="fragment"><div class="line">- (void)enableAudio;</div></div><!-- fragment --><p>关闭本地视频流的音频，也就是关闭相机采集的音频流：</p>
+<ul>
+<li>关闭本地音频方法</li>
+</ul>
+<div class="fragment"><div class="line">- (void)disableAudio;</div></div><!-- fragment --><h2>5.API查询</h2>
+<p>Doc目录打开index.html文件</p>
+<h2>6.Q&amp;A</h2>
+<p>### 6.1 运行崩溃 </p><div class="fragment"><div class="line">dyld: Library not loaded: @rpath/CCClassRoomBasic.framework/CCClassRoomBasic</div><div class="line">  Referenced from: /var/containers/Bundle/Application/E8CDE526-6F19-415B-9BA4-2380AB0A1FDE/CCClassRoom.app/CCClassRoom</div><div class="line">  Reason: image not found</div></div><!-- fragment --><p> 解决办法参考3.2 </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

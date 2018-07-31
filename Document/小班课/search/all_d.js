@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['unreleateddoc_3aroomid_3acompletion_3a',['unReleatedDoc:roomID:completion:',['../interface_c_c_streamer.html#a9771dc83f11ec18a3ac4e196c17f843c',1,'CCStreamer']]],
+  ['unsubscribestream_3acompletion_3a',['unsubscribeStream:completion:',['../interface_c_c_streamer.html#aa7f0f2685355b38147d45e98ebdea6d8',1,'CCStreamer']]],
+  ['updateusercount',['updateUserCount',['../interface_c_c_streamer.html#a512d42da85469d40a4f95deee9286db5',1,'CCStreamer']]],
+  ['user_5fassistantstate',['user_AssistantState',['../interface_c_c_user.html#a38e600e69cc6e4cab1b3e5b0f1ce7f92',1,'CCUser']]],
+  ['user_5faudiostate',['user_audioState',['../interface_c_c_user.html#a70a760fef8ef4f57294e2c46db996fcb',1,'CCUser']]],
+  ['user_5fchatstate',['user_chatState',['../interface_c_c_user.html#ac0498418e1f1b4e27b279d7786d99e87',1,'CCUser']]],
+  ['user_5fdrawstate',['user_drawState',['../interface_c_c_user.html#aeac6523413745c5fc4c1a13346dca006',1,'CCUser']]],
+  ['user_5fid',['user_id',['../interface_c_c_room.html#a96bc476b86cf845b8881afdbe16f5dfa',1,'CCRoom::user_id()'],['../interface_c_c_user.html#a6349b8d7e4c0c9298e273baee521fd0a',1,'CCUser::user_id()']]],
+  ['user_5fip',['user_ip',['../interface_c_c_user.html#a71c87c39f34a3c9cbf79190f1c2edb1c',1,'CCUser']]],
+  ['user_5fjointime',['user_joinTime',['../interface_c_c_user.html#aa38f7289770c788be203e7b335b98c40',1,'CCUser']]],
+  ['user_5fname',['user_name',['../interface_c_c_room.html#adfd98f88c2b805e3ac357a0f370a1171',1,'CCRoom::user_name()'],['../interface_c_c_user.html#a6e7a1b61f6eeed27e8ba12cc600420fd',1,'CCUser::user_name()']]],
+  ['user_5fplatform',['user_platform',['../interface_c_c_user.html#a7e58bde669f6d0f9890943d480ebf574',1,'CCUser']]],
+  ['user_5fpublishtime',['user_publishTime',['../interface_c_c_user.html#a8c845e5a1dc90df3d1eaa67ca648a502',1,'CCUser']]],
+  ['user_5frequesttime',['user_requestTime',['../interface_c_c_user.html#ace33b2b8d515d692e6b5ccbba0e16322',1,'CCUser']]],
+  ['user_5frole',['user_role',['../interface_c_c_room.html#a4d46cc645b38f09adeb4a6707babffba',1,'CCRoom::user_role()'],['../interface_c_c_user.html#a188aa342504cad4959a2514b7490d7c7',1,'CCUser::user_role()']]],
+  ['user_5fsocketid',['user_socketID',['../interface_c_c_user.html#a5f82456371834d6f78823fa694831dd2',1,'CCUser']]],
+  ['user_5fstatus',['user_status',['../interface_c_c_user.html#a42453a4e48ba521de1aaca9b9ec6033e',1,'CCUser']]],
+  ['user_5fstreamid',['user_streamID',['../interface_c_c_user.html#a9d2724379d440c1d1b0e50b752733507',1,'CCUser']]],
+  ['user_5fvideostate',['user_videoState',['../interface_c_c_user.html#a0b5801fac51f91ace435d73bab29381d',1,'CCUser']]],
+  ['userid',['userID',['../interface_c_c_stream_show_view.html#a68909ed31669e765cf7288237288620e',1,'CCStreamShowView']]]
+];

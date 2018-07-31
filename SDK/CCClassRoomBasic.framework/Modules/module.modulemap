@@ -1,0 +1,6 @@
+framework module CCClassRoomBasic {
+  umbrella header "CCClassRoomBasic.h"
+
+  export *
+  module * { export * }
+}

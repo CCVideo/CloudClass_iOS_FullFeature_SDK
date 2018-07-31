@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['cancleauthuserassistant_3a',['cancleAuthUserAssistant:',['../interface_c_c_streamer.html#a367444890ad8a90572641329c07ab547',1,'CCStreamer']]],
+  ['cancleauthuserdraw_3a',['cancleAuthUserDraw:',['../interface_c_c_streamer.html#a625d47c5c354ca36b0ba9d789f06f885',1,'CCStreamer']]],
+  ['canclehandup',['cancleHandup',['../interface_c_c_streamer.html#adaac9194166ed96eb871bb02baff5859',1,'CCStreamer']]],
+  ['cancleinviteuserlianmai_3acompletion_3a',['cancleInviteUserLianMai:completion:',['../interface_c_c_streamer.html#a93ed941290090fbd8fd90d104f690463',1,'CCStreamer']]],
+  ['canclelianmai_3a',['cancleLianMai:',['../interface_c_c_streamer.html#a4807d23006b9b289a1b4cefe2e3cd150',1,'CCStreamer']]],
+  ['certainhandup_3acompletion_3a',['certainHandup:completion:',['../interface_c_c_streamer.html#a95c5839c3ed2cef4421b84058bb23fe1',1,'CCStreamer']]],
+  ['changemainstreaminsigletemplate_3acompletion_3a',['changeMainStreamInSigleTemplate:completion:',['../interface_c_c_streamer.html#a09241189faedca274a023a028a7b9241',1,'CCStreamer']]],
+  ['changeroomallkickdownmai_3a',['changeRoomAllKickDownMai:',['../interface_c_c_streamer.html#a1ebd650f47a3b64c55c359973718e3f8',1,'CCStreamer']]],
+  ['changeroomaudiostate_3acompletion_3a',['changeRoomAudioState:completion:',['../interface_c_c_streamer.html#a159478a126886b41adc0335be390264f',1,'CCStreamer']]],
+  ['changeroomclasstype_3acompletion_3a',['changeRoomClassType:completion:',['../interface_c_c_streamer.html#a1d33f23a3fcaed71a392a508696aea88',1,'CCStreamer']]],
+  ['changeroomdetail_3acompletion_3a',['changeRoomDetail:completion:',['../interface_c_c_streamer.html#a83305e57aafc9ca33112815c4a42b94c',1,'CCStreamer']]],
+  ['changeroomname_3acompletion_3a',['changeRoomName:completion:',['../interface_c_c_streamer.html#a81eb6ce56804042c3f6bfc93ca48ab75',1,'CCStreamer']]],
+  ['changeroomrotate_3atime_3acompletion_3a',['changeRoomRotate:time:completion:',['../interface_c_c_streamer.html#abad159f9e84f46c68eedeae288be6275',1,'CCStreamer']]],
+  ['changeroomstudentbitrate_3acompletion_3a',['changeRoomStudentBitrate:completion:',['../interface_c_c_streamer.html#af9193c13691854504c9fdc9099596458',1,'CCStreamer']]],
+  ['changeroomteacherbitrate_3acompletion_3a',['changeRoomTeacherBitrate:completion:',['../interface_c_c_streamer.html#a8dc73e6c9e70a90c04579a7f375f6dc7',1,'CCStreamer']]],
+  ['changeroomtemplatemode_3acompletion_3a',['changeRoomTemplateMode:completion:',['../interface_c_c_streamer.html#a6505be724fe530aec3d3b5180821b637',1,'CCStreamer']]],
+  ['changeroomvideomode_3acompletion_3a',['changeRoomVideoMode:completion:',['../interface_c_c_streamer.html#a7b5a4aac4f3698681d76aed9a33d9f81',1,'CCStreamer']]]
+];

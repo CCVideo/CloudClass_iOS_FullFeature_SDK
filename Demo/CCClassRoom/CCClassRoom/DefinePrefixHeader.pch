@@ -1,0 +1,154 @@
+//
+//  DefinePrefixHeader.pch
+//  NewCCDemo
+//
+//  Created by cc on 2016/11/21.
+//  Copyright © 2016年 cc. All rights reserved.
+//
+
+#ifndef DefinePrefixHeader_pch
+#define DefinePrefixHeader_pch
+
+
+#import <Masonry.h>
+#import "CCWeakProxy.h"
+
+//[em2_01]
+#define FACE_NAME_HEAD  @"[em2_"
+// 表情转义字符的长度（ [em2_占5个长度，xx占2个长度，]占一个长度,共8个长度 ）
+#define FACE_NAME_LEN   8
+#define FACE_COUNT_ALL  20
+#define FACE_COUNT_ROW  3
+#define FACE_COUNT_CLU  7
+#define IMGWIDTH        28.0f
+
+#define CONTROLLER_INDEX @"index"
+
+#define LIVE_USERID @"Live_UserId"
+#define LIVE_ROOMID @"Live_RoomId"
+#define LIVE_ROLE   @"LIVE_ROLE"
+#define LIVE_USERNAME @"Live_UserName"
+#define LIVE_PASSWORD @"Live_Password"
+
+
+#define LIVE_ROOMNAME @"LIVE_ROOMNAME"
+#define LIVE_ROOMDESC @"LIVE_ROOMDESC"
+#define Live_ROOMMAXNUM @"Live_ROOMMAXNUM"
+
+#define WATCH_USERID @"Watch_UserId"
+#define WATCH_ROOMID @"Watch_RoomId"
+#define WATCH_USERNAME @"Watch_UserName"
+#define WATCH_PASSWORD @"Watch_Password"
+
+#define PLAYBACK_USERID @"PlayBack_UserId"
+#define PLAYBACK_ROOMID @"PlayBack_RoomId"
+#define PLAYBACK_USERNAME @"PlayBack_UserName"
+#define PLAYBACK_PASSWORD @"PlayBack_Password"
+
+#define SET_CAMERA_DIRECTION @"SetCameraDirection"
+#define SET_USER_NAME @"SetUserName"
+
+#define DOC_ROOMID @"DOC_ROOMID"
+#define DOC_DOCID @"DOC_DOCID"
+#define DOC_DOCPAGE @"DOC_DOCPAGE"
+#define SIGN_TIME @"SIGN_TIME"
+#define DOC_ANIMATIONSTEP @"DOC_ANIMATIONSTEP"
+
+#define SERVER_DOMAIN @"SERVER_DOMIN"
+#define SERVER_DOMAIN_NAME @"SERVER_DOMAIN_NAME"
+#define DRAWWIDTH @"DRAWWIDTH"
+#define DRAWCOLOR @"DRAWCOLOR"
+
+
+#define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
+
+//1.获取屏幕宽度与高度
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define SCREEN_SIZE [UIScreen mainScreen].bounds.size
+
+#define NativeScale [UIScreen mainScreen].nativeScale
+#define NativeBounds [UIScreen mainScreen].nativeBounds
+
+#define SCREEN_SCALE NativeBounds.size.width / 750.0
+
+#define CCGetRealFromPt(x) (x / NativeScale) * SCREEN_SCALE
+
+#define CCGetPxFromPt(x) (x / NativeScale)
+
+#define MainColor [UIColor colorWithRed:242/255.0 green:124/255.0 blue:25/255.0 alpha:1.0]
+#define StreamColor [UIColor colorWithRed:34/255.0 green:35/255.0 blue:37/255.0 alpha:1.0]
+
+//4.设置RGB颜色/设置RGBA颜色
+#define CCRGBColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+#define CCRGBAColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(r)/255.0 blue:(r)/255.0 alpha:a]
+// clear背景颜色
+#define CCClearColor [UIColor clearColor]
+
+//5.自定义高效率的 NSLog
+#ifdef DEBUG
+#define CCLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
+#else
+#define CCLog(...)
+
+#endif
+
+//13.使用 ARC 和 MRC
+#if __has_feature(objc_arc)
+// ARC
+#else
+// MRC
+#endif
+
+//14.判断当前的iPhone设备/系统版本
+//判断是否为iPhone
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+
+// 判断是否为 iPhone 4/4s
+#define iPhone4_4s NativeBounds.size.width == 640.0f && NativeBounds.size.height == 960.0f
+
+// 判断是否为 iPhone 5/5s/5c/5SE
+#define iPhone5_5s_5c_5SE NativeBounds.size.width == 640.0f && NativeBounds.size.height == 1136.0f
+
+// 判断是否为iPhone 6/6s/7
+#define iPhone6_6s_7 NativeBounds.size.width == 750.0f && NativeBounds.size.height == 1334.0f
+
+// 判断是否为iPhone 6Plus/6sPlus/7Plus
+#define iPhone6Plus_6sPlus_7Plus NativeBounds.size.width == 1242.0f && NativeBounds.size.height == 2208.0f
+
+#define MinSize (iPhone4_4s || iPhone5_5s_5c_5SE || iPhone6_6s_7)
+#define MaxSize iPhone6Plus_6sPlus_7Plus
+
+#define FontSizeClass_9  MinSize?9:10
+#define FontSizeClass_10 MinSize?10:11
+#define FontSizeClass_11 MinSize?11:12
+#define FontSizeClass_12 MinSize?12:13
+#define FontSizeClass_13 MinSize?13:14
+#define FontSizeClass_14 MinSize?14:15
+#define FontSizeClass_15 MinSize?15:16
+#define FontSizeClass_16 MinSize?16:17
+#define FontSizeClass_17 MinSize?17:18
+#define FontSizeClass_18 MinSize?18:19
+#define FontSizeClass_19 MinSize?19:20
+#define FontSizeClass_20 MinSize?20:21
+#define FontSizeClass_21 MinSize?21:22
+#define FontSizeClass_22 MinSize?22:23
+#define FontSizeClass_36 MinSize?36:37
+
+#define SaveToUserDefaults(key,value) \
+[[NSUserDefaults standardUserDefaults] setObject:value forKey:key];\
+[[NSUserDefaults standardUserDefaults]synchronize]
+
+
+#define GetFromUserDefaults(key) [[NSUserDefaults standardUserDefaults] objectForKey:key]
+
+#define StrNotEmpty(str) (str != nil && ![str isEqualToString:@""] && [str length] != 0)
+
+#define APPDelegate [UIApplication sharedApplication].delegate
+
+//#define USELOCALPHOTOLIBARY   //使用系统原生相册选择
+
+
+#define USEFORAPPSTORE
+
+#endif /* DefinePrefixHeader_pch */

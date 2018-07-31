@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['role',['role',['../interface_c_c_stream_show_view.html#a9827530f3a17ecfff91e751432028bdc',1,'CCStreamShowView']]],
+  ['room_5fallow_5faudio',['room_allow_audio',['../interface_c_c_room.html#a0daa19cbc41e6fc0a8253eeb56098e0b',1,'CCRoom']]],
+  ['room_5fallow_5fchat',['room_allow_chat',['../interface_c_c_room.html#a472c5960361d29c4eb7eef0842be9c46',1,'CCRoom']]],
+  ['room_5fclass_5ftype',['room_class_type',['../interface_c_c_room.html#a1814318aaa2bcb35ef924c27468d830e',1,'CCRoom']]],
+  ['room_5fdesc',['room_desc',['../interface_c_c_room.html#a14de7a468f6ac2945857ca3e5811b45c',1,'CCRoom']]],
+  ['room_5fmax_5fstreams',['room_max_streams',['../interface_c_c_room.html#a207df907778fed05d8a67b399195e723',1,'CCRoom']]],
+  ['room_5fmax_5fusers',['room_max_users',['../interface_c_c_room.html#a1a2098e49652964449e09e92255a2a1e',1,'CCRoom']]],
+  ['room_5fname',['room_name',['../interface_c_c_room.html#a8b0349bb26c99133096b3c82a12dee45',1,'CCRoom']]],
+  ['room_5fpublisher_5faudiobitrate',['room_publisher_audioBitrate',['../interface_c_c_room.html#a09e228b43d901434c19150c82514b78f',1,'CCRoom']]],
+  ['room_5fpublisher_5fbitrate',['room_publisher_bitrate',['../interface_c_c_room.html#aa277174e9ba194705b8182f7711ba8c1',1,'CCRoom']]],
+  ['room_5ftalker_5faudiobitrate',['room_talker_audioBitrate',['../interface_c_c_room.html#a4688633cdc23b21991872dc2e0818089',1,'CCRoom']]],
+  ['room_5ftalker_5fbitrate',['room_talker_bitrate',['../interface_c_c_room.html#abcf367042035425ef6b9e76e53c34065',1,'CCRoom']]],
+  ['room_5ftemplate',['room_template',['../interface_c_c_room.html#af8985c5e58334e9d1221c98bb5c4c718',1,'CCRoom']]],
+  ['room_5fuser_5fcount',['room_user_count',['../interface_c_c_room.html#a1784894552dfbe952239207a87373b49',1,'CCRoom']]],
+  ['room_5fuserlist',['room_userList',['../interface_c_c_room.html#aeff480a2db17c1aa527e97abcd645c97',1,'CCRoom']]],
+  ['room_5fvideo_5fmode',['room_video_mode',['../interface_c_c_room.html#aab30b35062c521e1077cecfc6e999049',1,'CCRoom']]],
+  ['rotatelocked',['rotateLocked',['../interface_c_c_user.html#a7458f8d6dc8eb850ad0b8713e8a76077',1,'CCUser']]],
+  ['rotatestate',['rotateState',['../interface_c_c_room.html#a00a43c9e76ddee82d9c88f4803bf8f13',1,'CCRoom']]],
+  ['rotatetime',['rotateTime',['../interface_c_c_room.html#ab89b8af342bb3f551fb759dcea986ec8',1,'CCRoom']]],
+  ['rtmpurl',['rtmpUrl',['../interface_c_c_room.html#ab2f99d337a3874695491077cf40ed593',1,'CCRoom']]]
+];

@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "c0e8f11c-a953-11e5-9218-8f706abcb27f++1426",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "c0e8f11c-a953-11e5-9218-8f706abcb27f++1426" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "c0e8f11c-a953-11e5-9218-8f706abcb27f++1426" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "96F8CF54-E1B9-4B91-B5AE-97120F4D0324",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "c0e8f11c-a953-11e5-9218-8f706abcb27f++1426" : "%E5%B0%8F%E7%8F%AD%E8%AF%BE\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CCClassRoom",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "branches\/dev\/CCClassRoom\/CCClassRoom.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.1.248:3380\/om-dev",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "c0e8f11c-a953-11e5-9218-8f706abcb27f++1426"
+    }
+  ]
+}

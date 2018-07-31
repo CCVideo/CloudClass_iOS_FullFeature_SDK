@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['sendanimationchange_3a',['sendAnimationChange:',['../interface_c_c_streamer.html#a922728e24772573c37e4adf816765b05',1,'CCStreamer']]],
+  ['sendbrainreply_3atitle_3atext_3a',['sendBrainReply:title:text:',['../interface_c_c_streamer.html#a9462280f196e2958e2ec481099480a7c',1,'CCStreamer']]],
+  ['senddrawdata_3a',['sendDrawData:',['../interface_c_c_streamer.html#abab42a0a9f9d8fdca5792b3de245ec20',1,'CCStreamer']]],
+  ['sendmsg_3a',['sendMsg:',['../interface_c_c_streamer.html#a47ea231251c68a00acdeb8a5bccdc2cf',1,'CCStreamer']]],
+  ['sendpic_3a',['sendPic:',['../interface_c_c_streamer.html#a833e66d87ff33e5c25719370093fa178',1,'CCStreamer']]],
+  ['sendvoteselected_3asingleans_3avoteid_3apublisherid_3a',['sendVoteSelected:singleAns:voteID:publisherID:',['../interface_c_c_streamer.html#a4c27fb662c29e00a446197e0d108ca1b',1,'CCStreamer']]],
+  ['sendvotetickedreply_3atitle_3achoice_3a',['sendVoteTickedReply:title:choice:',['../interface_c_c_streamer.html#abc44b16e67d9d67f8ffc6e0ad663af69',1,'CCStreamer']]],
+  ['setaudioopened_3auserid_3a',['setAudioOpened:userID:',['../interface_c_c_streamer.html#a4abb64a76c8ac4df765465198a0914f3',1,'CCStreamer']]],
+  ['setcameratype_3a',['setCameraType:',['../interface_c_c_streamer.html#a55e2d829ddccb91da913dd501ca91ec1',1,'CCStreamer']]],
+  ['setlogstate_3a',['setLogState:',['../interface_c_c_streamer.html#a185a73cce8e77bb39e5e1cf8748db5ea',1,'CCStreamer']]],
+  ['setregion_3acompletion_3a',['setRegion:completion:',['../interface_c_c_streamer.html#abad6977b58e9f942c50c619d4d683ca2',1,'CCStreamer']]],
+  ['setserverdomain_3aarea_3a',['setServerDomain:area:',['../interface_c_c_streamer.html#aac81d55070ccdf636f585f4b8924dc70',1,'CCStreamer']]],
+  ['setvideoopened_3auserid_3a',['setVideoOpened:userID:',['../interface_c_c_streamer.html#a4ce34887a6e2b2bda8848df134ac68c3',1,'CCStreamer']]],
+  ['sharedstreamer',['sharedStreamer',['../interface_c_c_streamer.html#af66f748d0d2bbf4f3c6fa2f21c8864e3',1,'CCStreamer']]],
+  ['startnamed_3a',['startNamed:',['../interface_c_c_streamer.html#a1fb50b3acdbd70f72d7fc029cdbd02da',1,'CCStreamer']]],
+  ['startpreview_3a',['startPreview:',['../interface_c_c_streamer.html#acf139b7d68fed1f93f8f1e376e22af58',1,'CCStreamer']]],
+  ['startpublish_3a',['startPublish:',['../interface_c_c_streamer.html#a19fbf8ede1ec5cac4abdeaf7b8db72db',1,'CCStreamer']]],
+  ['startsession',['startSession',['../interface_c_c_streamer.html#ac1749b251ab05235ad01eec51248c745',1,'CCStreamer']]],
+  ['stoplianmai_3a',['stopLianMai:',['../interface_c_c_streamer.html#a664f76f890e6001ca3f7a97efd4484f9',1,'CCStreamer']]],
+  ['stoplive_3a',['stopLive:',['../interface_c_c_streamer.html#a33596298b1d80adcca9738a3d0146eeb',1,'CCStreamer']]],
+  ['stoppreview',['stopPreview',['../interface_c_c_streamer.html#a3e4fb25eb0441959a78adb5b1a85046f',1,'CCStreamer']]],
+  ['stoppublish_3a',['stopPublish:',['../interface_c_c_streamer.html#ab3f38f28122d7d7bb92a3c6ed0355191',1,'CCStreamer']]],
+  ['stopsession',['stopSession',['../interface_c_c_streamer.html#a4b0c1a326eda22a9fa05de68d17b7e3c',1,'CCStreamer']]],
+  ['studentnamed',['studentNamed',['../interface_c_c_streamer.html#a3742043dc8e73b81b0e9ca73c9f1a617',1,'CCStreamer']]],
+  ['subcribestream_3arole_3aqualitylevel_3acompletion_3a',['subcribeStream:role:qualityLevel:completion:',['../interface_c_c_streamer.html#a813de31d886203175fcd93f2490d7969',1,'CCStreamer']]]
+];

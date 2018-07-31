@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Live.me Demo: CCStreamView.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Live.me Demo
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('_c_c_stream_view_8h_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">CCStreamView.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_c_c_stream_view_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//  CCStreamView.h</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//  CCStreamer</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//  Created by cc on 17/2/18.</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//  Copyright © 2017年 cc. All rights reserved.</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#import &lt;UIKit/UIKit.h&gt;</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#import &quot;<a class="code" href="_c_c_streamer_basic_8h.html">CCStreamerBasic.h</a>&quot;</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#import &quot;<a class="code" href="_c_c_stream_8h.html">CCStream.h</a>&quot;</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="_c_c_stream_view_8h.html#a0b65b04e9e87343784a0cb468182d906">   16</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span>{</div><div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="_c_c_stream_view_8h.html#a0b65b04e9e87343784a0cb468182d906a642cffe967dfcedadd50bae2b548bcd3">   20</a></span>&#160;    <a class="code" href="_c_c_stream_view_8h.html#a0b65b04e9e87343784a0cb468182d906a642cffe967dfcedadd50bae2b548bcd3">CCStreamViewFillMode_FitByH</a>,</div><div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="_c_c_stream_view_8h.html#a0b65b04e9e87343784a0cb468182d906a7b677ae94a974df2b74f772671965995">   24</a></span>&#160;    <a class="code" href="_c_c_stream_view_8h.html#a0b65b04e9e87343784a0cb468182d906a7b677ae94a974df2b74f772671965995">CCStreamViewFillMode_FitByW</a>,</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}<a class="code" href="_c_c_stream_view_8h.html#a0b65b04e9e87343784a0cb468182d906">CCStreamViewFillMode</a>;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div><div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="interface_c_c_stream_view.html">   31</a></span>&#160;<span class="keyword">@interface </span><a class="code" href="interface_c_c_stream_view.html">CCStreamView</a> : UIView</div><div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="interface_c_c_stream_view.html#a258b3c6eef0d353d7bca24e4f61f7f78">   35</a></span>&#160;<span class="keyword">@property</span> (strong, nonatomic, readonly) <a class="code" href="interface_c_c_stream.html">CCStream</a> *<a class="code" href="interface_c_c_stream_view.html#a258b3c6eef0d353d7bca24e4f61f7f78">stream</a>;</div><div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="interface_c_c_stream_view.html#aff0922102b8ef404e6968887efc4388a">   39</a></span>&#160;<span class="keyword">@property</span> (assign, nonatomic) <a class="code" href="_c_c_stream_view_8h.html#a0b65b04e9e87343784a0cb468182d906">CCStreamViewFillMode</a> <a class="code" href="interface_c_c_stream_view.html#aff0922102b8ef404e6968887efc4388a">fillMode</a>;</div><div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="interface_c_c_stream_view.html#a26608e3bfad777afca8b2566ee71f21b">   43</a></span>&#160;<span class="keyword">@property</span> (assign, nonatomic, readonly) CGSize <a class="code" href="interface_c_c_stream_view.html#a26608e3bfad777afca8b2566ee71f21b">videoViewSize</a>;</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div><div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="interface_c_c_stream_view.html#a76413209ee4b57512e0df74ecddd4a71">   45</a></span>&#160;<span class="keyword">@property</span> (strong, nonatomic)UIView *<a class="code" href="interface_c_c_stream_view.html#a76413209ee4b57512e0df74ecddd4a71">videoView</a>;</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;- (id)initWithStream:(<a class="code" href="interface_c_c_stream.html">CCStream</a> *)stream;</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;- (id)initWithPreView:(UIView *)preView stream:(<a class="code" href="interface_c_c_stream.html">CCStream</a> *)stream;</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;- (id)initWithStream:(<a class="code" href="interface_c_c_stream.html">CCStream</a> *)stream videoView:(UIView *)videoView;</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;- (void)setCameraViewTransform:(CGAffineTransform)transform;</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;- (UIImage*)<a class="code" href="interface_c_c_stream_view.html#a58ecfef01533b88dc54ea3939590a8d2">snapshot</a>;</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">@end</span></div><div class="ttc" id="_c_c_stream_view_8h_html_a0b65b04e9e87343784a0cb468182d906"><div class="ttname"><a href="_c_c_stream_view_8h.html#a0b65b04e9e87343784a0cb468182d906">CCStreamViewFillMode</a></div><div class="ttdeci">CCStreamViewFillMode</div><div class="ttdoc">流视图填充方式枚举 </div><div class="ttdef"><b>Definition:</b> <a href="_c_c_stream_view_8h_source.html#l00016">CCStreamView.h:16</a></div></div>
+<div class="ttc" id="_c_c_stream_view_8h_html_a0b65b04e9e87343784a0cb468182d906a7b677ae94a974df2b74f772671965995"><div class="ttname"><a href="_c_c_stream_view_8h.html#a0b65b04e9e87343784a0cb468182d906a7b677ae94a974df2b74f772671965995">CCStreamViewFillMode_FitByW</a></div><div class="ttdef"><b>Definition:</b> <a href="_c_c_stream_view_8h_source.html#l00024">CCStreamView.h:24</a></div></div>
+<div class="ttc" id="interface_c_c_stream_view_html_a26608e3bfad777afca8b2566ee71f21b"><div class="ttname"><a href="interface_c_c_stream_view.html#a26608e3bfad777afca8b2566ee71f21b">CCStreamView::videoViewSize</a></div><div class="ttdeci">CGSize videoViewSize</div><div class="ttdoc">视频画面大小(动态的) </div><div class="ttdef"><b>Definition:</b> <a href="_c_c_stream_view_8h_source.html#l00043">CCStreamView.h:43</a></div></div>
+<div class="ttc" id="_c_c_streamer_basic_8h_html"><div class="ttname"><a href="_c_c_streamer_basic_8h.html">CCStreamerBasic.h</a></div></div>
+<div class="ttc" id="interface_c_c_stream_view_html_a58ecfef01533b88dc54ea3939590a8d2"><div class="ttname"><a href="interface_c_c_stream_view.html#a58ecfef01533b88dc54ea3939590a8d2">-[CCStreamView snapshot]</a></div><div class="ttdeci">UIImage * snapshot()</div></div>
+<div class="ttc" id="interface_c_c_stream_view_html_aff0922102b8ef404e6968887efc4388a"><div class="ttname"><a href="interface_c_c_stream_view.html#aff0922102b8ef404e6968887efc4388a">CCStreamView::fillMode</a></div><div class="ttdeci">CCStreamViewFillMode fillMode</div><div class="ttdoc">视图填充方式 </div><div class="ttdef"><b>Definition:</b> <a href="_c_c_stream_view_8h_source.html#l00039">CCStreamView.h:39</a></div></div>
+<div class="ttc" id="_c_c_stream_view_8h_html_a0b65b04e9e87343784a0cb468182d906a642cffe967dfcedadd50bae2b548bcd3"><div class="ttname"><a href="_c_c_stream_view_8h.html#a0b65b04e9e87343784a0cb468182d906a642cffe967dfcedadd50bae2b548bcd3">CCStreamViewFillMode_FitByH</a></div><div class="ttdef"><b>Definition:</b> <a href="_c_c_stream_view_8h_source.html#l00020">CCStreamView.h:20</a></div></div>
+<div class="ttc" id="interface_c_c_stream_html"><div class="ttname"><a href="interface_c_c_stream.html">CCStream</a></div><div class="ttdoc">流 </div><div class="ttdef"><b>Definition:</b> <a href="_c_c_stream_8h_source.html#l00042">CCStream.h:42</a></div></div>
+<div class="ttc" id="_c_c_stream_8h_html"><div class="ttname"><a href="_c_c_stream_8h.html">CCStream.h</a></div></div>
+<div class="ttc" id="interface_c_c_stream_view_html"><div class="ttname"><a href="interface_c_c_stream_view.html">CCStreamView</a></div><div class="ttdoc">流视图 </div><div class="ttdef"><b>Definition:</b> <a href="_c_c_stream_view_8h_source.html#l00031">CCStreamView.h:31</a></div></div>
+<div class="ttc" id="interface_c_c_stream_view_html_a258b3c6eef0d353d7bca24e4f61f7f78"><div class="ttname"><a href="interface_c_c_stream_view.html#a258b3c6eef0d353d7bca24e4f61f7f78">CCStreamView::stream</a></div><div class="ttdeci">CCStream * stream</div><div class="ttdoc">该视图对应流ID </div><div class="ttdef"><b>Definition:</b> <a href="_c_c_stream_view_8h_source.html#l00035">CCStreamView.h:35</a></div></div>
+<div class="ttc" id="interface_c_c_stream_view_html_a76413209ee4b57512e0df74ecddd4a71"><div class="ttname"><a href="interface_c_c_stream_view.html#a76413209ee4b57512e0df74ecddd4a71">CCStreamView::videoView</a></div><div class="ttdeci">UIView * videoView</div><div class="ttdef"><b>Definition:</b> <a href="_c_c_stream_view_8h_source.html#l00045">CCStreamView.h:45</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="_c_c_stream_view_8h.html">CCStreamView.h</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

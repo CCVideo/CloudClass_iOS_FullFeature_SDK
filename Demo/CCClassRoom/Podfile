@@ -1,0 +1,21 @@
+platform :ios, '8.0'
+target:’CCClassRoom’ do
+#pod 'Mantle'
+pod 'Masonry'
+pod 'SDWebImage', '~>3.8'
+pod 'Reachability'
+pod 'BlocksKit'
+#pod 'KVOController'
+#pod 'MBProgressHUD'
+#pod 'ODRefreshControl'
+pod 'AFNetworking', '~>2.6.3'
+#pod 'Toast'
+#pod 'LazyTableView'
+#pod "LeoDanmakuKit"
+pod 'SDCycleScrollView','~> 1.64'
+#pod 'MLeaksFinder'
+pod 'LBXScan/LBXZBar','~> 2.2'
+pod 'pop'
+#pod 'ZLPhotoBrowser', '~> 2.2.7'
+#pod 'FBMemoryProfiler'
+end

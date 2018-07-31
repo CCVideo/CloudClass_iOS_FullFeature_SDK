@@ -1,0 +1,813 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>CC视频云课堂: CCRoom.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">CC视频云课堂
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('_c_c_room_8h.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#typedef-members">类型定义</a> &#124;
+<a href="#enum-members">枚举</a> &#124;
+<a href="#var-members">变量</a>  </div>
+  <div class="headertitle">
+<div class="title">CCRoom.h 文件参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#import &lt;Foundation/Foundation.h&gt;</code><br />
+</div>
+<p><a href="_c_c_room_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_c_c_room.html">CCRoom</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+类型定义</h2></td></tr>
+<tr class="memitem:af7d5d21a92f8e1531f88a56a5b95abba"><td class="memItemLeft" align="right" valign="top">typedef void(^&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#af7d5d21a92f8e1531f88a56a5b95abba">CCComletionBlock</a>) (BOOL result, NSError *error, id info)</td></tr>
+<tr class="memdesc:af7d5d21a92f8e1531f88a56a5b95abba"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步请求闭包回调.  <a href="#af7d5d21a92f8e1531f88a56a5b95abba">更多...</a><br /></td></tr>
+<tr class="separator:af7d5d21a92f8e1531f88a56a5b95abba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+枚举</h2></td></tr>
+<tr class="memitem:a7b7ee54380a557d314e0ced33dca5260"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#a7b7ee54380a557d314e0ced33dca5260">CCFocusMode</a> { <a class="el" href="_c_c_room_8h.html#a7b7ee54380a557d314e0ced33dca5260ac61fc1eca78c6c38910ba5aa1e2cf296">CCFocusModeAuto</a>, 
+<a class="el" href="_c_c_room_8h.html#a7b7ee54380a557d314e0ced33dca5260a566967abe3a8afef2edbea95798475f8">CCFocusModeManual</a>
+ }<tr class="memdesc:a7b7ee54380a557d314e0ced33dca5260"><td class="mdescLeft">&#160;</td><td class="mdescRight">相机对焦模式枚举  CCFocusModeAuto 自动对焦  CCFocusModeManual 手动对焦  <a href="_c_c_room_8h.html#a7b7ee54380a557d314e0ced33dca5260">更多...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a7b7ee54380a557d314e0ced33dca5260"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e635983d9372da04d95ec864e10d4f6"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#a6e635983d9372da04d95ec864e10d4f6">CCRole</a> { <a class="el" href="_c_c_room_8h.html#a6e635983d9372da04d95ec864e10d4f6a51d55aca39ebd59efe4d00ab011886c6">CCRole_Teacher</a>, 
+<a class="el" href="_c_c_room_8h.html#a6e635983d9372da04d95ec864e10d4f6ac42edfa5562c88382e43ff4a58a0aaf9">CCRole_Student</a>, 
+<a class="el" href="_c_c_room_8h.html#a6e635983d9372da04d95ec864e10d4f6a326f9398d53b8f419dfd0581a02640ab">CCRole_Watcher</a>, 
+<a class="el" href="_c_c_room_8h.html#a6e635983d9372da04d95ec864e10d4f6a9fc8d2a271920f88810eb191004fa6e6">CCRole_Inspector</a>
+ }<tr class="memdesc:a6e635983d9372da04d95ec864e10d4f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">用户角色身份枚举  CCRole_Teacher 教师端  CCRole_Student 互动者  CCRole_Watcher 观看者  CCRole_Inspector 隐身者  <a href="_c_c_room_8h.html#a6e635983d9372da04d95ec864e10d4f6">更多...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a6e635983d9372da04d95ec864e10d4f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89f3bb834cf514c9db5399387a0a290a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290a">CCSocketEvent</a> { <br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa9cf747acbd64d61300d0b7eedfaf9955">CCSocketEvent_Chat</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aaabbff350672b1985aa3503653d31a5fc">CCSocketEvent_UserListUpdate</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aad54400e7fd3c41f4b4f7f965d5ee95c9">CCSocketEvent_Announcement</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa30b02dde8d262584beae5f4045c8c9c2">CCSocketEvent_GagAll</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa921c9c124840ae559f10609277112e93">CCSocketEvent_GagOne</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa378b94bb51006842d2d43e945de44890">CCSocketEvent_MediaModeUpdate</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa101d1f2397439e893dc8b6826950cfb8">CCSocketEvent_PublishStart</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aad763de8ac32f30f20d6bb131a9a552c6">CCSocketEvent_PublishEnd</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa27175ca636502646d763a55afecc730f">CCSocketEvent_LianmaiStateUpdate</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aac7d152a3f0246b4eefe4d77b7a027235">CCSocketEvent_KickFromRoom</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aafac86cd8450fd763e5fb2dc96cf2bdb6">CCSocketEvent_UserCountUpdate</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa562dad3bce13ca5e8eb10ff358324edd">CCSocketEvent_AudioStateChanged</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aaa02ffe08679cefa51b241fd4d939cf0c">CCSocketEvent_VideoStateChanged</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aad0e5ca53c7860223f31aea72901ab1c0">CCSocketEvent_TeacherNamed</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa95d97bfbc06e62e1f8b056490acb20ad">CCSocketEvent_TeacherNamedInfo</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa841fffef00fdfa78b60b8a336a386cc5">CCSocketEvent_StudentNamed</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aab5a64d97de96caff051d8de6a6b632df">CCSocketEvent_LianmaiModeChanged</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa2b066be94f8e6130d9a0c8a70f654ddd">CCSocketEvent_ReciveLianmaiInvite</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aac923ae23036c722de930e7445392a488">CCSocketEvent_ReciveCancleLianmaiInvite</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aaae38212b7a0f6a4e5e89e65b6e6adb11">CCSocketEvent_StreamRemoved</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aaf6b5a1b6f22161a76acadb059f854cff">CCSocketEvent_TemplateChanged</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aacf47fddcdd7e6ad6fbc4ad3f2b2201ff">CCSocketEvent_MainStreamChanged</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa7f3f2d2967c92801d7196f5fa38ae8f0">CCSocketEvent_MaxStreamsChanged</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aaab10a51145e3016d8bb1fe304b45142a">CCSocketEvent_TeacherBitRateChanged</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa8917d1488afb699f9da10d644ee649d2">CCSocketEvent_StudentBitRateChanged</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aaffa19d043b82ebb3ff5ac86fa621ee01">CCSocketEvent_DocDraw</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa132fe1a3e127f471ac1e0fcde489b2bf">CCSocketEvent_DocPageChange</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa0e3937d85eb35a05acc6e5da6ab35ae8">CCSocketEvent_TimerStart</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aad7b9d0f39571aeffee1b2e886810f13f">CCSocketEvent_TimerEnd</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aaf3e0ade78697568326efb1318b76be5d">CCSocketEvent_ReciveVote</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa1cf8a8420b6c5d2d4ee651ab003909d5">CCSocketEvent_ReciveVoteAns</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa739e46e23bb031a5a4964cfae9ee87f3">CCSocketEvent_ReciveStopVote</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa2ea1a1a4a8f3e8f281fa39c4e8663ae8">CCSocketEvent_ReciveDrawStateChanged</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aaf5a5e5754edec4236844cede085ec2b3">CCSocketEvent_HandupStateChanged</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aaddb04bc02e2ca49af92a3fc2c1df473a">CCSocketEvent_RotateLockedStateChanged</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa0dcc3d6e3f1b450d5f4aa29306208888">CCSocketEvent_SocketReconnecting</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa4701551d7c1aa73ee6da84293edcab2b">CCSocketEvent_SocketConnected</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa0df6cefa3ccff0835e78fbb20a1ad9aa">CCSocketEvent_SocketReconnected</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aaabfb85067887c2b4401c5427191d2b4f">CCSocketEvent_SocketConnectionClosed</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa406367f3db19daec36b1a424fd69159a">CCSocketEvent_SocketReconnectedFailed</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aad0a6c7ab00c18a46c848e7d00ac567d9">CCSocketEvent_RecivePublishError</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aab509861198161073d461607c9072c53b">CCSocketEvent_ReciveInterCutAudioOrVideo</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aab6c004bb4a552011adb42db849e2d732">CCSocketEvent_ReciveDocAnimationChange</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aabda3b2c8633d0b905dbb8723c67736aa">CCSocketEvent_ReciveAnssistantChange</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aaa6f3bb876a00afda85f45ac16df066b4">CCSocketEvent_ReciveStreamBigOrSmall</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aad89266b00efb8ace6a2101dd186ed5ee">CCSocketEvent_BrainstomSend</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa8654708ac353145f385636e744973fd1">CCSocketEvent_BrainstomReply</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa449019fb6a657d7fa162c1adf3a58813">CCSocketEvent_BrainstomEnd</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aab1cd451c40e31eb37fab4cc59356c263">CCSocketEvent_VoteSend</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa118a539a6321ce81ce82544c8469c5d3">CCSocketEvent_VoteReply</a>, 
+<a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290aa6c209c672fa4f38ffe81d0f9b1e2d197">CCSocketEvent_VoteEnd</a>
+<br />
+ }<tr class="memdesc:a89f3bb834cf514c9db5399387a0a290a"><td class="mdescLeft">&#160;</td><td class="mdescRight">skocket.io被动通知事件枚举  CCSocketEvent_Chat 收到的聊天消息  CCSocketEvent_UserListUpdate 在线列表  CCSocketEvent_Announcement 公告  CCSocketEvent_GagAll 全体禁言或者取消全体禁言  CCSocketEvent_GagOne 禁言或者取消禁言(学生有效)  CCSocketEvent_MediaModeUpdate 连麦音视频权限改变  CCSocketEvent_PublishStart 开始推流  CCSocketEvent_PublishEnd 推流结束,正在连麦的学生要停止连麦，停止订阅流  CCSocketEvent_LianmaiStateUpdate 连麦状态变化  CCSocketEvent_KickFromRoom 被踢出房间  CCSocketEvent_UserCountUpdate 旁听人数  CCSocketEvent_AudioStateChanged 改变音频状态  CCSocketEvent_VideoStateChanged 改变视频状态  CCSocketEvent_TeacherNamed 收到老师点名  CCSocketEvent_TeacherNamedInfo 老师点名信息  CCSocketEvent_StudentNamed 学生签到  CCSocketEvent_LianmaiModeChanged 连麦模式变化  CCSocketEvent_ReciveLianmaiInvite 在举手连麦模式中收到老师的连麦邀请  CCSocketEvent_ReciveCancleLianmaiInvite 老师取消了连麦邀请  CCSocketEvent_StreamRemoved 自己的流断开了  CCSocketEvent_TemplateChanged 房间模板改变  CCSocketEvent_MainStreamChanged 在跟随模式下老师切换主视频  CCSocketEvent_MaxStreamsChanged 房间最大连麦人数变化  CCSocketEvent_TeacherBitRateChanged 房间老师码率变化  CCSocketEvent_StudentBitRateChanged 房间学生码率变化  CCSocketEvent_DocDraw 文档画笔信息  CCSocketEvent_DocPageChange 文档翻页  CCSocketEvent_TimerStart 老师发起计时器  CCSocketEvent_TimerEnd 老师结束计时器  CCSocketEvent_ReciveVote 收到答题  CCSocketEvent_ReciveStopVote 收到结束答题  CCSocketEvent_ReciveDrawStateChanged 收到授权标注状态改变  CCSocketEvent_HandupStateChanged 收到举手状态改变  CCSocketEvent_SocketReconnecting socket重连中  CCSocketEvent_SocketConnected socket连接成功  CCSocketEvent_SocketReconnected socket重连成功  CCSocketEvent_SocketConnectionClosed socket连接断开  CCSocketEvent_SocketReconnectedFailed socket重连连接  CCSocketEvent_RecivePublishError 上麦失败(老师拉学生上麦，而学生不具备上麦条件)  CCSocketEvent_ReciveInterCutAudioOrVideo 插播音视频事件  CCSocketEvent_ReciveDocAnimationChange 文档动画事件  CCSocketEvent_ReciveAnssistantChange 设为讲师事件  CCSocketEvent_ReciveStreamBigOrSmall web端老师双击放大  CCSocketEvent_BrainstomSend 头脑风暴开始  CCSocketEvent_BrainstomReply 头脑风暴回复  CCSocketEvent_BrainstomEnd 头脑风暴结束  CCSocketEvent_VoteSend 投票内容  CCSocketEvent_VoteReply 投票回复  CCSocketEvent_VoteEnd 投票结束  <a href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290a">更多...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a89f3bb834cf514c9db5399387a0a290a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfc379ce1f261169b1d50a52e5c45ddf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#abfc379ce1f261169b1d50a52e5c45ddf">CCVideoMode</a> { <a class="el" href="_c_c_room_8h.html#abfc379ce1f261169b1d50a52e5c45ddfab2195370be3e70b2f60878817d9cfb39">CCVideoMode_AudioAndVideo</a> = 1, 
+<a class="el" href="_c_c_room_8h.html#abfc379ce1f261169b1d50a52e5c45ddfacf2286e56968306b91483eebfaba0d8c">CCVideoMode_Audio</a> = 2
+ }<tr class="memdesc:abfc379ce1f261169b1d50a52e5c45ddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">音视频模式枚举  CCVideoMode_AudioAndVideo 连麦开放音视频  CCVideoMode_Audio = 2 连麦只开放音频  <a href="_c_c_room_8h.html#abfc379ce1f261169b1d50a52e5c45ddf">更多...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:abfc379ce1f261169b1d50a52e5c45ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa6e28863b900c64187c4a1c22e59af1"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#aaa6e28863b900c64187c4a1c22e59af1">CCLiveStatus</a> { <a class="el" href="_c_c_room_8h.html#aaa6e28863b900c64187c4a1c22e59af1a4e16ef5b6f25833aeb3bd6525928375a">CCLiveStatus_Stop</a>, 
+<a class="el" href="_c_c_room_8h.html#aaa6e28863b900c64187c4a1c22e59af1ad25db2bfc92d63ab71bdf45c69b4e767">CCLiveStatus_Start</a>
+ }<tr class="memdesc:aaa6e28863b900c64187c4a1c22e59af1"><td class="mdescLeft">&#160;</td><td class="mdescRight">直播间状态枚举  CCLiveStatus_Stop 未开始直播  CCLiveStatus_Start 正在直播  <a href="_c_c_room_8h.html#aaa6e28863b900c64187c4a1c22e59af1">更多...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:aaa6e28863b900c64187c4a1c22e59af1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dc127ff58603cec94b5b4bac9267fe5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#a0dc127ff58603cec94b5b4bac9267fe5">CCClassType</a> { <a class="el" href="_c_c_room_8h.html#a0dc127ff58603cec94b5b4bac9267fe5a022d98d13a1afc22683d451ab1991bca">CCClassType_Rotate</a> = 3, 
+<a class="el" href="_c_c_room_8h.html#a0dc127ff58603cec94b5b4bac9267fe5a351b483bfb7f6612f52bc352dc47cfbc">CCClassType_Auto</a> = 2, 
+<a class="el" href="_c_c_room_8h.html#a0dc127ff58603cec94b5b4bac9267fe5a3c1b2565a524e6affe3c9de2f955a3bd">CCClassType_Named</a> = 1
+ }<tr class="memdesc:a0dc127ff58603cec94b5b4bac9267fe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">连麦模式枚举  CCClassType_Auto 自由连麦  CCClassType_Named 举手连麦  <a href="_c_c_room_8h.html#a0dc127ff58603cec94b5b4bac9267fe5">更多...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a0dc127ff58603cec94b5b4bac9267fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe0128acb5997f5434d18e8dc24d726a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#abe0128acb5997f5434d18e8dc24d726a">CCRoomTemplate</a> { <br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#abe0128acb5997f5434d18e8dc24d726aaae9ef34a550ebfe1c5bfeafb80d9758b">CCRoomTemplateSpeak</a> = 1, 
+<a class="el" href="_c_c_room_8h.html#abe0128acb5997f5434d18e8dc24d726aa622e7effa547a7a6b4e1e4d73fa23723">CCRoomTemplateSingle</a> = 2, 
+<a class="el" href="_c_c_room_8h.html#abe0128acb5997f5434d18e8dc24d726aa5f4ab126cc075b0e0c2e5e101c1415fe">CCRoomTemplateTile</a> = 4, 
+<a class="el" href="_c_c_room_8h.html#abe0128acb5997f5434d18e8dc24d726aae356ca17ed7b55efadbe84a2670b7d77">CCRoomTemplateOneface</a> = 8, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#abe0128acb5997f5434d18e8dc24d726aafacd6941e1be331cc6b4759557ec10ac">CCRoomTemplateDoubleTeacher</a> = 16
+<br />
+ }<tr class="memdesc:abe0128acb5997f5434d18e8dc24d726a"><td class="mdescLeft">&#160;</td><td class="mdescRight">模板类型枚举  CCRoomTemplateSpeak 主讲模式  CCRoomTemplateSingle 主视角模式  CCRoomTemplateTile 平铺模式  CCRoomTemplateOneface 1V1  CCRoomTemplateDoubleTeacher 双师  <a href="_c_c_room_8h.html#abe0128acb5997f5434d18e8dc24d726a">更多...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:abe0128acb5997f5434d18e8dc24d726a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ace6d1aa327f59e1841369cbbccaf41"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#a4ace6d1aa327f59e1841369cbbccaf41">CCUserMicStatus</a> { <br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a4ace6d1aa327f59e1841369cbbccaf41aa3e355824ec2f7ee35d1642e416f7470">CCUserMicStatus_None</a>, 
+<a class="el" href="_c_c_room_8h.html#a4ace6d1aa327f59e1841369cbbccaf41a7e0397cbe2b37fed8e437c7a8f4e789e">CCUserMicStatus_Wait</a>, 
+<a class="el" href="_c_c_room_8h.html#a4ace6d1aa327f59e1841369cbbccaf41aa33f0f2571c4df94e3c685852da5e42e">CCUserMicStatus_Connecting</a>, 
+<a class="el" href="_c_c_room_8h.html#a4ace6d1aa327f59e1841369cbbccaf41a90c20b78466977993030c0961229e2d7">CCUserMicStatus_Connected</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#a4ace6d1aa327f59e1841369cbbccaf41a418f0509f4f92dae2bdb88f36cd1cd82">CCUserMicStatus_Inviteing</a>
+<br />
+ }<tr class="memdesc:a4ace6d1aa327f59e1841369cbbccaf41"><td class="mdescLeft">&#160;</td><td class="mdescRight">上麦状态枚举  CCUserMicStatus_None 初始状态  CCUserMicStatus_Wait 排麦中  CCUserMicStatus_Connecting 上麦  CCUserMicStatus_Connected 连麦中  CCUserMicStatus_Inviteing 邀请上麦中  <a href="_c_c_room_8h.html#a4ace6d1aa327f59e1841369cbbccaf41">更多...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a4ace6d1aa327f59e1841369cbbccaf41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a772da855553977649bd045affbc3539b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#a772da855553977649bd045affbc3539b">CCUserPlatform</a> { <a class="el" href="_c_c_room_8h.html#a772da855553977649bd045affbc3539bae6fb34b4ed2e325d90dda10be929b44b">CCUserPlatform_PC</a>, 
+<a class="el" href="_c_c_room_8h.html#a772da855553977649bd045affbc3539ba46e3d41653dbfdf8f271e9e540360bd4">CCUserPlatform_Mobile</a>
+ }<tr class="memdesc:a772da855553977649bd045affbc3539b"><td class="mdescLeft">&#160;</td><td class="mdescRight">登录平台枚举  CCUserPlatform_PC web端登录  CCUserPlatform_Mobile 手机端登录  <a href="_c_c_room_8h.html#a772da855553977649bd045affbc3539b">更多...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a772da855553977649bd045affbc3539b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8a6e11da89d59d7b53395782b8d270c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#af8a6e11da89d59d7b53395782b8d270c">CCUserBitrate</a> { <br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#af8a6e11da89d59d7b53395782b8d270cada47ae117dcc98880483a03debf6243b">CCUserBitrate_1</a> = 100, 
+<a class="el" href="_c_c_room_8h.html#af8a6e11da89d59d7b53395782b8d270cadee21f111364bfc3cdba28a6165ad91a">CCUserBitrate_2</a> = 200, 
+<a class="el" href="_c_c_room_8h.html#af8a6e11da89d59d7b53395782b8d270cac844610301253e98415c34ae53397936">CCUserBitrate_3</a> = 300, 
+<a class="el" href="_c_c_room_8h.html#af8a6e11da89d59d7b53395782b8d270ca46b76bc45b119c73c95505ae5eca7f95">CCUserBitrate_4</a> = 500, 
+<br />
+&#160;&#160;<a class="el" href="_c_c_room_8h.html#af8a6e11da89d59d7b53395782b8d270ca486c2be1dcb8040352c033ce2e92ccfc">CCUserBitrate_5</a> = 1000, 
+<a class="el" href="_c_c_room_8h.html#af8a6e11da89d59d7b53395782b8d270cab710b35c1a88f15e16232d2df3096d60">CCUserBitrate_6</a> = 2000
+<br />
+ }<tr class="memdesc:af8a6e11da89d59d7b53395782b8d270c"><td class="mdescLeft">&#160;</td><td class="mdescRight">码率枚举  <a href="_c_c_room_8h.html#af8a6e11da89d59d7b53395782b8d270c">更多...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:af8a6e11da89d59d7b53395782b8d270c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafb03e3b0fe4fea793c019a72c3fb002"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#aafb03e3b0fe4fea793c019a72c3fb002">CCRotateType</a> { <a class="el" href="_c_c_room_8h.html#aafb03e3b0fe4fea793c019a72c3fb002af074234bec966149eab6166c40f6448e">CCRotateType_Open</a> = 1, 
+<a class="el" href="_c_c_room_8h.html#aafb03e3b0fe4fea793c019a72c3fb002a24a76f56643387962116971c64af2536">CCRotateType_Close</a> = 0, 
+<a class="el" href="_c_c_room_8h.html#aafb03e3b0fe4fea793c019a72c3fb002a2b3f7546d9054ada808b52797389c47d">CCRotateType_Update</a> = 2
+ }<tr class="memdesc:aafb03e3b0fe4fea793c019a72c3fb002"><td class="mdescLeft">&#160;</td><td class="mdescRight">轮播变更枚举  <a href="_c_c_room_8h.html#aafb03e3b0fe4fea793c019a72c3fb002">更多...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:aafb03e3b0fe4fea793c019a72c3fb002"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:a57c4fc9ddc8c12ab6c33a685445de0c9"><td class="memItemLeft" align="right" valign="top">NSString *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#a57c4fc9ddc8c12ab6c33a685445de0c9">ShareScreenViewName</a></td></tr>
+<tr class="memdesc:a57c4fc9ddc8c12ab6c33a685445de0c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">共享桌面流名字宏定义  <a href="#a57c4fc9ddc8c12ab6c33a685445de0c9">更多...</a><br /></td></tr>
+<tr class="separator:a57c4fc9ddc8c12ab6c33a685445de0c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7bf5c13a3c684b4bebdff58aea485ba"><td class="memItemLeft" align="right" valign="top">NSString *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#ad7bf5c13a3c684b4bebdff58aea485ba">ShareScreenViewUserID</a></td></tr>
+<tr class="memdesc:ad7bf5c13a3c684b4bebdff58aea485ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">共享桌面流用户ID宏定义  <a href="#ad7bf5c13a3c684b4bebdff58aea485ba">更多...</a><br /></td></tr>
+<tr class="separator:ad7bf5c13a3c684b4bebdff58aea485ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab85234734e4e47f572f0640b9fc3bd69"><td class="memItemLeft" align="right" valign="top">NSString *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#ab85234734e4e47f572f0640b9fc3bd69">TeacherSecondStreamViewName</a></td></tr>
+<tr class="memdesc:ab85234734e4e47f572f0640b9fc3bd69"><td class="mdescLeft">&#160;</td><td class="mdescRight">老师高拍仪用户名字宏定义  <a href="#ab85234734e4e47f572f0640b9fc3bd69">更多...</a><br /></td></tr>
+<tr class="separator:ab85234734e4e47f572f0640b9fc3bd69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c1ea7e0de753e4e99f01e4595464763"><td class="memItemLeft" align="right" valign="top">NSString *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#a6c1ea7e0de753e4e99f01e4595464763">TeacherSecondStreamViewUserID</a></td></tr>
+<tr class="memdesc:a6c1ea7e0de753e4e99f01e4595464763"><td class="mdescLeft">&#160;</td><td class="mdescRight">老师高拍仪用户ID宏定义  <a href="#a6c1ea7e0de753e4e99f01e4595464763">更多...</a><br /></td></tr>
+<tr class="separator:a6c1ea7e0de753e4e99f01e4595464763"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9763aa44db98c8faab2305bf2a99132"><td class="memItemLeft" align="right" valign="top">NSString *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#ae9763aa44db98c8faab2305bf2a99132">CCNotiReceiveSocketEvent</a></td></tr>
+<tr class="memdesc:ae9763aa44db98c8faab2305bf2a99132"><td class="mdescLeft">&#160;</td><td class="mdescRight">socket.io事件通知.  <a href="#ae9763aa44db98c8faab2305bf2a99132">更多...</a><br /></td></tr>
+<tr class="separator:ae9763aa44db98c8faab2305bf2a99132"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58bd51f3fcba0c4aaec8e2a865e2fe3a"><td class="memItemLeft" align="right" valign="top">NSString *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#a58bd51f3fcba0c4aaec8e2a865e2fe3a">CCNotiNetWorkDicconnect</a></td></tr>
+<tr class="memdesc:a58bd51f3fcba0c4aaec8e2a865e2fe3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">断网事件通知.  <a href="#a58bd51f3fcba0c4aaec8e2a865e2fe3a">更多...</a><br /></td></tr>
+<tr class="separator:a58bd51f3fcba0c4aaec8e2a865e2fe3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecd8a70840d5fcfad6d46a86312aa3d1"><td class="memItemLeft" align="right" valign="top">NSString *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#aecd8a70840d5fcfad6d46a86312aa3d1">CCNotiNeedStartPublish</a></td></tr>
+<tr class="memdesc:aecd8a70840d5fcfad6d46a86312aa3d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">学生排麦中 轮到自己连麦(开始推流)通知.  <a href="#aecd8a70840d5fcfad6d46a86312aa3d1">更多...</a><br /></td></tr>
+<tr class="separator:aecd8a70840d5fcfad6d46a86312aa3d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81fd3e9dea6c68fb96ebb20a3f6abbc6"><td class="memItemLeft" align="right" valign="top">NSString *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#a81fd3e9dea6c68fb96ebb20a3f6abbc6">CCNotiNeedStopPublish</a></td></tr>
+<tr class="memdesc:a81fd3e9dea6c68fb96ebb20a3f6abbc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">老师端踢下麦(学生端停止推流).  <a href="#a81fd3e9dea6c68fb96ebb20a3f6abbc6">更多...</a><br /></td></tr>
+<tr class="separator:a81fd3e9dea6c68fb96ebb20a3f6abbc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36f2c5636ffa292eeff2326d14b912d3"><td class="memItemLeft" align="right" valign="top">NSString *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#a36f2c5636ffa292eeff2326d14b912d3">CCNotiNeedSubscriStream</a></td></tr>
+<tr class="memdesc:a36f2c5636ffa292eeff2326d14b912d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">有学生端连麦、其他学生端订阅该学生的流通知.  <a href="#a36f2c5636ffa292eeff2326d14b912d3">更多...</a><br /></td></tr>
+<tr class="separator:a36f2c5636ffa292eeff2326d14b912d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cdc7441e6a7e3b60bc5f9d1599903d4"><td class="memItemLeft" align="right" valign="top">NSString *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#a8cdc7441e6a7e3b60bc5f9d1599903d4">CCNotiNeedUnSubcriStream</a></td></tr>
+<tr class="memdesc:a8cdc7441e6a7e3b60bc5f9d1599903d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">学生端下麦、其他学生取消订阅该学生的流通知.  <a href="#a8cdc7441e6a7e3b60bc5f9d1599903d4">更多...</a><br /></td></tr>
+<tr class="separator:a8cdc7441e6a7e3b60bc5f9d1599903d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9f9181d3aa3513d1a8479bf2d906e53"><td class="memItemLeft" align="right" valign="top">NSString *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_c_room_8h.html#ac9f9181d3aa3513d1a8479bf2d906e53">CCNotiNeedLoginOut</a></td></tr>
+<tr class="memdesc:ac9f9181d3aa3513d1a8479bf2d906e53"><td class="mdescLeft">&#160;</td><td class="mdescRight">退出房间(可能是被老师踢出房间)通知.  <a href="#ac9f9181d3aa3513d1a8479bf2d906e53">更多...</a><br /></td></tr>
+<tr class="separator:ac9f9181d3aa3513d1a8479bf2d906e53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">类型定义说明</h2>
+<a id="af7d5d21a92f8e1531f88a56a5b95abba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7d5d21a92f8e1531f88a56a5b95abba">&#9670;&nbsp;</a></span>CCComletionBlock</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(^ CCComletionBlock) (BOOL result, NSError *error, id info)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>异步请求闭包回调. </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">result</td><td>结果 </td></tr>
+    <tr><td class="paramname">error</td><td>错误信息 </td></tr>
+    <tr><td class="paramname">info</td><td>回调数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="_c_c_room_8h_source.html">CCRoom.h</a> 第 <a class="el" href="_c_c_room_8h_source.html#l00262">262</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">枚举类型说明</h2>
+<a id="a0dc127ff58603cec94b5b4bac9267fe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dc127ff58603cec94b5b4bac9267fe5">&#9670;&nbsp;</a></span>CCClassType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_c_c_room_8h.html#a0dc127ff58603cec94b5b4bac9267fe5">CCClassType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>连麦模式枚举  CCClassType_Auto 自由连麦  CCClassType_Named 举手连麦 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a0dc127ff58603cec94b5b4bac9267fe5a022d98d13a1afc22683d451ab1991bca"></a>CCClassType_Rotate&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0dc127ff58603cec94b5b4bac9267fe5a351b483bfb7f6612f52bc352dc47cfbc"></a>CCClassType_Auto&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0dc127ff58603cec94b5b4bac9267fe5a3c1b2565a524e6affe3c9de2f955a3bd"></a>CCClassType_Named&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="_c_c_room_8h_source.html">CCRoom.h</a> 第 <a class="el" href="_c_c_room_8h_source.html#l00170">170</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7b7ee54380a557d314e0ced33dca5260"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b7ee54380a557d314e0ced33dca5260">&#9670;&nbsp;</a></span>CCFocusMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_c_c_room_8h.html#a7b7ee54380a557d314e0ced33dca5260">CCFocusMode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>相机对焦模式枚举  CCFocusModeAuto 自动对焦  CCFocusModeManual 手动对焦 </p>
+<p><a class="el" href="_c_c_room_8h.html">CCRoom.h</a>  房间数据模型 </p><dl class="section author"><dt>作者</dt><dd>Created by cc on 17/5/19 </dd></dl>
+<dl class="section version"><dt>版本</dt><dd>1.00 Created by cc on 17/5/19 </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a7b7ee54380a557d314e0ced33dca5260ac61fc1eca78c6c38910ba5aa1e2cf296"></a>CCFocusModeAuto&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a7b7ee54380a557d314e0ced33dca5260a566967abe3a8afef2edbea95798475f8"></a>CCFocusModeManual&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="_c_c_room_8h_source.html">CCRoom.h</a> 第 <a class="el" href="_c_c_room_8h_source.html#l00023">23</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aaa6e28863b900c64187c4a1c22e59af1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa6e28863b900c64187c4a1c22e59af1">&#9670;&nbsp;</a></span>CCLiveStatus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_c_c_room_8h.html#aaa6e28863b900c64187c4a1c22e59af1">CCLiveStatus</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>直播间状态枚举  CCLiveStatus_Stop 未开始直播  CCLiveStatus_Start 正在直播 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="aaa6e28863b900c64187c4a1c22e59af1a4e16ef5b6f25833aeb3bd6525928375a"></a>CCLiveStatus_Stop&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaa6e28863b900c64187c4a1c22e59af1ad25db2bfc92d63ab71bdf45c69b4e767"></a>CCLiveStatus_Start&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="_c_c_room_8h_source.html">CCRoom.h</a> 第 <a class="el" href="_c_c_room_8h_source.html#l00161">161</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6e635983d9372da04d95ec864e10d4f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e635983d9372da04d95ec864e10d4f6">&#9670;&nbsp;</a></span>CCRole</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_c_c_room_8h.html#a6e635983d9372da04d95ec864e10d4f6">CCRole</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>用户角色身份枚举  CCRole_Teacher 教师端  CCRole_Student 互动者  CCRole_Watcher 观看者  CCRole_Inspector 隐身者 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a6e635983d9372da04d95ec864e10d4f6a51d55aca39ebd59efe4d00ab011886c6"></a>CCRole_Teacher&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6e635983d9372da04d95ec864e10d4f6ac42edfa5562c88382e43ff4a58a0aaf9"></a>CCRole_Student&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6e635983d9372da04d95ec864e10d4f6a326f9398d53b8f419dfd0581a02640ab"></a>CCRole_Watcher&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6e635983d9372da04d95ec864e10d4f6a9fc8d2a271920f88810eb191004fa6e6"></a>CCRole_Inspector&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="_c_c_room_8h_source.html">CCRoom.h</a> 第 <a class="el" href="_c_c_room_8h_source.html#l00034">34</a> 行定义.</p>
+
+</div>
+</div>
+<a id="abe0128acb5997f5434d18e8dc24d726a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe0128acb5997f5434d18e8dc24d726a">&#9670;&nbsp;</a></span>CCRoomTemplate</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_c_c_room_8h.html#abe0128acb5997f5434d18e8dc24d726a">CCRoomTemplate</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>模板类型枚举  CCRoomTemplateSpeak 主讲模式  CCRoomTemplateSingle 主视角模式  CCRoomTemplateTile 平铺模式  CCRoomTemplateOneface 1V1  CCRoomTemplateDoubleTeacher 双师 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="abe0128acb5997f5434d18e8dc24d726aaae9ef34a550ebfe1c5bfeafb80d9758b"></a>CCRoomTemplateSpeak&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abe0128acb5997f5434d18e8dc24d726aa622e7effa547a7a6b4e1e4d73fa23723"></a>CCRoomTemplateSingle&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abe0128acb5997f5434d18e8dc24d726aa5f4ab126cc075b0e0c2e5e101c1415fe"></a>CCRoomTemplateTile&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abe0128acb5997f5434d18e8dc24d726aae356ca17ed7b55efadbe84a2670b7d77"></a>CCRoomTemplateOneface&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abe0128acb5997f5434d18e8dc24d726aafacd6941e1be331cc6b4759557ec10ac"></a>CCRoomTemplateDoubleTeacher&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="_c_c_room_8h_source.html">CCRoom.h</a> 第 <a class="el" href="_c_c_room_8h_source.html#l00183">183</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aafb03e3b0fe4fea793c019a72c3fb002"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafb03e3b0fe4fea793c019a72c3fb002">&#9670;&nbsp;</a></span>CCRotateType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_c_c_room_8h.html#aafb03e3b0fe4fea793c019a72c3fb002">CCRotateType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>轮播变更枚举 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="aafb03e3b0fe4fea793c019a72c3fb002af074234bec966149eab6166c40f6448e"></a>CCRotateType_Open&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aafb03e3b0fe4fea793c019a72c3fb002a24a76f56643387962116971c64af2536"></a>CCRotateType_Close&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aafb03e3b0fe4fea793c019a72c3fb002a2b3f7546d9054ada808b52797389c47d"></a>CCRotateType_Update&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="_c_c_room_8h_source.html">CCRoom.h</a> 第 <a class="el" href="_c_c_room_8h_source.html#l00233">233</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a89f3bb834cf514c9db5399387a0a290a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89f3bb834cf514c9db5399387a0a290a">&#9670;&nbsp;</a></span>CCSocketEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_c_c_room_8h.html#a89f3bb834cf514c9db5399387a0a290a">CCSocketEvent</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>skocket.io被动通知事件枚举  CCSocketEvent_Chat 收到的聊天消息  CCSocketEvent_UserListUpdate 在线列表  CCSocketEvent_Announcement 公告  CCSocketEvent_GagAll 全体禁言或者取消全体禁言  CCSocketEvent_GagOne 禁言或者取消禁言(学生有效)  CCSocketEvent_MediaModeUpdate 连麦音视频权限改变  CCSocketEvent_PublishStart 开始推流  CCSocketEvent_PublishEnd 推流结束,正在连麦的学生要停止连麦，停止订阅流  CCSocketEvent_LianmaiStateUpdate 连麦状态变化  CCSocketEvent_KickFromRoom 被踢出房间  CCSocketEvent_UserCountUpdate 旁听人数  CCSocketEvent_AudioStateChanged 改变音频状态  CCSocketEvent_VideoStateChanged 改变视频状态  CCSocketEvent_TeacherNamed 收到老师点名  CCSocketEvent_TeacherNamedInfo 老师点名信息  CCSocketEvent_StudentNamed 学生签到  CCSocketEvent_LianmaiModeChanged 连麦模式变化  CCSocketEvent_ReciveLianmaiInvite 在举手连麦模式中收到老师的连麦邀请  CCSocketEvent_ReciveCancleLianmaiInvite 老师取消了连麦邀请  CCSocketEvent_StreamRemoved 自己的流断开了  CCSocketEvent_TemplateChanged 房间模板改变  CCSocketEvent_MainStreamChanged 在跟随模式下老师切换主视频  CCSocketEvent_MaxStreamsChanged 房间最大连麦人数变化  CCSocketEvent_TeacherBitRateChanged 房间老师码率变化  CCSocketEvent_StudentBitRateChanged 房间学生码率变化  CCSocketEvent_DocDraw 文档画笔信息  CCSocketEvent_DocPageChange 文档翻页  CCSocketEvent_TimerStart 老师发起计时器  CCSocketEvent_TimerEnd 老师结束计时器  CCSocketEvent_ReciveVote 收到答题  CCSocketEvent_ReciveStopVote 收到结束答题  CCSocketEvent_ReciveDrawStateChanged 收到授权标注状态改变  CCSocketEvent_HandupStateChanged 收到举手状态改变  CCSocketEvent_SocketReconnecting socket重连中  CCSocketEvent_SocketConnected socket连接成功  CCSocketEvent_SocketReconnected socket重连成功  CCSocketEvent_SocketConnectionClosed socket连接断开  CCSocketEvent_SocketReconnectedFailed socket重连连接  CCSocketEvent_RecivePublishError 上麦失败(老师拉学生上麦，而学生不具备上麦条件)  CCSocketEvent_ReciveInterCutAudioOrVideo 插播音视频事件  CCSocketEvent_ReciveDocAnimationChange 文档动画事件  CCSocketEvent_ReciveAnssistantChange 设为讲师事件  CCSocketEvent_ReciveStreamBigOrSmall web端老师双击放大  CCSocketEvent_BrainstomSend 头脑风暴开始  CCSocketEvent_BrainstomReply 头脑风暴回复  CCSocketEvent_BrainstomEnd 头脑风暴结束  CCSocketEvent_VoteSend 投票内容  CCSocketEvent_VoteReply 投票回复  CCSocketEvent_VoteEnd 投票结束 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa9cf747acbd64d61300d0b7eedfaf9955"></a>CCSocketEvent_Chat&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aaabbff350672b1985aa3503653d31a5fc"></a>CCSocketEvent_UserListUpdate&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aad54400e7fd3c41f4b4f7f965d5ee95c9"></a>CCSocketEvent_Announcement&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa30b02dde8d262584beae5f4045c8c9c2"></a>CCSocketEvent_GagAll&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa921c9c124840ae559f10609277112e93"></a>CCSocketEvent_GagOne&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa378b94bb51006842d2d43e945de44890"></a>CCSocketEvent_MediaModeUpdate&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa101d1f2397439e893dc8b6826950cfb8"></a>CCSocketEvent_PublishStart&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aad763de8ac32f30f20d6bb131a9a552c6"></a>CCSocketEvent_PublishEnd&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa27175ca636502646d763a55afecc730f"></a>CCSocketEvent_LianmaiStateUpdate&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aac7d152a3f0246b4eefe4d77b7a027235"></a>CCSocketEvent_KickFromRoom&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aafac86cd8450fd763e5fb2dc96cf2bdb6"></a>CCSocketEvent_UserCountUpdate&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa562dad3bce13ca5e8eb10ff358324edd"></a>CCSocketEvent_AudioStateChanged&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aaa02ffe08679cefa51b241fd4d939cf0c"></a>CCSocketEvent_VideoStateChanged&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aad0e5ca53c7860223f31aea72901ab1c0"></a>CCSocketEvent_TeacherNamed&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa95d97bfbc06e62e1f8b056490acb20ad"></a>CCSocketEvent_TeacherNamedInfo&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa841fffef00fdfa78b60b8a336a386cc5"></a>CCSocketEvent_StudentNamed&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aab5a64d97de96caff051d8de6a6b632df"></a>CCSocketEvent_LianmaiModeChanged&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa2b066be94f8e6130d9a0c8a70f654ddd"></a>CCSocketEvent_ReciveLianmaiInvite&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aac923ae23036c722de930e7445392a488"></a>CCSocketEvent_ReciveCancleLianmaiInvite&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aaae38212b7a0f6a4e5e89e65b6e6adb11"></a>CCSocketEvent_StreamRemoved&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aaf6b5a1b6f22161a76acadb059f854cff"></a>CCSocketEvent_TemplateChanged&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aacf47fddcdd7e6ad6fbc4ad3f2b2201ff"></a>CCSocketEvent_MainStreamChanged&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa7f3f2d2967c92801d7196f5fa38ae8f0"></a>CCSocketEvent_MaxStreamsChanged&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aaab10a51145e3016d8bb1fe304b45142a"></a>CCSocketEvent_TeacherBitRateChanged&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa8917d1488afb699f9da10d644ee649d2"></a>CCSocketEvent_StudentBitRateChanged&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aaffa19d043b82ebb3ff5ac86fa621ee01"></a>CCSocketEvent_DocDraw&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa132fe1a3e127f471ac1e0fcde489b2bf"></a>CCSocketEvent_DocPageChange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa0e3937d85eb35a05acc6e5da6ab35ae8"></a>CCSocketEvent_TimerStart&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aad7b9d0f39571aeffee1b2e886810f13f"></a>CCSocketEvent_TimerEnd&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aaf3e0ade78697568326efb1318b76be5d"></a>CCSocketEvent_ReciveVote&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa1cf8a8420b6c5d2d4ee651ab003909d5"></a>CCSocketEvent_ReciveVoteAns&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa739e46e23bb031a5a4964cfae9ee87f3"></a>CCSocketEvent_ReciveStopVote&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa2ea1a1a4a8f3e8f281fa39c4e8663ae8"></a>CCSocketEvent_ReciveDrawStateChanged&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aaf5a5e5754edec4236844cede085ec2b3"></a>CCSocketEvent_HandupStateChanged&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aaddb04bc02e2ca49af92a3fc2c1df473a"></a>CCSocketEvent_RotateLockedStateChanged&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa0dcc3d6e3f1b450d5f4aa29306208888"></a>CCSocketEvent_SocketReconnecting&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa4701551d7c1aa73ee6da84293edcab2b"></a>CCSocketEvent_SocketConnected&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa0df6cefa3ccff0835e78fbb20a1ad9aa"></a>CCSocketEvent_SocketReconnected&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aaabfb85067887c2b4401c5427191d2b4f"></a>CCSocketEvent_SocketConnectionClosed&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa406367f3db19daec36b1a424fd69159a"></a>CCSocketEvent_SocketReconnectedFailed&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aad0a6c7ab00c18a46c848e7d00ac567d9"></a>CCSocketEvent_RecivePublishError&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aab509861198161073d461607c9072c53b"></a>CCSocketEvent_ReciveInterCutAudioOrVideo&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aab6c004bb4a552011adb42db849e2d732"></a>CCSocketEvent_ReciveDocAnimationChange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aabda3b2c8633d0b905dbb8723c67736aa"></a>CCSocketEvent_ReciveAnssistantChange&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aaa6f3bb876a00afda85f45ac16df066b4"></a>CCSocketEvent_ReciveStreamBigOrSmall&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aad89266b00efb8ace6a2101dd186ed5ee"></a>CCSocketEvent_BrainstomSend&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa8654708ac353145f385636e744973fd1"></a>CCSocketEvent_BrainstomReply&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa449019fb6a657d7fa162c1adf3a58813"></a>CCSocketEvent_BrainstomEnd&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aab1cd451c40e31eb37fab4cc59356c263"></a>CCSocketEvent_VoteSend&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa118a539a6321ce81ce82544c8469c5d3"></a>CCSocketEvent_VoteReply&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a89f3bb834cf514c9db5399387a0a290aa6c209c672fa4f38ffe81d0f9b1e2d197"></a>CCSocketEvent_VoteEnd&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="_c_c_room_8h_source.html">CCRoom.h</a> 第 <a class="el" href="_c_c_room_8h_source.html#l00093">93</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af8a6e11da89d59d7b53395782b8d270c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8a6e11da89d59d7b53395782b8d270c">&#9670;&nbsp;</a></span>CCUserBitrate</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_c_c_room_8h.html#af8a6e11da89d59d7b53395782b8d270c">CCUserBitrate</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>码率枚举 </p>
+<ul>
+<li>CCUserBitrate_1: </li>
+</ul>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="af8a6e11da89d59d7b53395782b8d270cada47ae117dcc98880483a03debf6243b"></a>CCUserBitrate_1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af8a6e11da89d59d7b53395782b8d270cadee21f111364bfc3cdba28a6165ad91a"></a>CCUserBitrate_2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af8a6e11da89d59d7b53395782b8d270cac844610301253e98415c34ae53397936"></a>CCUserBitrate_3&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af8a6e11da89d59d7b53395782b8d270ca46b76bc45b119c73c95505ae5eca7f95"></a>CCUserBitrate_4&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af8a6e11da89d59d7b53395782b8d270ca486c2be1dcb8040352c033ce2e92ccfc"></a>CCUserBitrate_5&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af8a6e11da89d59d7b53395782b8d270cab710b35c1a88f15e16232d2df3096d60"></a>CCUserBitrate_6&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="_c_c_room_8h_source.html">CCRoom.h</a> 第 <a class="el" href="_c_c_room_8h_source.html#l00220">220</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4ace6d1aa327f59e1841369cbbccaf41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ace6d1aa327f59e1841369cbbccaf41">&#9670;&nbsp;</a></span>CCUserMicStatus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_c_c_room_8h.html#a4ace6d1aa327f59e1841369cbbccaf41">CCUserMicStatus</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>上麦状态枚举  CCUserMicStatus_None 初始状态  CCUserMicStatus_Wait 排麦中  CCUserMicStatus_Connecting 上麦  CCUserMicStatus_Connected 连麦中  CCUserMicStatus_Inviteing 邀请上麦中 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a4ace6d1aa327f59e1841369cbbccaf41aa3e355824ec2f7ee35d1642e416f7470"></a>CCUserMicStatus_None&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4ace6d1aa327f59e1841369cbbccaf41a7e0397cbe2b37fed8e437c7a8f4e789e"></a>CCUserMicStatus_Wait&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4ace6d1aa327f59e1841369cbbccaf41aa33f0f2571c4df94e3c685852da5e42e"></a>CCUserMicStatus_Connecting&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4ace6d1aa327f59e1841369cbbccaf41a90c20b78466977993030c0961229e2d7"></a>CCUserMicStatus_Connected&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4ace6d1aa327f59e1841369cbbccaf41a418f0509f4f92dae2bdb88f36cd1cd82"></a>CCUserMicStatus_Inviteing&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="_c_c_room_8h_source.html">CCRoom.h</a> 第 <a class="el" href="_c_c_room_8h_source.html#l00198">198</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a772da855553977649bd045affbc3539b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a772da855553977649bd045affbc3539b">&#9670;&nbsp;</a></span>CCUserPlatform</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_c_c_room_8h.html#a772da855553977649bd045affbc3539b">CCUserPlatform</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>登录平台枚举  CCUserPlatform_PC web端登录  CCUserPlatform_Mobile 手机端登录 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a772da855553977649bd045affbc3539bae6fb34b4ed2e325d90dda10be929b44b"></a>CCUserPlatform_PC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a772da855553977649bd045affbc3539ba46e3d41653dbfdf8f271e9e540360bd4"></a>CCUserPlatform_Mobile&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="_c_c_room_8h_source.html">CCRoom.h</a> 第 <a class="el" href="_c_c_room_8h_source.html#l00210">210</a> 行定义.</p>
+
+</div>
+</div>
+<a id="abfc379ce1f261169b1d50a52e5c45ddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfc379ce1f261169b1d50a52e5c45ddf">&#9670;&nbsp;</a></span>CCVideoMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_c_c_room_8h.html#abfc379ce1f261169b1d50a52e5c45ddf">CCVideoMode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>音视频模式枚举  CCVideoMode_AudioAndVideo 连麦开放音视频  CCVideoMode_Audio = 2 连麦只开放音频 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="abfc379ce1f261169b1d50a52e5c45ddfab2195370be3e70b2f60878817d9cfb39"></a>CCVideoMode_AudioAndVideo&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abfc379ce1f261169b1d50a52e5c45ddfacf2286e56968306b91483eebfaba0d8c"></a>CCVideoMode_Audio&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="_c_c_room_8h_source.html">CCRoom.h</a> 第 <a class="el" href="_c_c_room_8h_source.html#l00152">152</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">变量说明</h2>
+<a id="ac9f9181d3aa3513d1a8479bf2d906e53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9f9181d3aa3513d1a8479bf2d906e53">&#9670;&nbsp;</a></span>CCNotiNeedLoginOut</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NSString* const CCNotiNeedLoginOut</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>退出房间(可能是被老师踢出房间)通知. </p>
+
+</div>
+</div>
+<a id="aecd8a70840d5fcfad6d46a86312aa3d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecd8a70840d5fcfad6d46a86312aa3d1">&#9670;&nbsp;</a></span>CCNotiNeedStartPublish</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NSString* const CCNotiNeedStartPublish</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>学生排麦中 轮到自己连麦(开始推流)通知. </p>
+
+</div>
+</div>
+<a id="a81fd3e9dea6c68fb96ebb20a3f6abbc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81fd3e9dea6c68fb96ebb20a3f6abbc6">&#9670;&nbsp;</a></span>CCNotiNeedStopPublish</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NSString* const CCNotiNeedStopPublish</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>老师端踢下麦(学生端停止推流). </p>
+
+</div>
+</div>
+<a id="a36f2c5636ffa292eeff2326d14b912d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36f2c5636ffa292eeff2326d14b912d3">&#9670;&nbsp;</a></span>CCNotiNeedSubscriStream</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NSString* const CCNotiNeedSubscriStream</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>有学生端连麦、其他学生端订阅该学生的流通知. </p>
+
+</div>
+</div>
+<a id="a8cdc7441e6a7e3b60bc5f9d1599903d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cdc7441e6a7e3b60bc5f9d1599903d4">&#9670;&nbsp;</a></span>CCNotiNeedUnSubcriStream</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NSString* const CCNotiNeedUnSubcriStream</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>学生端下麦、其他学生取消订阅该学生的流通知. </p>
+
+</div>
+</div>
+<a id="a58bd51f3fcba0c4aaec8e2a865e2fe3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58bd51f3fcba0c4aaec8e2a865e2fe3a">&#9670;&nbsp;</a></span>CCNotiNetWorkDicconnect</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NSString* const CCNotiNetWorkDicconnect</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>断网事件通知. </p>
+
+</div>
+</div>
+<a id="ae9763aa44db98c8faab2305bf2a99132"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9763aa44db98c8faab2305bf2a99132">&#9670;&nbsp;</a></span>CCNotiReceiveSocketEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NSString* const CCNotiReceiveSocketEvent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>socket.io事件通知. </p>
+
+</div>
+</div>
+<a id="a57c4fc9ddc8c12ab6c33a685445de0c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57c4fc9ddc8c12ab6c33a685445de0c9">&#9670;&nbsp;</a></span>ShareScreenViewName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NSString* const ShareScreenViewName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>共享桌面流名字宏定义 </p>
+
+</div>
+</div>
+<a id="ad7bf5c13a3c684b4bebdff58aea485ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7bf5c13a3c684b4bebdff58aea485ba">&#9670;&nbsp;</a></span>ShareScreenViewUserID</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NSString* const ShareScreenViewUserID</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>共享桌面流用户ID宏定义 </p>
+
+</div>
+</div>
+<a id="ab85234734e4e47f572f0640b9fc3bd69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab85234734e4e47f572f0640b9fc3bd69">&#9670;&nbsp;</a></span>TeacherSecondStreamViewName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NSString* const TeacherSecondStreamViewName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>老师高拍仪用户名字宏定义 </p>
+
+</div>
+</div>
+<a id="a6c1ea7e0de753e4e99f01e4595464763"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c1ea7e0de753e4e99f01e4595464763">&#9670;&nbsp;</a></span>TeacherSecondStreamViewUserID</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">NSString* const TeacherSecondStreamViewUserID</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>老师高拍仪用户ID宏定义 </p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="_c_c_room_8h.html">CCRoom.h</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

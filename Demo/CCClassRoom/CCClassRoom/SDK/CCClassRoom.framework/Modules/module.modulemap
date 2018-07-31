@@ -1,0 +1,6 @@
+framework module CCClassRoom {
+  umbrella header "CCClassRoom.h"
+
+  export *
+  module * { export * }
+}
