@@ -20,6 +20,7 @@
         self.roomID = [dic objectForKey:@"roomId"];
         self.useSDK = [[dic objectForKey:@"useSDK"] boolValue];
         self.size = [[dic objectForKey:@"size"] floatValue];
+        self.mode = [dic[@"mode"]longValue];
         
         NSString *url = [[domain componentsSeparatedByString:@"://"] lastObject];
         self.picDomain = [NSString stringWithFormat:@"https://%@", url];

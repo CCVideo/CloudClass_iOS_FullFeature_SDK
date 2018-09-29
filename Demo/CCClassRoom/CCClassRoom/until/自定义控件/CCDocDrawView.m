@@ -290,7 +290,8 @@
                         CGFloat ty = [drawDic[@"y"] floatValue] * self.frame.size.height;
                         //                    CGFloat tw = [drawDic[@"width"] floatValue] * self.scale;
                         //                    CGFloat th = [drawDic[@"height"] floatValue] * self.scale;
-                        CGFloat tw = [drawDic[@"width_per"] floatValue] * self.frame.size.width;
+                        CGFloat scaleLocal = [[UIScreen mainScreen]scale];
+                        CGFloat tw = [drawDic[@"width_per"] floatValue] * self.frame.size.width * scaleLocal + 100;
                         CGFloat th = [drawDic[@"height_per"] floatValue] * self.frame.size.height;
                         NSInteger fontSize = [drawDic[@"size"] integerValue];
                         UIFont  *font = [UIFont boldSystemFontOfSize:fontSize * self.scale];

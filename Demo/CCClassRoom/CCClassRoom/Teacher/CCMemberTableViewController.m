@@ -13,6 +13,9 @@
 #import "SULogger.h"
 #import <BlocksKit+UIKit.h>
 #import "LoadingView.h"
+#import <AFNetworking.h>
+#import "CCRewardView.h"
+#import "CCTipsView.h"
 
 @implementation CCMemberModel
 - (id)initWithDic:(NSDictionary *)info blackList:(NSArray *)blackList
@@ -112,6 +115,10 @@
 @property (strong, nonatomic) UIImageView *logintypeIcon;
 @property (strong, nonatomic) UILabel *nameLabel;//名字
 @property (strong, nonatomic) UIImageView *typeIcon;//身份
+//chenfy-new
+@property (strong, nonatomic) UIImageView *rewardIcon;//奖励图标
+@property (strong, nonatomic) UILabel *rewardCount; //奖励数量
+
 @property (strong, nonatomic) UIImageView *micIcon;
 @property (strong, nonatomic) UILabel *micNumLabel;
 @property (strong, nonatomic) UIImageView *micTypeIcon;//正在连麦还是排麦中
@@ -132,6 +139,8 @@
         [self addSubview:self.logintypeIcon];
         [self addSubview:self.nameLabel];
         [self addSubview:self.typeIcon];
+        [self addSubview:self.rewardIcon];
+        [self addSubview:self.rewardCount];
         [self addSubview:self.micIcon];
         [self addSubview:self.micNumLabel];
         [self addSubview:self.isMuteIcon];
@@ -151,6 +160,14 @@
         }];
         [self.typeIcon mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(ws.nameLabel.mas_right).offset(CCGetRealFromPt(7));
+            make.centerY.mas_equalTo(ws);
+        }];
+        [self.rewardIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(ws.typeIcon.mas_right).offset(CCGetRealFromPt(7));
+            make.centerY.mas_equalTo(ws);
+        }];
+        [self.rewardCount mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(ws.rewardIcon.mas_right).offset(CCGetRealFromPt(7));
             make.centerY.mas_equalTo(ws);
         }];
         
@@ -331,7 +348,7 @@
 {
     if (!_rightActionImageView)
     {
-        _rightActionImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrows2"]];
+        _rightActionImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"talking"]];
     }
     return _rightActionImageView;
 }
@@ -362,6 +379,65 @@
         _typeIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"teacher"]];
     }
     return _typeIcon;
+}
+//奖励：奖杯、鲜花
+- (UIImageView *)rewardIcon
+{
+    if (!_rewardIcon)
+    {
+        _rewardIcon = [[UIImageView alloc]init];
+//        _rewardIcon.backgroundColor = [UIColor purpleColor];
+    }
+    return _rewardIcon;
+}
+
+- (UILabel *)rewardCount
+{
+    if (!_rewardCount)
+    {
+        _rewardCount = [[UILabel alloc]init];
+        _rewardCount.font = [UIFont systemFontOfSize:12];
+        _rewardCount.text = @"";
+//        _rewardCount.backgroundColor = [UIColor cyanColor];
+    }
+    return _rewardCount;
+}
+
+- (void)setRewardRole:(CCMemberType)memberType count:(int)count reload:(BOOL)reload
+{
+    //计数
+    int countFinal = 0;
+    if (count == 0)
+    {
+        countFinal = 0;
+    }
+    else
+    {
+        NSString *text = self.rewardCount.text;
+        if (reload)
+        {
+            text = @"";
+        }
+        text = [text stringByReplacingOccurrencesOfString:@"X" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        countFinal = [text intValue] + count;
+        
+        self.rewardCount.text = [NSString stringWithFormat:@"X %d",countFinal];
+    }
+    
+    if (countFinal == 0)
+    {
+        self.rewardIcon.image = nil;
+        self.rewardCount.text = @"";
+    }
+    else if (memberType == CCMemberType_Teacher && countFinal > 0)
+    {
+        self.rewardIcon.image = [UIImage imageNamed:@"flower_small"];
+    }
+    else
+    {
+        self.rewardIcon.image = [UIImage imageNamed:@"cup_small"];
+    }
 }
 
 - (UIImageView *)micIcon
@@ -530,6 +606,8 @@
 - (void)receiveSocketEvent:(NSNotification *)noti
 {
     CCSocketEvent event = (CCSocketEvent)[noti.userInfo[@"event"] integerValue];
+    id value = noti.userInfo[@"value"];
+
     if (event == CCSocketEvent_UserListUpdate || event == CCSocketEvent_GagOne)
     {
         //在线列表
@@ -588,43 +666,120 @@
     else if (event == CCSocketEvent_ReciveDrawStateChanged)
     {
         //授权标注列表变动
-        //        CCUser *user = noti.userInfo[@"user"];
-        //        NSString *myUserID = [CCStreamer sharedStreamer].getRoomInfo.user_id;
-        //        if ([user.user_id isEqualToString:myUserID])
-        //        {
-        //            if (user.user_drawState)
-        //            {
-        //                [self showAutoHiddenAlert:@"你已被老师开启标注"];
-        //                //开启授权
-        //            }
-        //            else
-        //            {
-        //                //关闭授权
-        //                [self showAutoHiddenAlert:@"你已被老师关闭标注"];
-        //            }
-        //        }
-        
+        [self makeData:[[CCStreamer sharedStreamer] getRoomInfo].room_userList];
+    }
+    else if(event == CCSocketEvent_Flower)
+    {
+        [self rewardFlower:value];
+    }
+    else if (event == CCSocketEvent_Cup)
+    {
+        [self rewardCup:value];
+    }
+    else if (event == CCSocketEvent_PublishEnd || event == CCSocketEvent_PublishStart)
+    {
         [self makeData:[[CCStreamer sharedStreamer] getRoomInfo].room_userList];
     }
 }
 
-- (void)showAutoHiddenAlert:(NSString *)title
+//reward 奖励、鲜花
+- (void)rewardFlower:(id)obj
 {
-    if (_loadingView) {
-        [_loadingView removeFromSuperview];
-        _loadingView = nil;
+    CCLog(@"rewardFlower__%@",obj);
+    NSDictionary *dicData = obj[@"data"];
+    NSString *uid = dicData[@"uid"];
+   
+    [self reward_flower_cup_ui:uid count:1];
+}
+- (void)rewardCup:(id)obj
+{
+    CCLog(@"rewardCup__%@",obj);
+    NSDictionary *dicData = obj[@"data"];
+    NSString *uid = dicData[@"uid"];
+    
+    [self reward_flower_cup_ui:uid count:1];
+}
+//更新鲜花、
+- (void)reward_flower_cup_ui:(NSString *)uid count:(int)count
+{
+    NSString *uidLocal = uid;
+    int index = (int)[self indexForUserId:uidLocal];
+    CCMemberModel *model = [self modelForUid:uid];
+    CCMemberTableViewCell *cell = [self cellForIndex:index];
+    if (!model)
+    {//人员已经不存在
+        return;
     }
-    _loadingView = [[LoadingView alloc] initWithLabel:title showActivity:NO];
-    [self.view addSubview:_loadingView];
-    [_loadingView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
-    }];
-    [self performSelector:@selector(alertViewAutoHide:) withObject:_loadingView afterDelay:2];
+    if (count > 1)
+    {
+        [cell setRewardRole:model.type count:count reload:YES];
+    }
+    else
+    {
+        [cell setRewardRole:model.type count:count reload:NO];
+    }
+}
+- (void)reward_update_ui:(NSString *)uid count:(int)count
+{
+    NSString *uidLocal = uid;
+    int index = (int)[self indexForUserId:uidLocal];
+    CCMemberModel *model = [self modelForUid:uid];
+    CCMemberTableViewCell *cell = [self cellForIndex:index];
+    if (!model)
+    {//人员已经不存在
+        return;
+    }
+    [cell setRewardRole:model.type count:count reload:YES];
 }
 
-- (void)alertViewAutoHide:(LoadingView *)alertView
+//获取展示的用户
+- (NSUInteger)indexForUserId:(NSString *)uid
 {
-    [alertView removeFromSuperview];
+    if (!self.data) {
+        return -1;
+    }
+    NSUInteger indx = 0;
+    for (CCMemberModel *mode in self.data)
+    {
+        if ([mode.userID isEqualToString:uid])
+        {
+            indx = [self.data indexOfObject:mode];
+            break;
+        }
+    }
+    return indx;
+}
+
+- (CCMemberTableViewCell *)cellForIndex:(int)index
+{
+    NSIndexPath *indexP = [NSIndexPath indexPathForRow:index inSection:0];
+    CCMemberTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexP];
+    return cell;
+}
+
+- (CCMemberModel *)modelForUid:(NSString *)uid
+{
+    for (CCMemberModel *mode in self.data)
+    {
+        if ([mode.userID isEqualToString:uid])
+        {
+            return mode;
+        }
+    }
+    return nil;
+}
+
+- (void)showAutoHiddenAlert:(NSString *)title
+{
+    UIAlertView *alertV = [UIAlertView bk_alertViewWithTitle:title];
+    [alertV show];
+    
+    [self performSelector:@selector(alertViewAutoHide:) withObject:alertV afterDelay:1];
+}
+
+- (void)alertViewAutoHide:(UIAlertView *)alertView
+{
+    [alertView dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -750,6 +905,8 @@
     }
     self.data = data;
     [self.tableView reloadData];
+    
+    [self updateFlowerAndCupData];
 }
 
 #pragma mark - Table view data source
@@ -778,6 +935,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     CCMemberModel *model = self.data[indexPath.row];
     [cell configWithModel:model];
+    [cell setRewardRole:model.type count:0 reload:NO];
     if (indexPath.row == self.data.count - 1)
     {
         cell.line.hidden = NO;
@@ -786,17 +944,6 @@
     {
         cell.line.hidden = YES;
     }
-    //    if (self.myRole == CCRole_Student)
-    //    {
-    //        cell.rightActionImageView.hidden = YES;
-    //    }
-    //    else
-    //    {
-    //        if (model.type != CCMemberType_Teacher)
-    //        {
-    //            cell.rightActionImageView.hidden = NO;
-    //        }
-    //    }
     return cell;
 }
 
@@ -805,14 +952,64 @@
 #define ACTIONSHEETTAGTHTREE 1003
 #define ACTIONSHEETTAGFOUR 1004
 #define ACTIONSHEETTAGFIVE 1005
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CCLiveStatus statusLive = [[CCStreamer sharedStreamer]getRoomInfo].live_status;
+    if (statusLive == CCLiveStatus_Stop) {
+        [self showAutoHiddenAlert:@"直播未开始！"];
+        return;
+    }
+    NSLog(@"ccc--:%ld",(long)indexPath.row);
     CCMemberModel *model = self.data[indexPath.row];
+    if (model.type == CCMemberType_Teacher)
+    {
+        [self clickCellTeacker:model tableView:tableView];
+    }
+    if (model.type == CCMemberType_Student)
+    {
+        [self clickCellStudent:model tableView:tableView];
+    }
+}
+//点击cell
+- (void)clickCellTeacker:(CCMemberModel *)model tableView:(UITableView *)tableView
+{
+    if ([[CCStreamer sharedStreamer] getRoomInfo].user_role == CCRole_Student)
+    {
+        [self student_clicked:model tableView:tableView];
+    }
+}
+- (void)clickCellStudent:(CCMemberModel *)model tableView:(UITableView *)tableView
+{
+    if ([[CCStreamer sharedStreamer] getRoomInfo].user_role == CCRole_Teacher)
+    {
+        [self teacher_clicked:model tableView:tableView];
+    }
+}
+//点击事件
+- (void)student_clicked:(CCMemberModel *)model tableView:(UITableView *)tableView
+{
+    CCShareObject *shareObj = [CCShareObject sharedObj];
+    BOOL allowSend = shareObj.isAllowSendFlower;
+    if (!allowSend)
+    {
+        [[CCTipsView new] showMessage:@"鲜花生长中，3分钟后才可以送出哟！"];
+        return;
+    }
     self.actionManager = [CCStudentActionManager new];
-    [self.actionManager showWithUserID:model.userID inView:self.view dismiss:^(BOOL result, id info) {
+    [self.actionManager studentCallWithUserID:model.userID inView:self.view dismiss:^(BOOL result, id info) {
         [tableView reloadData];
     }];
 }
+
+- (void)teacher_clicked:(CCMemberModel *)model tableView:(UITableView *)tableView
+{
+    self.actionManager = [CCStudentActionManager new];
+    [self.actionManager showWithUserID:model.userID inView:self.view dismiss:^(BOOL result, id info) {
+        //[tableView reloadData];
+    }];
+}
+
 #pragma mark -
 - (void)room_user_count
 {
@@ -848,4 +1045,99 @@
     UIGraphicsEndImageContext();
     return theImage;
 }
+
+//===========
+- (void)updateFlowerAndCupData
+{
+    /*
+     {
+     liveid = 6848A7E5569C2BCB;
+     result = OK;
+     started = 1;
+     } */
+    [[CCStreamer sharedStreamer]getLiveStatus:^(BOOL result, NSError *error, id info) {
+        NSString *resultString = info[@"result"];
+        int start = [info[@"started"] intValue];
+        if (![resultString isEqualToString:@"OK"] || start != 1)
+        {
+            NSString *errMsg = error.domain;
+            return ;
+        }
+        NSString *liveId = info[@"liveid"];
+        [self getUserCountData:liveId];
+    }];
+}
+
+- (void)getUserCountData:(NSString *)liveID
+{
+    __weak typeof(self)weakSelf = self;
+    NSString *roomId = GetFromUserDefaults(LIVE_ROOMID);
+    NSDictionary *par = @{
+                          @"liveid":liveID,
+                          @"roomid":roomId
+                          };
+    
+    NSString *urlString = @"https://hand.csslcloud.net/backend/live/reward/";
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager POST:urlString parameters:par success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        if (!responseObject)
+        {
+            return ;
+        }
+        NSDictionary *dicRes = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        CCLog(@"getUserCountData__%@",dicRes);
+        if (!dicRes)
+        {
+            return;
+        }
+        if (![dicRes[@"result"] isEqualToString:@"OK"])
+        {
+            [self showMessage:@"获取数据失败！"];
+            return ;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSDictionary *dicValue = dicRes[@"data"];
+            NSDictionary *dicFinal = [weakSelf allUserFlowerCupData:dicValue];
+            [self updateFlowerCupUI:dicFinal];
+        });
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        CCLog(@"warm_play_error!");
+    }];
+}
+
+//刷新鲜花、奖杯 UI
+- (NSDictionary *)allUserFlowerCupData:(NSDictionary *)dicData
+{
+    NSDictionary *dicFlower = dicData[@"total_flower"];
+    NSDictionary *dicCup = dicData[@"total_cup"];
+    
+    NSMutableDictionary *dicNew = [NSMutableDictionary dictionaryWithDictionary:dicFlower];
+    [dicNew addEntriesFromDictionary:dicCup];
+    
+    return dicNew;
+}
+
+- (void)updateFlowerCupUI:(NSDictionary *)dicValue
+{
+    //通过枚举类枚举
+    NSEnumerator *enumerator = [dicValue keyEnumerator];
+    NSString *key = nil;
+    while (key = [enumerator nextObject]) {
+        int count = [[dicValue objectForKey:key] intValue];
+        NSLog(@"通过枚举类枚举--->%d",count);
+        [self reward_update_ui:key count:count];
+    }
+}
+
+- (void)showMessage:(NSString *)msg
+{
+    [UIAlertView bk_showAlertViewWithTitle:@"提示" message:msg cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        
+    }];
+}
+
+
 @end

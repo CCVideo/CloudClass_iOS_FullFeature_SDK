@@ -214,17 +214,17 @@
         {
             [self.data removeObject:localInfo];
             [self.collectionView reloadData];
-//            [self.collectionView performBatchUpdates:^{
-//                NSIndexPath *newIndexPath = [NSIndexPath indexPathForItem:i inSection:0];
-//                [self.collectionView deleteItemsAtIndexPaths:@[newIndexPath]];
-//            } completion:^(BOOL finished) {
-//            }];
             break;
         }
         i++;
     }
     if ([[CCStreamer sharedStreamer] getRoomInfo].user_role == CCRole_Student)
     {
+        if (!view)
+        {
+            CCLog(@"流视图参数为nil");
+            return;
+        }
         if (view.role == CCRole_Teacher)
         {
             [self bringSubviewToFront:self.noTeacherStreamLabel];

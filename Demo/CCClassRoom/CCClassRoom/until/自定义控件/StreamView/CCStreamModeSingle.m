@@ -289,6 +289,7 @@
 
 - (void)removeStreamView:(CCStreamShowView *)view
 {
+    CCLog(@"LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
     CCLog(@"%s__%d__%@", __func__, __LINE__, view.stream.streamID);
     //这里要考虑移除的是大屏显示的视图
     if ([self.bigView.stream.streamID isEqualToString:view.stream.streamID] || self.bigView == view)
@@ -346,9 +347,14 @@
     
     if ([[CCStreamer sharedStreamer] getRoomInfo].user_role == CCRole_Student)
     {
+        if (!view)
+        {
+            CCLog(@"视图为空__CC");
+            return;
+        }
         if (view.role == CCRole_Teacher)
         {
-            CCLog(@"老师的流走了");
+            CCLog(@"老师的流走了__CC");
             [self bringSubviewToFront:self.noTeacherStreamLabel];
             self.noTeacherStreamLabel.hidden = NO;
         }

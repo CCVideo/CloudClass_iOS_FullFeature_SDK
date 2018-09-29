@@ -619,7 +619,9 @@
     {
         self.docViewTapGes.enabled = YES;
     }
-    if (_role == CCStreamModeSpeakRole_Teacher && self.nowDoc.pageSize > 1)
+    
+    BOOL teacherCopy = [[CCDocManager sharedManager]user_teacher_copy];
+    if ((_role == CCStreamModeSpeakRole_Teacher || teacherCopy) && self.nowDoc.pageSize > 1)
     {
         self.skipBtn.hidden = NO;
         self.frontBtn.hidden = NO;

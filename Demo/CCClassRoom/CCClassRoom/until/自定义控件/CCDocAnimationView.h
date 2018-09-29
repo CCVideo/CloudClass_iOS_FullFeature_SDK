@@ -25,4 +25,5 @@ typedef void(^AnimationBlock)(id vlaue);
 - (NSInteger)changeToBack;
 - (NSInteger)changeToFront;
 - (void)gotoStep:(NSInteger)step;
+
 @end

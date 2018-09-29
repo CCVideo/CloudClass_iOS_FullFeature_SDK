@@ -25,5 +25,7 @@
 @property(nonatomic,assign)CCRole roleType;
 
 - (void)docPageChange;
+//调整鲜花奖杯，聊天视图层次
+- (void)changeKeyboardViewUp;
 
 @end

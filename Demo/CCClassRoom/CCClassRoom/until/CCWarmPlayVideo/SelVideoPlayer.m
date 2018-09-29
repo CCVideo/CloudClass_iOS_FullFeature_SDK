@@ -232,8 +232,7 @@ static int gl_play_times = 0;
     else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"])
     {
         // 当视频缓冲好时
-        if (self.playerItem.playbackLikelyToKeepUp && self.playerState == SelVideoPlayerStateBuffering)
-        {
+        if (self.playerItem.playbackLikelyToKeepUp && self.playerState == SelVideoPlayerStateBuffering){
             self.playerState = SelVideoPlayerStatePlaying;
         }
     }
@@ -257,7 +256,7 @@ static int gl_play_times = 0;
         }
     }
 }
-//暖场视频重新加载
+
 - (void)reload_play
 {
     [self setPlayerURL:self.playerConfiguration.sourceUrl];

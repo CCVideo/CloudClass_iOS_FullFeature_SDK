@@ -22,6 +22,7 @@
 @implementation CCCollectionViewCellSpeak
 - (void)loadwith:(CCStreamShowView *)info showNameAtTop:(BOOL)top
 {
+    __weak typeof(self) weakSelf = self;
     //这里不能简单的remove，要判断是不是在当前view的子view中才能remove，不然remove另外一个cell的视图
     if (self.info && self.info.superview == self)
     {
@@ -63,6 +64,15 @@
         self.bottomView.backgroundColor = CCRGBAColor(0, 0, 0, 0.5);
         [self addSubview:self.bottomView];
     }
+    if (!self.loadingView)
+    {
+        self.loadingView = [CCLoadingView createLoadingView:info.stream.streamID];
+        [self addSubview:self.loadingView];
+        [self.loadingView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(weakSelf);
+        }];
+    }
+
     [self addSubview:info];
     [self sendSubviewToBack:info];
     [self bringSubviewToFront:self.lockImageView];
@@ -92,7 +102,6 @@
         }
     }
     
-    __weak typeof(self) weakSelf = self;
     [info mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(weakSelf).offset(1.f);
         make.right.mas_equalTo(weakSelf).offset(-1.f);
@@ -215,6 +224,40 @@
     if (![haveAudio isEqualToString:@"true"])
     {
         self.audioImageView.image = [UIImage imageNamed:@"nomai"];
+    }
+    [self addObserver];
+}
+- (void)addObserver
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeStatus:) name:KKEY_Loading_changed object:nil];
+}
+- (void)removeObserver
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+- (void)changeStatus:(NSNotification *)object
+{
+    NSDictionary *dicInfo = object.object;
+    CCStream *stream = dicInfo[@"stream"];
+    if (![stream.streamID isEqualToString:self.info.stream.streamID])
+    {
+        return;
+    }
+    BOOL isRemote = [dicInfo[@"type"]boolValue];
+    if(!isRemote)
+    {
+        [self.loadingView stopLoading];
+        return;
+    }
+    int status = [dicInfo[@"status"]intValue];
+    if (status == 1001)
+    {
+        [self.loadingView stopLoading];
+    }
+    else
+    {
+        [self.loadingView startLoading];
     }
 }
 

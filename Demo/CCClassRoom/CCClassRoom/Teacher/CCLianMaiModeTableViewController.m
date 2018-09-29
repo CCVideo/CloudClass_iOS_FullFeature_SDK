@@ -10,6 +10,7 @@
 #import <CCClassRoom/CCClassRoom.h>
 #import <UIAlertView+BlocksKit.h>
 #import "LoadingView.h"
+#import "CCTool.h"
 
 @interface CCLianMaiModeTableViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *oneImage;
@@ -88,7 +89,8 @@
         {
             [_loadingView removeFromSuperview];
             _loadingView = nil;
-            [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            NSString *message = [CCTool toolErrorMessage:error];
+            [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 self.navigationItem.leftBarButtonItem.enabled = NO;
                 [self.navigationController popViewControllerAnimated:YES];
             }];

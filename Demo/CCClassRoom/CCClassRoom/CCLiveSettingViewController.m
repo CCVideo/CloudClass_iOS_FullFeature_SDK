@@ -715,7 +715,8 @@ typedef NS_ENUM(NSInteger, CCSettingType) {
             _loadingView = nil;
             if (!result)
             {
-                [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                NSString *message = [CCTool toolErrorMessage:error];
+                [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 }];
             }
         }];
@@ -727,7 +728,8 @@ typedef NS_ENUM(NSInteger, CCSettingType) {
             _loadingView = nil;
             if (!result)
             {
-                [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                NSString *message = [CCTool toolErrorMessage:error];
+                [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 }];
             }
         }];

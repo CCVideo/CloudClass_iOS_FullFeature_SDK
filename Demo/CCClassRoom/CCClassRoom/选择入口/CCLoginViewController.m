@@ -331,7 +331,7 @@
     [[CCStreamer sharedStreamer] loginWithRoomID:self.roomID userID:self.userID role:self.role password:self.textFieldUserPassword.text nickName:self.textFieldUserName.text config:config videoOri:mode areaCode:domain completion:^(BOOL result, NSError *error, id info) {
         if (result)
         {
-            [weakSelf.loadingView changeText:@"正在初始化"];
+            [weakSelf.loadingView changeText:@"正在登录"];
             CCLog(@"+++++++++++++++++++++++++++++ start join room");
             [[CCStreamer sharedStreamer] joinRoom:^(BOOL result, NSError *error, id info) {
                 //                NSString *areaCode = [CCStreamer sharedStreamer].getRoomInfo.areaCode;
@@ -510,8 +510,8 @@
 - (void)streamLoginFail:(NSError *)error
 {
     [_loadingView removeFromSuperview];
-    
-    [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+    NSString *title = [CCTool toolErrorMessage:error];
+    [UIAlertView bk_showAlertViewWithTitle:@"" message:title cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
         
     }];
 }

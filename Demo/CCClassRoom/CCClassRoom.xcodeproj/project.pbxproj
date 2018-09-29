@@ -30,6 +30,7 @@
 		420AE3781EB33B37006DEA05 /* CCStreamerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 420AE36F1EB33B37006DEA05 /* CCStreamerView.m */; };
 		420AE37B1EB33E39006DEA05 /* CCDocViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 420AE37A1EB33E39006DEA05 /* CCDocViewController.m */; };
 		420AE37E1EB33E62006DEA05 /* CCDocSkipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 420AE37D1EB33E62006DEA05 /* CCDocSkipViewController.m */; };
+		420D2BFA2133F66700BC7E00 /* CCTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 420D2BF92133F66700BC7E00 /* CCTipsView.m */; };
 		420DFC981E49D6CE0026B031 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 420DFC971E49D6CE0026B031 /* libstdc++.tbd */; };
 		4214EAD41F15EDC1002ABDD7 /* CCDocManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214EAD31F15EDC1002ABDD7 /* CCDocManager.m */; };
 		4214EAD71F15EE0E002ABDD7 /* CCDrawBitmapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4214EAD61F15EE0E002ABDD7 /* CCDrawBitmapView.m */; };
@@ -137,6 +138,8 @@
 		42C9AABD20E269840070B379 /* CCTicketVoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C9AAB220E269840070B379 /* CCTicketVoteView.m */; };
 		42C9AABE20E269840070B379 /* CCTicketVotPerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C9AAB420E269840070B379 /* CCTicketVotPerView.m */; };
 		42C9AABF20E269840070B379 /* CCGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C9AAB720E269840070B379 /* CCGuideView.m */; };
+		42DDFC5B2119BBA800A1B9F4 /* CCRewardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DDFC5A2119BBA800A1B9F4 /* CCRewardView.m */; };
+		42E657232134F77600E72F95 /* CCLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E657212134F77500E72F95 /* CCLoadingView.m */; };
 		42E7EB7A1FE756AF007FCEB3 /* CCStreamCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E7EB791FE756AF007FCEB3 /* CCStreamCheck.m */; };
 		42EB95BA1EE0002000B925B1 /* PopoverAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EB95B51EE0002000B925B1 /* PopoverAction.m */; };
 		42EB95BB1EE0002000B925B1 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EB95B71EE0002000B925B1 /* PopoverView.m */; };
@@ -210,6 +213,8 @@
 		420AE37A1EB33E39006DEA05 /* CCDocViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDocViewController.m; sourceTree = "<group>"; };
 		420AE37C1EB33E62006DEA05 /* CCDocSkipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDocSkipViewController.h; sourceTree = "<group>"; };
 		420AE37D1EB33E62006DEA05 /* CCDocSkipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDocSkipViewController.m; sourceTree = "<group>"; };
+		420D2BF82133F66700BC7E00 /* CCTipsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTipsView.h; sourceTree = "<group>"; };
+		420D2BF92133F66700BC7E00 /* CCTipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCTipsView.m; sourceTree = "<group>"; };
 		420DFC971E49D6CE0026B031 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		4214EAD21F15EDC1002ABDD7 /* CCDocManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDocManager.h; sourceTree = "<group>"; };
 		4214EAD31F15EDC1002ABDD7 /* CCDocManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDocManager.m; sourceTree = "<group>"; };
@@ -411,6 +416,10 @@
 		42C9AAB420E269840070B379 /* CCTicketVotPerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCTicketVotPerView.m; sourceTree = "<group>"; };
 		42C9AAB620E269840070B379 /* CCGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCGuideView.h; sourceTree = "<group>"; };
 		42C9AAB720E269840070B379 /* CCGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCGuideView.m; sourceTree = "<group>"; };
+		42DDFC592119BBA800A1B9F4 /* CCRewardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRewardView.h; sourceTree = "<group>"; };
+		42DDFC5A2119BBA800A1B9F4 /* CCRewardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRewardView.m; sourceTree = "<group>"; };
+		42E657212134F77500E72F95 /* CCLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLoadingView.m; sourceTree = "<group>"; };
+		42E657222134F77600E72F95 /* CCLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLoadingView.h; sourceTree = "<group>"; };
 		42E7EB781FE756AF007FCEB3 /* CCStreamCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCStreamCheck.h; sourceTree = "<group>"; };
 		42E7EB791FE756AF007FCEB3 /* CCStreamCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCStreamCheck.m; sourceTree = "<group>"; };
 		42EB95B41EE0002000B925B1 /* PopoverAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverAction.h; sourceTree = "<group>"; };
@@ -537,6 +546,7 @@
 		420071551E2F7AD600A19C10 /* 自定义控件 */ = {
 			isa = PBXGroup;
 			children = (
+				42DDFC582119BBA800A1B9F4 /* CCRewardView */,
 				42C9AAA420E269840070B379 /* CCBaseView */,
 				42C9AAA920E269840070B379 /* CCBrainStorm */,
 				42C9AAAC20E269840070B379 /* CCVoteTicket */,
@@ -948,6 +958,19 @@
 			path = GuidePageView;
 			sourceTree = "<group>";
 		};
+		42DDFC582119BBA800A1B9F4 /* CCRewardView */ = {
+			isa = PBXGroup;
+			children = (
+				42E657222134F77600E72F95 /* CCLoadingView.h */,
+				42E657212134F77500E72F95 /* CCLoadingView.m */,
+				420D2BF82133F66700BC7E00 /* CCTipsView.h */,
+				420D2BF92133F66700BC7E00 /* CCTipsView.m */,
+				42DDFC592119BBA800A1B9F4 /* CCRewardView.h */,
+				42DDFC5A2119BBA800A1B9F4 /* CCRewardView.m */,
+			);
+			path = CCRewardView;
+			sourceTree = "<group>";
+		};
 		42EB95B31EE0002000B925B1 /* PopoverView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1156,6 +1179,7 @@
 				42C9AAB920E269840070B379 /* CCTool.m in Sources */,
 				425C67CF1FD954F3007A465A /* CCDocDrawView.m in Sources */,
 				4254FC521F3DAC2C0080F0BB /* TZPhotoPreviewController.m in Sources */,
+				42DDFC5B2119BBA800A1B9F4 /* CCRewardView.m in Sources */,
 				4243C5941E764CB300568C69 /* CCBaseTableViewController.m in Sources */,
 				42152E1F1F4ACBBC00C16385 /* STSimplePing.m in Sources */,
 				420AE3771EB33B37006DEA05 /* CCStreamModeTeach_Teacher.m in Sources */,
@@ -1182,6 +1206,7 @@
 				420AE35C1EB3356D006DEA05 /* Utility.m in Sources */,
 				428FDDF11F7CCC5D004972B1 /* CCUserGuideViewController.m in Sources */,
 				4281F9051E2F6E1B007C1080 /* main.m in Sources */,
+				42E657232134F77600E72F95 /* CCLoadingView.m in Sources */,
 				42748D981EAA111300596AC7 /* CCTemplateViewController.m in Sources */,
 				429517C21E35A27400494D43 /* CCLoginViewController.m in Sources */,
 				42C099111F5FE90400EE259E /* LJBaseModel.m in Sources */,
@@ -1196,6 +1221,7 @@
 				42B845A91F1F09B1003E3CD5 /* CCVoteResultView.m in Sources */,
 				4243C58E1E7642F900568C69 /* CCLianMaiModeTableViewController.m in Sources */,
 				4268EE4A1E3310EA0022F1C8 /* CCPlayViewController.m in Sources */,
+				420D2BFA2133F66700BC7E00 /* CCTipsView.m in Sources */,
 				42748D9B1EAA113700596AC7 /* CCDocListViewController.m in Sources */,
 				4223464F1EB19DCA00667B9D /* CCRoomMaxNumCountEditViewController.m in Sources */,
 				426013001EE25356000D8A89 /* CCImageView.m in Sources */,
@@ -1369,6 +1395,7 @@
 					"$(PROJECT_DIR)/CCClassRoom/SDK",
 					"$(PROJECT_DIR)/CCClassRoom/until",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CCClassRoom/DefinePrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1396,6 +1423,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1417,6 +1445,7 @@
 					"$(PROJECT_DIR)/CCClassRoom/SDK",
 					"$(PROJECT_DIR)/CCClassRoom/until",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CCClassRoom/DefinePrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1444,6 +1473,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

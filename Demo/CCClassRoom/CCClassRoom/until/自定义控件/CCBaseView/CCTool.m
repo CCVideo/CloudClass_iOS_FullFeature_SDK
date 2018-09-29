@@ -62,4 +62,19 @@
     
     return image;
 }
+
++ (NSString *)toolErrorMessage:(NSError *)error
+{
+    NSString *title = @"";
+    if ([error.domain isEqualToString:@"NSURLErrorDomain"])
+    {
+        title = @"网络不稳定！";
+    }
+    else
+    {
+        title = error.domain;
+    }
+    return title;
+}
+
 @end

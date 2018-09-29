@@ -257,6 +257,7 @@
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSString *pathNew = [[path componentsSeparatedByString:@"?"] firstObject];
         NSURL *urlN = [NSURL URLWithString:pathNew];
+
         //获取视频尺寸
         AVURLAsset *asset = [AVURLAsset assetWithURL:urlN];
         NSArray *array = asset.tracks;
@@ -264,8 +265,9 @@
         
         for (AVAssetTrack *track in array) {
             if ([track.mediaType isEqualToString:AVMediaTypeVideo]) {
-                videoSize = track.naturalSize;
-                self.videoNaturalSize = track.naturalSize;
+                //Chenfy...根据视频宽高做重新尺寸调整
+//                videoSize = track.naturalSize;
+//                self.videoNaturalSize = track.naturalSize;
             }
             CCLog(@"AVAssetTrack---aready get size");
         }
@@ -481,6 +483,7 @@
         });
     });
 }
+
 
 - (void)volumeSet:(float)slider
 {

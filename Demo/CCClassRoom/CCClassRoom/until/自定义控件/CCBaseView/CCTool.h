@@ -6,7 +6,6 @@
 //  Copyright © 2018年 cc. All rights reserved.
 //
 
-
 /*!  头文件基本信息。这个用在每个源代码文件的头文件的最开头。
  
  @header CCTool.h
@@ -29,5 +28,7 @@
 + (UILabel *)createLabelText:(NSString *)text;
 + (UIButton *)createButtonText:(NSString *)text tag:(int)tag;
 + (UIImage *)createImageWithColor:(UIColor *)color;
+//处理网络不稳定，产生的异常消息<NSURLErrorDomain>
++ (NSString *)toolErrorMessage:(NSError *)error;
 
 @end

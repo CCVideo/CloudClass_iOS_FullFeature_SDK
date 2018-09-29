@@ -37,6 +37,8 @@
 #import "AppDelegate.h"
 #import "CCDrawMenuView.h"
 #import "CCDoc.h"
+#import "CCRewardView.h"
+#import "CCLoadingView.h"
 
 #define infomationViewClassRoomIconLeft 3
 #define infomationViewErrorwRight 9.f
@@ -93,6 +95,12 @@
 @property(nonatomic,strong)CCUser *movieClickUser;
 @property(nonatomic,strong)UIButton *hideVideoBtn;
 @property (strong, nonatomic) CCDrawMenuView *drawMenuView;
+
+
+#pragma mark strong
+@property(nonatomic,strong)CCRoom *room;
+@property(nonatomic,assign)BOOL willTeacherRewardShow;
+
 @end
 
 @implementation CCPushViewController
@@ -106,6 +114,10 @@
     return self;
 }
 
+- (CCRoom *)room
+{
+    return [[CCStreamer sharedStreamer]getRoomInfo];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.currentIsInBottom = YES;
@@ -178,9 +190,18 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    _willTeacherRewardShow = YES;
     [self.streamView viewDidAppear];
+    //黑流检测
+    [[CCStreamer sharedStreamer]onStreamStatsListener:^(BOOL result, NSError *error, id info) {
+        [self postStreamStatusMessage:info];
+    }];
 }
-
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    _willTeacherRewardShow = NO;
+}
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -440,6 +461,7 @@
                             [weakSelf.loadingView removeFromSuperview];
                         });
                         NSLog(@"publish error:%@", error);
+                        [weakSelf publishRetry];
                     }
                 }];
             }
@@ -501,6 +523,7 @@
                     [weakSelf.loadingView removeFromSuperview];
                 });
                 NSLog(@"publish error:%@", error);
+                [weakSelf publishRetry];
             }
         }];
     }
@@ -522,11 +545,7 @@
                                     [weakSelf setRtmpUrl:info];
                                     dispatch_async(dispatch_get_main_queue(), ^{
                                         //调整btn显示隐藏
-                                        weakSelf.startPublishBtn.hidden = YES;
-                                        weakSelf.cameraChangeBtn.hidden = NO;
-                                        weakSelf.stopPublishBtn.hidden = NO;
-                                        weakSelf.micChangeBtn.hidden = NO;
-                                        [ weakSelf.loadingView removeFromSuperview];
+                                        [weakSelf publishAreadyStartUI:YES];
                                     });
                                 }
                                 else
@@ -535,6 +554,9 @@
                                         [weakSelf.loadingView removeFromSuperview];
                                     });
                                     NSLog(@"publish error:%@", error);
+                                    //Chenfy--new
+                                    [weakSelf publishAreadyStartUI:YES];
+                                    [weakSelf publishRetry];
                                 }
                             }];
                         }
@@ -557,11 +579,7 @@
                         [weakSelf setRtmpUrl:info];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             //调整btn显示隐藏
-                            weakSelf.startPublishBtn.hidden = YES;
-                            weakSelf.cameraChangeBtn.hidden = NO;
-                            weakSelf.stopPublishBtn.hidden = NO;
-                            weakSelf.micChangeBtn.hidden = NO;
-                            [ weakSelf.loadingView removeFromSuperview];
+                            [weakSelf publishAreadyStartUI:YES];
                         });
                     }
                     else
@@ -570,10 +588,28 @@
                             [weakSelf.loadingView removeFromSuperview];
                         });
                         NSLog(@"publish error:%@", error);
+                        //调整btn显示隐藏
+                        //Chenfy--new
+                        [weakSelf publishAreadyStartUI:YES];
+                        [weakSelf publishRetry];
                     }
                 }];
             }
         }];
+    }
+}
+//开始直播后的UI
+- (void)publishAreadyStartUI:(BOOL)isStart
+{
+    WS(weakSelf);
+    if (isStart)
+    {
+        //调整btn显示隐藏
+        weakSelf.startPublishBtn.hidden = YES;
+        weakSelf.cameraChangeBtn.hidden = NO;
+        weakSelf.stopPublishBtn.hidden = NO;
+        weakSelf.micChangeBtn.hidden = NO;
+        [ weakSelf.loadingView removeFromSuperview];
     }
 }
 
@@ -760,7 +796,8 @@
     return _publicChatBtn;
 }
 
--(void)publicChatBtnClicked {
+-(void)publicChatBtnClicked
+{
     [_chatTextField becomeFirstResponder];
 }
 
@@ -833,6 +870,7 @@
                 make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
             }];
             [[CCStreamer sharedStreamer] stopPublish:^(BOOL result, NSError *error, id info) {
+                NSLog(@"stopPublish__%d__%@__%@",result,error,info);
                 if (result)
                 {
                     [weakSelf removeRtmpUrl];
@@ -1380,7 +1418,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     Dialogue *dialogue = [self.tableArray objectAtIndex:indexPath.row];
-    return dialogue.msgSize.height + 10;
+    return dialogue.msgSize.height + 10 + 8;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -1390,7 +1428,8 @@
 
 -(void)chatSendMessage {
     NSString *str = _chatTextField.text;
-    if(str == nil || str.length == 0) {
+    if(str == nil || str.length == 0)
+    {
         return;
     }
     
@@ -1421,6 +1460,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rotati) name:UIDeviceOrientationDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveCurrentShowDocDel:) name:CCNotiDelCurrentShowDoc object:nil];
 }
+
 
 -(void)removeObserver {
     NSLog(@"%s", __func__);
@@ -1752,6 +1792,101 @@
             }];
         }
     }
+    else if (event == CCSocketEvent_Cup)
+    {
+        [self rewardTeacherCup:value];
+    }
+    else if (event == CCSocketEvent_Flower)
+    {
+        [self rewardTeacherFlower:value];
+    }
+}
+
+//奖励
+- (void)rewardTeacherFlower:(id)obj
+{
+    CCLog(@"rewardTeacherFlower__%@",obj);
+    NSDictionary *dicData = obj[@"data"];
+    NSString *uid = dicData[@"uid"];
+    NSString *uname = dicData[@"uname"];
+    __unused NSString *sid = dicData[@"sender"];
+    
+    CCUser *user = [self getCurrentUser:uid];
+    if (!user)
+    {
+        return;
+    }
+    CCMemberType mType = [self getRewardType:user];
+    NSString *title = [self getRewardTitle:uid user:uname];
+    
+    [self showRewardView:mType msg:title];
+}
+
+- (void)rewardTeacherCup:(id)obj
+{
+    CCLog(@"rewardTeacherFlower__%@",obj);
+    NSDictionary *dicData = obj[@"data"];
+    NSString *uid = dicData[@"uid"];
+    NSString *uname = dicData[@"uname"];
+    __unused NSString *sid = dicData[@"sender"];
+    
+    CCUser *user = [self getCurrentUser:uid];
+    if (!user)
+    {
+        return;
+    }
+    CCMemberType mType = [self getRewardType:user];
+    NSString *title = [self getRewardTitle:uid user:uname];
+    
+    [self showRewardView:mType msg:title];
+}
+//获取当前学员
+- (CCUser *)getCurrentUser:(NSString *)uid
+{
+    NSArray *arrayUser = self.room.room_userList;
+    CCUser *userNew = nil;
+    for (CCUser *user in arrayUser)
+    {
+        if ([user.user_id isEqualToString:uid])
+        {
+            userNew = user;
+            break;
+        }
+    }
+    return userNew;
+}
+//获取配型
+- (CCMemberType)getRewardType:(CCUser *)user
+{
+    CCMemberType mType = CCMemberType_Teacher;
+    if (user.user_role == CCRole_Teacher)
+    {
+        mType = CCMemberType_Teacher;
+    }
+    else
+    {
+        mType = CCMemberType_Student;
+    }
+    return mType;
+}
+//获取展示标题
+- (NSString *)getRewardTitle:(NSString *)uid user:(NSString *)uname
+{
+    if ([self.room.user_id isEqualToString:uid])
+    {
+        return @"你";
+    }
+    else
+        return uname;
+}
+
+- (void)showRewardView:(CCMemberType)type msg:(NSString *)user
+{
+    if (!_willTeacherRewardShow)
+    {
+        return;
+    }
+    [[CCRewardView shareReward]showRole:type user:user withTarget:self isTeacher:YES];
 }
 
 - (void)streamAdded:(NSNotification *)noti
@@ -2350,6 +2485,8 @@ static int failCount = 0;
     {
         [data addObject:@{@"image":@"action_teacher", @"text":@"设为讲师", @"type":@(12)}];
     }
+    [data addObject:@{@"image":@"cup_pink", @"text":@"奖励奖杯", @"type":@(13)}];
+    
     self.actionData = [NSArray arrayWithArray:data];
     
     UIView *backView = [self.view viewWithTag:ACTIONVIEWTAG];
@@ -2546,12 +2683,25 @@ static int failCount = 0;
             [[CCStreamer sharedStreamer] authUserAssistant:self.movieClickUser.user_id];
         }
             break;
+        case 13:
+        {
+            [self rewordCup];
+        }
+            break;
         default:
             break;
     }
     [self hideActionView:nil];
 }
-
+- (void)rewordCup
+{
+    //发送奖杯
+    NSString *uid = self.movieClickUser.user_id;
+    NSString *uname = self.movieClickUser.user_name;
+    NSString *typeF = @"cup";
+    NSString *sid = [[CCStreamer sharedStreamer]getRoomInfo].user_id;
+    [[CCStreamer sharedStreamer]rewardUid:uid uName:uname type:typeF sender:sid];
+}
 #pragma mark - draw
 - (CCDrawMenuView *)drawMenuView1:(BOOL)showPageChange
 {
@@ -2740,4 +2890,137 @@ static int failCount = 0;
     }
     [self.streamView reloadData];
 }
+
+//调整鲜花奖杯，聊天视图层次
+- (void)changeKeyboardViewUp
+{
+    [self.view bringSubviewToFront:self.contentView];
+}
+
+- (void)postStreamStatusMessage:(id)obj
+{
+    NSLog(@"AAAAAAAAAAAAAAAAA___%@",obj);
+    NSDictionary *dicReceive = obj;
+    int status = [dicReceive[@"status"]intValue];
+    BOOL isRemote = [dicReceive[@"type"]boolValue];
+    CCStream *stream = dicReceive[@"stream"];
+    NSDictionary *dicNew = @{@"streamID":stream.streamID,@"role":@(CCRole_Student)};
+    
+    if (status == 1003 && isRemote)
+    {   //重新订阅
+        NSNotification *nofity = [NSNotification notificationWithName:@"black" object:nil userInfo:dicNew];
+        [self reSub:nofity];
+        NSLog(@"re_re_substream");
+    }
+    if (status == 1003 && !isRemote)
+    {   //重新推流
+        [self rePublish];
+        NSLog(@"re_re_publish");
+    }
+    [[NSNotificationCenter defaultCenter]postNotificationName:KKEY_Loading_changed object:obj];
+}
+#pragma mark
+#pragma mark -- 重新推流
+- (void)publishRetry
+{
+    [UIAlertView bk_showAlertViewWithTitle:@"" message:@"推流异常，请重新推流或退出房间重新进入！" cancelButtonTitle:@"取消" otherButtonTitles:@[@"重试"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        if (buttonIndex == 0)
+        {
+            
+        }
+        if (buttonIndex == 1)
+        {
+            [self rePublish];
+        }
+    }];
+}
+- (void)rePublish
+{
+    __weak typeof(self) weakSelf = self;
+    [[CCStreamer sharedStreamer] stopPublish:^(BOOL result, NSError *error, id info) {
+        if (result)
+        {
+            NSLog(@"%s", __func__);
+            [weakSelf.streamView removeStreamView:weakSelf.preview];
+            [weakSelf removeRtmpUrl];
+            //重新推流
+            [weakSelf startPublish];
+        }
+        else
+        {
+            if (error.code != 4002)
+            {
+                [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                    
+                }];
+            }
+            else
+            {
+                [weakSelf startPublish];
+            }
+        }
+    }];
+}
+
+- (void)stopPublish
+{
+    WS(weakSelf);
+    [[CCStreamer sharedStreamer] stopPublish:^(BOOL result, NSError *error, id info) {
+        if (result)
+        {
+            [weakSelf removeRtmpUrl];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //调整UI
+                weakSelf.cameraChangeBtn.hidden = YES;
+                weakSelf.stopPublishBtn.hidden = YES;
+                weakSelf.micChangeBtn.hidden = YES;
+                weakSelf.startPublishBtn.hidden = NO;
+                weakSelf.cameraChangeBtn.selected = NO;
+                weakSelf.micChangeBtn.selected = NO;
+                weakSelf.fllowBtn.selected = NO;
+                [weakSelf.loadingView removeFromSuperview];
+            });
+        }
+    }];
+}
+
+- (void)reSub:(NSNotification *)noti
+{
+    NSDictionary *info = noti.userInfo;
+    NSLog(@"%s__%d__%@", __func__, __LINE__, info);
+    NSString *streamID = [info objectForKey:@"stream"];
+    CCRole role = (CCRole)[[info objectForKey:@"role"] integerValue];
+    __weak typeof(self) weakSelf = self;
+    [[CCStreamer sharedStreamer] unsubscribeStream:streamID completion:^(BOOL result, NSError *error, id info) {
+        if (result) {
+            NSLog(@"unsubcribe stream success %@",streamID);
+        }
+        else
+        {
+            NSLog(@"unsubcribe stream fail:%@", error);
+        }
+        [weakSelf.streamView removeStreamViewByStreamID:info];
+        
+        NSLog(@"%s__%d__%@", __func__, __LINE__, info);
+        [[CCStreamer sharedStreamer] subcribeStream:streamID role:role qualityLevel:4 completion:^(BOOL result, NSError *error, id info) {
+            NSLog(@"%s__%d__%@", __func__, __LINE__, info);
+            if (result)
+            {
+                [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker | AVAudioSessionCategoryOptionMixWithOthers | AVAudioSessionCategoryOptionAllowBluetooth error:nil];
+                
+                
+                [[AVAudioSession sharedInstance] setActive:YES error:nil];
+                NSLog(@"%s__%@", __func__, info);
+                CCStreamShowView *view = info;
+                if (weakSelf.isLandSpace)
+                {
+                    view.fillMode = CCStreamViewFillMode_FitByH;
+                }
+                [weakSelf.streamView showStreamView:view];
+            }
+        }];
+    }];
+}
+
+
 @end

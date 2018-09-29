@@ -6,7 +6,7 @@
  
  @author Created by cc on 17/1/5.
  
- @version 1.00 17/1/5 Creation
+ @version 3.11.0 17/1/5 Creation
  */
 
 
@@ -28,6 +28,11 @@
  * @result streamer
  */
 +(instancetype)sharedStreamer;
+
+/**
+ * 黑流检测监听事件
+ */
+- (void)onStreamStatsListener:(CCComletionBlock)completion;
 
 /*!
  * @method
@@ -698,6 +703,16 @@
  */
 - (BOOL)sendVoteTickedReply:(NSString *)Id title:(NSString *)title choice:(NSArray *)choices;
 
+/**
+ @method
+ @abstract 奖杯、鲜花
+ @param uid 用户id
+ @param uName 用户名称
+ @param actionType 操作类型 | flower 鲜花 cup 奖杯
+ @param sid 发送者id
+ */
+- (BOOL)rewardUid:(NSString *)uid uName:(NSString *)uName type:(NSString *)actionType sender:(NSString *)sid;
+
 #pragma mark - 1.3
 /*!
  @method
@@ -750,6 +765,11 @@
  @return 操作结果
  */
 - (BOOL)getConnectionStats:(NSString *)stream completion:(CCComletionBlock)completion;
+
+/*!
+ @method  获取直播间状态
+ */
+- (BOOL)getLiveStatus:(CCComletionBlock)completion;
 
 /*!
  @method  释放所有已订阅的流(学生退出超时调用)

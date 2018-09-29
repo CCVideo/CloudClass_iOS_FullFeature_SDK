@@ -61,7 +61,7 @@
     [self.backView addSubview:self.labelTips];
     
     self.labelSelfVote = [UILabel new];
-    self.labelSelfVote.text = [NSString stringWithFormat:@"你的投票：%@",self.selected];
+    self.labelSelfVote.text = [NSString stringWithFormat:@"你的投票是：%@",self.selected];
     self.labelSelfVote.textAlignment = NSTextAlignmentCenter;
     self.labelSelfVote.textColor = CCRGBColor(21, 147, 67);
     [self.backView addSubview:self.labelSelfVote];

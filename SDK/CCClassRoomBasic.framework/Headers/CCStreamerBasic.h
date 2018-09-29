@@ -6,7 +6,7 @@
  
  @author Created by cc on 17/1/5.
  
- @version 1.00 17/1/5 Creation
+ @version 3.11.0 17/1/5 Creation
  */
 
 #import <Foundation/Foundation.h>
@@ -15,8 +15,7 @@
 #import "CCEncodeConfig.h"
 #import "CCStream.h"
 
-
-#define PUBLISHTIMEOUT 40
+#define PUBLISHTIMEOUT 40.0
 
 /*!
  * @brief    流视图填充方式枚举
@@ -35,6 +34,14 @@ typedef enum{
      */
     CCVideoLandscape,
 }CCVideoOriMode;
+
+//流状态
+typedef NS_ENUM(NSInteger,CCBlaskStatus) {
+    CCBlaskStatus_Init = 1000, //初始状态
+    CCBlaskStatus_isOK, //流正常
+    CCBlaskStatus_isLoading, //正在加载流
+    CCBlaskStatus_isBlack //流异常（黑流）
+};
 
 /**
  @brief 异步请求闭包回调
@@ -72,6 +79,12 @@ typedef void(^CCComletionBlock)(BOOL result, NSError *error, id info);
  @param error The error happened. Currently, errors are reported by MCU.
  */
 - (void)onStreamError:(NSError *)error forStream:(CCStream *)stream;
+/**
+ @brief Triggers when a message is received.
+ @param senderId Sender's ID.
+ @param message Message received.
+ */
+- (void)onMessageReceivedFrom:(NSString*)senderId message:(NSString*)message;
 
 /**
  socket连接失败
@@ -192,6 +205,11 @@ typedef void(^CCComletionBlock)(BOOL result, NSError *error, id info);
  初始化CCStreamerBasic实例
  */
 + (instancetype)sharedStreamer;
+
+/**
+ * 黑流检测监听事件
+ */
+- (void)onStreamStatsListener:(CCComletionBlock)completion;
 
 #pragma mark - 配置socket重连参数
 
@@ -485,4 +503,11 @@ typedef void(^CCComletionBlock)(BOOL result, NSError *error, id info);
  @param completion 回调闭包
  */
 - (void)reconnectAtlas:(CCComletionBlock)completion;
+
+/**
+ @brief Send message to all participants in the conference.
+ @param message The message to be sent.
+ */
+- (void)sendAtlas:(NSString*)message completion:(CCComletionBlock)completion;
+
 @end

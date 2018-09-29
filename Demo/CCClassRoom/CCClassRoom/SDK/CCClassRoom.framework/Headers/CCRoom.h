@@ -88,7 +88,9 @@ typedef enum{
  * @constant CCSocketEvent_VoteSend 投票内容
  * @constant CCSocketEvent_VoteReply 投票回复
  * @constant CCSocketEvent_VoteEnd 投票结束
- 
+ * @constant CCSocketEvent_Flower  鲜花
+ * @constant CCSocketEvent_Cup     奖杯
+
  */
 typedef enum{
     CCSocketEvent_Chat,
@@ -142,6 +144,8 @@ typedef enum{
     CCSocketEvent_VoteSend,
     CCSocketEvent_VoteReply,
     CCSocketEvent_VoteEnd,
+    CCSocketEvent_Flower,
+    CCSocketEvent_Cup
     
 }CCSocketEvent;
 /*!

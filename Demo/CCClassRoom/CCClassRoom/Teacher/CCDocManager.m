@@ -10,6 +10,12 @@
 #import <CCClassRoom/CCClassRoom.h>
 #import "CCDrawMenuView.h"
 
+#pragma mark -- wb_change
+#pragma mark -- 将之前的白板页码 @"-1" 改为 @"1"
+//白板页码
+#define WB_PAGE_NUM_ONE   -1
+#define WB_PAGE_STR_ONE   @"-1"
+
 @interface CCDocManager()
 @property (strong, nonatomic) NSMutableDictionary *topDrawID;//自己最新的一条画笔ID
 @property (assign, nonatomic) BOOL useSDK;
@@ -20,7 +26,6 @@
 @property (copy, nonatomic) NSString                *oldDocId;
 @property (assign, nonatomic) BOOL oldUseSDK;
 @property (assign, nonatomic) BOOL historyDataReady;//历史记录是否解析完
-
 @property (copy, nonatomic) NSString                *pptPageNum;
 
 @end
@@ -33,14 +38,18 @@
     dispatch_once(&onceToken, ^{
         s_instance = [[self alloc] init];
         s_instance.docId = @"WhiteBoard";
-        s_instance.pageNum = @"-1";
+#pragma mark -- wb_change
+        s_instance.pageNum = WB_PAGE_STR_ONE;
         s_instance.docName = @"WhiteBoard";
+        s_instance.docMode = 0;
     });
     return s_instance;
 }
 
--(NSMutableDictionary *)allDataDic {
-    if(_allDataDic == nil) {
+-(NSMutableDictionary *)allDataDic
+{
+    if(_allDataDic == nil)
+    {
         _allDataDic = [[NSMutableDictionary alloc] init];
     }
     return _allDataDic;
@@ -51,8 +60,12 @@
     self.docParent = view;
     self.docFrame = view.frame;
     self.historyDataReady = NO;
+
+    view.backgroundColor = [UIColor whiteColor];
     __weak typeof(self) weakSelf = self;
-    CCRole role = [[CCStreamer sharedStreamer] getRoomInfo].user_role;
+    CCRoom *room = [[CCStreamer sharedStreamer]getRoomInfo];
+    CCRole role = room.user_role;
+   
     if (role == CCRole_Teacher)
     {
         
@@ -190,36 +203,54 @@
 - (void)onPageChange:(id)pageChangeData
 {
     CCLog(@"Chenfy--onPageChange--:%@",pageChangeData);
-    if (pageChangeData == nil)
+    NSDictionary *dicPageChange = @{};
+    if ([pageChangeData isKindOfClass:[NSString class]] ||
+        [pageChangeData isKindOfClass:[NSMutableString class]])
+    {
+        NSLog(@"Json string to dictionary exchange!");
+        NSData *data = [pageChangeData dataUsingEncoding:NSUTF8StringEncoding];
+        NSError *err = nil;
+        dicPageChange = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&err];
+    }
+    else
+    {
+        dicPageChange = pageChangeData;
+    }
+    self.dicDocData = dicPageChange;
+    if (dicPageChange == nil)
     {
         return;
     }
-    NSDictionary *dicPar = (NSDictionary *)pageChangeData;
+    NSDictionary *dicPar = dicPageChange;
     NSString *action = dicPar[@"action"];
     if ([action isEqualToString:@"page_change"]) {
         NSNumber *page = (dicPar[@"value"][@"page"]);
-        CCLog(@"Chenfy--onPageChange--page-:%@",page);
-        if ([page intValue] != -1) {
+        CCLog(@"onPageChange--page-:%@",page);
+#pragma mark -- wb_change
+        if ([page intValue] != WB_PAGE_NUM_ONE) {
             self.pageNum = [NSString stringWithFormat:@"%@",page];
             self.oldPageNum = self.pageNum;
         } else {
-            self.pageNum = @"-1";
+#pragma mark -- wb_change
+            self.pageNum = WB_PAGE_STR_ONE;
         }
+        //新的page
+//        self.pageNum = [NSString stringWithFormat:@"%@",page];
+//        self.oldPageNum = self.pageNum;
     }
+    //记录mode值
+    self.docMode = [dicPageChange[@"value"][@"mode"]intValue];
     if (self.drawView)
     {
         //这里是处理，在绘制的过程中，翻页了，这个时候数据全部丢掉
         CCLog(@"%s", __func__);
         [self showOrHideDrawView:NO];
     }
-    NSLog(@"Chenfy----onPageChange_001");
-    
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSDictionary *pageChangeDic = (NSDictionary *)pageChangeData;
+        NSDictionary *pageChangeDic = dicPageChange;
         NSString *docID = weakSelf.docId;
         [weakSelf drawData:pageChangeDic[@"value"] animationData:nil completion:^(BOOL result, NSError *error, id info) {
-            NSLog(@"Chenfy----onPageChange_002");
             
             NSString *userID = [CCStreamer sharedStreamer].getRoomInfo.user_id;
             CCUser *user = [[CCStreamer sharedStreamer] getUSerInfoWithUserID:userID];
@@ -321,6 +352,10 @@
         }];
         if (animationData)
         {
+            //new
+            CCDocManager *docManager = [CCDocManager sharedManager];
+            docManager.dicDocHistoryAnimation = animationData;
+            
             NSDictionary *jsonDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                       animationData[@"docId"],@"docid",
                                       animationData[@"pageNum"], @"page",
@@ -335,13 +370,10 @@
 
 - (void)drawData:(NSDictionary *)dic animationData:(NSDictionary *)animationData completion:(CCComletionBlock)completion
 {
-    NSLog(@"Chenfy----drawData_001_____:%@",dic);
+    self.dicDocData = dic;
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"Chenfy----drawData_002");
-        
         if(dic[@"encryptDocId"]) {
-            NSLog(@"Chenfy----drawData_003");
             
             NSMutableDictionary *dicByEncryptDocId = [weakSelf.allDataDic objectForKey:dic[@"docId"]];
             NSMutableArray *subArr = [dicByEncryptDocId objectForKey:[dic[@"pageNum"] stringValue]];
@@ -359,18 +391,11 @@
             } else {
                 if ([dic[@"docName"] isEqualToString:weakSelf.docName] && [[dic[@"pageNum"] stringValue] isEqualToString:weakSelf.pageNum] && [dic[@"docId"] isEqualToString:weakSelf.docId] && [[weakSelf dealWithSecurity:dic[@"url"]] isEqualToString:weakSelf.ppturl]) {
                     [weakSelf.draw reloadData:subArr];
-                    
-                    NSLog(@"Chenfy----drawData_005");
-                    
                 } else {
-                    
-                    NSLog(@"Chenfy----drawData_006");
-                    
                     BOOL useSDk = [dic[@"useSDK"] boolValue];
                     [weakSelf reloadBitMapView:[weakSelf dealWithSecurity:dic[@"url"]] data:subArr useSDK:useSDk docID:dic[@"docId"] animationData:animationData];
                 }
             }
-            NSLog(@"Chenfy----drawData_007");
             
             weakSelf.docName = dic[@"docName"];
             weakSelf.pageNum = [dic[@"pageNum"] stringValue];
@@ -381,7 +406,6 @@
                 completion(YES, nil, nil);
             }
         } else if(!dic[@"type"] && !dic[@"drawType"]){
-            NSLog(@"Chenfy----drawData_008");
             
             NSMutableDictionary *dicByEncryptDocId = [weakSelf.allDataDic objectForKey:dic[@"docid"]];
             NSMutableArray *subArr = [dicByEncryptDocId objectForKey:[dic[@"page"] stringValue]];
@@ -392,17 +416,14 @@
             //            weakSelf.ppturl = [weakSelf dealWithSecurity:dic[@"url"]];
             
             if (weakSelf.draw == nil) {
-                NSLog(@"Chenfy----drawData_009");
                 
                 BOOL useSDk = [dic[@"useSDK"] boolValue];
                 [weakSelf createBitmapView:[weakSelf dealWithSecurity:dic[@"url"]] data:subArr useSDK:useSDk docID:dic[@"docid"] animationData:animationData];
             } else {
-                NSLog(@"Chenfy----drawData_0010");
                 
                 if ([dic[@"fileName"] isEqualToString:weakSelf.docName] && [[dic[@"page"] stringValue] isEqualToString:weakSelf.pageNum] && [dic[@"docid"] isEqualToString:weakSelf.docId] && [[weakSelf dealWithSecurity:dic[@"url"]] isEqualToString:weakSelf.ppturl]) {
                     [weakSelf.draw reloadData:subArr];
                 } else {
-                    NSLog(@"Chenfy----drawData_0011");
                     
                     //TODO..Chenfy..NeedToModify
                     BOOL useSDk = [dic[@"useSDK"] boolValue];
@@ -410,7 +431,6 @@
                 }
             }
             //TODO..
-            NSLog(@"Chenfy----drawData_0012");
             
             weakSelf.docName = dic[@"fileName"];
             weakSelf.pageNum = [dic[@"page"] stringValue];
@@ -549,12 +569,13 @@
     }
     if (pageChangeDataArr.count == 0)
     {
+#pragma mark -- wb_change
         NSDictionary *info = @{@"docId":@"WhiteBorad",
                                @"docName":@"WhiteBorad",
                                @"docTotalPage": @0,
                                @"encryptDocId":@"WhiteBorad",
                                @"height":@0,
-                               @"pageNum":@(-1),
+                               @"pageNum":@(WB_PAGE_NUM_ONE),
                                @"time":@1886,
                                @"url":@"#",
                                @"useSDK":@0,
@@ -564,9 +585,11 @@
     }
     else
     {
+        //文档数据
         NSDictionary *pageChangeDic = [pageChangeDataArr lastObject];
         NSDictionary *animationDic = [animation lastObject];
         self.useSDK = [pageChangeDic[@"useSDK"] boolValue];
+        self.docMode = [pageChangeDic[@"mode"] intValue];
         if([animationDic[@"time"] integerValue] >= [pageChangeDic[@"time"] integerValue]) {
             [weakSelf drawData:[pageChangeDataArr lastObject] animationData:animationDic completion:completion];
         } else {
@@ -612,6 +635,8 @@
     [self.draw clearAllDrawViews];
     self.draw = nil;
     self.docParent = nil;
+    self.docMode = 0;
+    self.dicDocData = nil;
 }
 
 #pragma mark - draw
@@ -647,6 +672,17 @@
     NSString *userID = [CCStreamer sharedStreamer].getRoomInfo.user_id;
     CCUser *user = [[CCStreamer sharedStreamer] getUSerInfoWithUserID:userID];
     if (user && (user.user_AssistantState || user.user_role == CCRole_Teacher || user.user_drawState))
+    {
+        return YES;
+    }
+    return NO;
+}
+#pragma mark - 被设为讲师
+- (BOOL)user_teacher_copy
+{
+    NSString *userID = [CCStreamer sharedStreamer].getRoomInfo.user_id;
+    CCUser *user = [[CCStreamer sharedStreamer] getUSerInfoWithUserID:userID];
+    if (user && (user.user_AssistantState || user.user_role == CCRole_Teacher))
     {
         return YES;
     }
@@ -768,6 +804,10 @@
                                     @"value" : value,
                                     };
             [[CCStreamer sharedStreamer] sendDrawData:info];
+            if ([CCStreamer sharedStreamer].getRoomInfo.live_status == CCLiveStatus_Stop)
+            {   //没有开始直播时，离线操作画笔
+                [self onDraw:info];
+            }
         }
         [self.drawView.canvasView setBrush:nil];
     }
@@ -777,13 +817,14 @@
     //Chenfy..TODO..TEST
     //判断视频状态
     if (self.videoSuspend) {
-        self.pageNum = @"-1";
+#pragma mark -- wb_change
+        self.pageNum = WB_PAGE_STR_ONE;
     } else {
         self.pageNum = self.oldPageNum;
     }
-    //判断是否是白板，如果是白板则page为“-1”
+#pragma mark -- wb_change
     if ([self.docId isEqualToString:@"WhiteBorad"]) {
-        self.pageNum = @"-1";
+        self.pageNum = WB_PAGE_STR_ONE;
     }
     NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
     now = now*1000;
@@ -947,16 +988,18 @@
 - (void)sendDocChange:(CCDoc *)doc currentPage:(NSInteger)currentPage
 {
     NSString *url = [doc getPicUrl:currentPage];
+    self.docMode = (int)doc.mode;
     [self sendDocChange:doc.docID fileName:doc.docName page:currentPage totalPage:doc.pageSize url:url useSDK:doc.useSDK];
 }
 
 - (void)sendDocChange:(NSString *)docID fileName:(NSString *)fileName page:(NSInteger)page totalPage:(NSInteger)totalPage url:(NSString *)url useSDK:(BOOL)useSDk
 {
+    NSURL *imageUrl = [NSURL URLWithString:url];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+    __block CGFloat width = self.docParent.frame.size.width;
+    __block CGFloat height = self.docParent.frame.size.height;
+
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSURL *imageUrl = [NSURL URLWithString:url];
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
-        CGFloat width = self.docParent.frame.size.width;
-        CGFloat height = self.docParent.frame.size.height;
         if (!CGSizeEqualToSize(image.size, CGSizeZero))
         {
             width = image.size.width;
@@ -975,6 +1018,11 @@
                 newUrl = [NSString stringWithFormat:@"http:%@", newUrl];
             }
         }
+        //Chenfy...PPT_sync
+        CCRoom *room = [[CCStreamer sharedStreamer]getRoomInfo];
+        NSString *uid = room.user_id ? room.user_id : @"";
+        NSTimeInterval timeMS = [CCDocManager getTimeStampMS];
+        
         NSDictionary *value = @{@"docid":docID.length == 0 ? @"" : docID,
                                 @"fileName":fileName.length == 0 ? @"":fileName,
                                 @"page":@(page),
@@ -982,7 +1030,11 @@
                                 @"url":newUrl.length == 0 ? @"#":newUrl,
                                 @"useSDK":useSDk ? @(YES) : @(NO),
                                 @"height" : @(width),
-                                @"width" : @(height)};
+                                @"width" : @(height),
+                                @"mode":@(self.docMode),
+                                @"userid":uid,
+                                @"currentTime":@(timeMS)
+                                };
         if ([CCStreamer sharedStreamer].getRoomInfo.live_status == CCLiveStatus_Stop)
         {
             [[NSNotificationCenter defaultCenter] postNotificationName:CCNotiReceiveSocketEvent object:nil userInfo:@{@"event":@(CCSocketEvent_DocPageChange), @"value":@{@"value":value}}];
@@ -1128,12 +1180,15 @@
                             @"width" : @(height)};
     value = @{@"value":value};
     self.oldDocId = self.docId;
-    if (![docid isEqualToString:@"video_draw"]) {
+    if (![docid isEqualToString:@"video_draw"])
+    {
         self.docId = docid;
     }
     self.oldPpturl = self.ppturl;
     self.oldDocName = self.docName;
-    if (![self.pageNum isEqualToString:@"-1"]) {
+#pragma mark -- wb_change
+    if (![self.pageNum isEqualToString:WB_PAGE_STR_ONE])
+    {
         self.oldPageNum = self.pageNum;
     }
     self.oldUseSDK = self.useSDK;
@@ -1157,11 +1212,14 @@
     }
     self.videoSuspend = NO;
     //Chenfy..added
-    if ([self.pageNum isEqualToString:@"-1"] && ![self.docId isEqualToString:@"WhiteBoard"]) {
+#pragma mark -- wb_change
+    if ([self.pageNum isEqualToString:WB_PAGE_STR_ONE] && ![self.docId isEqualToString:@"WhiteBoard"]) {
         self.pageNum = self.oldPageNum;
     }
-    if ([self.oldDocId isEqualToString:@"WhiteBoard"] || [self.oldDocId isEqualToString:@"WhiteBorad"]) {
-        self.pageNum = @"-1";
+    if ([self.oldDocId isEqualToString:@"WhiteBoard"] || [self.oldDocId isEqualToString:@"WhiteBorad"])
+    {
+#pragma mark -- wb_change
+        self.pageNum = WB_PAGE_STR_ONE;
     }
     
     CGFloat width = self.docParent.frame.size.width;
@@ -1175,9 +1233,7 @@
                             @"height" : @(width),
                             @"width" : @(height)};
     value = @{@"value":value};
-    
     CCLog(@"Chenfy..clearDoc....%@",value);
-    
     [self onPageChange:value];
     [self.allDataDic removeObjectForKey:docid];
     return YES;
@@ -1251,4 +1307,11 @@
     int intValue = time;
     return intValue;
 }
+//毫秒时间戳
++ (NSTimeInterval)getTimeStampMS
+{
+    NSTimeInterval timeInt = [[NSDate date] timeIntervalSince1970]*1000;
+    return timeInt;
+}
+
 @end

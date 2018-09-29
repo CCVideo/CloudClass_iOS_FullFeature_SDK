@@ -179,7 +179,8 @@
             }
         }
         _drawMenuView.delegate = self;
-        _drawMenuView.pageLabel.text = [NSString stringWithFormat:@"%@ / %@", @(self.streamView.steamSpeak.nowDocpage+1), @(self.streamView.steamSpeak.nowDoc.pageSize)];
+        [self pageResetPageShow];
+        
         [self.view addSubview:_drawMenuView];
         __weak typeof(self) weakSelf = self;
         [_drawMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -188,6 +189,30 @@
         }];
     }
     return _drawMenuView;
+}
+//计算page显示的标题
+- (void)pageResetPageShow
+{
+    CCDoc *doc = self.streamView.steamSpeak.nowDoc;
+    int pageNow = 1 , pageTotal = 1;
+    if (doc)
+    {
+        //计算page显示
+        pageNow = (int)(self.streamView.steamSpeak.nowDocpage+1);
+        pageNow = pageNow < 1 ? 1 :pageNow;
+        pageTotal = (int) (self.streamView.steamSpeak.nowDoc.pageSize);
+    }
+    pageTotal = pageTotal < 1 ? 1 : pageTotal;
+    _drawMenuView.pageLabel.text = [NSString stringWithFormat:@"%d / %d", pageNow, pageTotal];
+}
+- (BOOL)isWhiteBoard
+{
+    CCDoc *doc = self.streamView.steamSpeak.nowDoc;
+    if (doc)
+    {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)drawBtnClicked:(UIButton *)btn
@@ -214,12 +239,20 @@
 
 - (void)pageFrontBtnClicked:(UIButton *)btn
 {
+    if ([self isWhiteBoard])
+    {
+        return;
+    }
     [self.streamView clickFront:nil];
     self.drawMenuView.pageLabel.text = [NSString stringWithFormat:@"%@ / %@", @(self.streamView.steamSpeak.nowDocpage+1), @(self.streamView.steamSpeak.nowDoc.pageSize)];
 }
 
 - (void)pageBackBtnClicked:(UIButton *)btn
 {
+    if ([self isWhiteBoard])
+    {
+        return;
+    }
     [self.streamView clickBack:nil];
     NSInteger nowPage = self.streamView.steamSpeak.nowDocpage+1;
     self.drawMenuView.pageLabel.text = [NSString stringWithFormat:@"%@ / %@", @(nowPage), @(self.streamView.steamSpeak.nowDoc.pageSize)];

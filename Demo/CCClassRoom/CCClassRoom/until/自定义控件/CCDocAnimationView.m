@@ -19,13 +19,13 @@
 #define KK_Heri_Vertical_badage  420
 
 
-@interface CCDocAnimationView()<UIWebViewDelegate, WKNavigationDelegate, WKScriptMessageHandler>
-@property (strong, nonatomic) WKWebView *webView;
+@interface CCDocAnimationView()<UIWebViewDelegate>
+@property (strong, nonatomic) UIWebView *webView;
 @property (copy,   nonatomic) AnimationBlock block;
-@property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) CCDocDrawView *drawView;
 @property (assign, nonatomic) CGFloat imageWidth;
 @property (assign, nonatomic) CGFloat imageHeight;
+
 @property (assign, nonatomic) CGFloat scale;
 @property (strong, nonatomic) NSString *docID;
 @property (assign, nonatomic) NSInteger page;
@@ -37,6 +37,8 @@
 //useSDK YES PPT动画， 如果是NO 直接翻页
 @property (assign, nonatomic) BOOL useSDK;
 @property (strong, nonatomic) NSString *path;
+//Chenfy-标注是否是第一次加载
+@property (assign, nonatomic) BOOL isLoadHistory;
 @end
 
 @implementation CCDocAnimationView
@@ -45,152 +47,11 @@
     if (self = [super initWithFrame:frame])
     {
         self.initFrame = frame;
+        _isLoadHistory = YES;
+        [self loadWebView];
     }
     self.backgroundColor = [UIColor whiteColor];
     return self;
-}
-
-//记录PPT frame
-- (void)setPPTFrameAll:(CGRect)frame newFrame:(CGRect)frameNew
-{
-    if (frameNew.size.width > KK_Heri_Vertical_badage)
-    {
-        //竖屏
-        self.pptFrameBig = frame;
-    }
-    else
-    {
-        //横屏
-        self.pptFrameSmall = frame;
-    }
-}
-//获取PPT frame
-- (CGRect)getPPTAvalibaleFrame
-{
-    CCDocManager *manager = [CCDocManager sharedManager];
-    if (manager.videoSuspend) {
-        return self.initFrame;
-    }
-    CGRect frame ;
-    if (self.frame.size.width > KK_Heri_Vertical_badage)
-    {
-        if (CGRectEqualToRect(self.pptFrameSmall, CGRectZero))
-        {
-            frame = self.initFrame;
-        }
-        else
-        {
-            //竖屏
-            frame = self.pptFrameBig;
-        }
-    }
-    else
-    {
-        //横屏
-        frame = self.pptFrameSmall;
-    }
-    return frame;
-}
-
-- (void)loadImageView:(NSString *)path
-{
-    //    if (_imageView)
-    //    {
-    //        [_imageView removeFromSuperview];
-    //        _imageView = nil;
-    //    }
-    //    _imageView = [[UIImageView alloc] init];
-    //    _imageView.contentMode = UIViewContentModeScaleAspectFit;
-    //    _imageView.backgroundColor = [UIColor clearColor];
-    
-    if (!_imageView)
-    {
-        _imageView = [[UIImageView alloc] init];
-        _imageView.contentMode = UIViewContentModeScaleAspectFit;
-        _imageView.backgroundColor = [UIColor clearColor];
-    }
-    
-    [CCDocManager sharedManager].docParent.backgroundColor = [[UIColor alloc] initWithRed:1.f green:1.f blue:1.f alpha:0.2];
-    __weak typeof(self) weakSelf = self;
-    
-    BOOL isVideoSupport = [CCDocManager sharedManager].videoSuspend;
-    [_imageView sd_setImageWithURL:[NSURL URLWithString:path] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        if (image)
-        {
-            //Chenfy..注释掉..为了解决切换PPT时，文档
-            CGFloat width = image.size.width;
-            CGFloat height = image.size.height;
-            CGFloat widthScale = weakSelf.initFrame.size.width/width;
-            CGFloat heightScale = weakSelf.initFrame.size.height/height;
-            CGFloat scale = widthScale < heightScale ? widthScale : heightScale;
-            CGRect frame = CGRectMake(weakSelf.initFrame.origin.x + weakSelf.initFrame.size.width / 2 - width * scale / 2,
-                                      weakSelf.initFrame.origin.y + weakSelf.initFrame.size.height / 2 - height * scale / 2,
-                                      width * scale,
-                                      height * scale);
-            //打开可以保持画笔同步，注释掉会导致，播放不能占满整个屏幕
-            weakSelf.frame = frame;
-            weakSelf.pptFrame = frame;
-            //设置pptframe
-            [weakSelf setPPTFrameAll:frame newFrame:weakSelf.frame];
-            CCLog(@"chenfy_loadImage__%s__%@",__func__,NSStringFromCGRect(frame));
-            weakSelf.imageWidth = width;
-            weakSelf.imageHeight = height;
-            weakSelf.scale = scale;
-            
-            [weakSelf calcuteRealFrame];
-        }
-        //        if (weakSelf.useSDK)
-        //        {
-        //            NSString *path = [weakSelf.path stringByReplacingOccurrencesOfString:@".jpg" withString:@"/index.html"];
-        //            path = [path stringByReplacingOccurrencesOfString:@"https" withString:@"http"];
-        //            [self loadWebView:path];
-        //        }
-        if (weakSelf.block)
-        {
-            weakSelf.block(nil);
-        }
-    }];
-    [self addSubview:self.imageView];
-    WS(ws);
-    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws);
-    }];
-    
-    NSArray *subViews = [self subviews];
-    NSLog(@"Chenfy-subviews:%@",subViews);
-    UIView *viewVideo = nil;
-    UIView *viewImageV = nil;
-    for (UIView *view in subViews) {
-        if ([view isKindOfClass:[CCDragView class]]) {
-            viewVideo = view;
-        }
-        if ([view isKindOfClass:[UIImageView class]]) {
-            viewImageV = view;
-        }
-    }
-    if (viewVideo && viewImageV) {
-        [self insertSubview:viewImageV belowSubview:viewVideo];
-    }
-}
-/**
- * 当插播视频静止时，由于CCDragView依赖于父CCDocAnimationView的大小，当切换的PPT小于屏幕宽度时，VideoView就会展示不全
- * 这里做了一个偏移，保证VideoView完全覆盖Doc文档区域
- **/
-- (void)calcuteRealFrame
-{
-    NSArray *subViews = [self subviews];
-    UIView *viewVideo = nil;
-    UIView *viewImageV = nil;
-    for (UIView *view in subViews) {
-        if ([view isKindOfClass:[CCDragView class]]) {
-            viewVideo = view;
-            viewVideo.frame = CGRectMake(-self.frame.origin.x, 0, viewVideo.frame.size.width, viewVideo.frame.size.height);
-        }
-        if ([view isKindOfClass:[UIImageView class]]) {
-            viewImageV = view;
-        }
-    }
-    CCLog(@"\n\ncalcuteVideoViewRealFrame--:%@\n\n",NSStringFromCGRect(viewVideo.frame));
 }
 
 - (void)loadDrawView:(NSArray *)drawData
@@ -221,88 +82,29 @@
     self.lastAnimationStep = 0;
     self.useSDK = useSDK;
     self.path = path;
-    self.imageWidth = 0.f;
-    self.imageHeight = 0.f;
     
-    [self cleanWebViewCache];
-    NSLog(@"Chenfy---loadWithUrl__001");
-    
-    if ([path hasPrefix:@"#"] || [path hasSuffix:@"#"])
+    CCDocManager *docM = [CCDocManager sharedManager];
+    NSDictionary *dicSource = docM.dicDocData;
+    if (docM.isDocPusher)
     {
-        NSLog(@"Chenfy---loadWithUrl__002");
-        //        self.frame = self.initFrame;
-        [self.webView removeFromSuperview];
-        //Chenfy..TODO..修改了视频暂停开始层次分布异常BUG
-        //        [self.imageView removeFromSuperview];
-        //为了解决不能切换到白板的BUG
-        if ([docID isEqualToString:@"WhiteBorad"]) {
-            self.imageView.image = [UIImage new];
-            self.frame = self.initFrame;
-        }
-        else if([docID isEqualToString:@"video_draw"])
-        {
-            self.frame = self.initFrame;
-        }
-        else
-        {
-            self.frame = [self getPPTAvalibaleFrame];
-//            self.frame = self.initFrame;
-        }
-        //白板
-        if (block)
-        {
-            block(nil);
-        }
+        //切换ppt页面
+        [self pageChangePusher:dicSource];
     }
     else
     {
-        NSLog(@"Chenfy---loadWithUrl__003");
-        self.block = block;
-        //imageview重新生成
-        [self loadImageView:path];
-        
-        if (useSDK)
-        {
-            NSLog(@"Chenfy---loadWithUrl__004");
-            path = [path stringByReplacingOccurrencesOfString:@".jpg" withString:@"/index.html"];
-            //            path = [path stringByReplacingOccurrencesOfString:@"https" withString:@"http"];
-            [self loadWebView:path];
-            if (self.imageView) {
-                [self insertSubview:self.webView aboveSubview:self.imageView];
-            }
-        }
+        [self pageChangeHistory:dicSource];
     }
+    //绘制画板
     [self loadDrawView:drawData];
-}
-
-- (void)cleanWebViewCache
-{
-    //清除cookies
-    NSHTTPCookie *cookie;
-    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (cookie in [storage cookies]){
-        [storage deleteCookie:cookie];
-    }
-    //清除UIWebView的缓存
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    NSURLCache * cache = [NSURLCache sharedURLCache];
-    [cache removeAllCachedResponses];
-    [cache setDiskCapacity:0];
-    [cache setMemoryCapacity:0];
-    [self.webView loadRequest:nil];
-    [self.webView stopLoading];
-    [self.webView removeFromSuperview];
-    self.webView = nil;
-    self.webView.navigationDelegate = nil;
 }
 
 - (void)getAnimationStep
 {
     __weak typeof(self) weakSelf = self;
     NSString *param = @"window.ANIMATIONSTEPSCOUNT";
+    NSString *We = [self.webView stringByEvaluatingJavaScriptFromString:param];
+    CCLog(@"window.ANIMATIONSTEPSCOUNT----:%@",We);
     [self commitWithJSText:param completion:^(NSString *value) {
-        CCLog(@"window.ANIMATIONSTEPSCOUNT----:%@",value);
-
         if (value && [value integerValue] != -1)
         {
             weakSelf.step = [value integerValue] - 1;
@@ -319,9 +121,9 @@
 {
     __weak typeof(self) weakSelf = self;
     NSString *param = @"window.TRIGGERED_ANIMATION_STEP";
+    NSString *We = [self.webView stringByEvaluatingJavaScriptFromString:param];
+    CCLog(@"window.TRIGGERED_ANIMATION_STEP----:%@",We);
     [self commitWithJSText:param completion:^(NSString *value) {
-        CCLog(@"window.TRIGGERED_ANIMATION_STEP----:%@",value);
-
         if (value && [value integerValue] != -1)
         {
             weakSelf.currentStep = [value integerValue];
@@ -346,11 +148,7 @@
                                   @(self.page), @"page",
                                   @(step), @"step",
                                   nil];
-        
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:0 error:nil];
-        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        __block NSString *param = [NSString stringWithFormat:@"on_cc_live_dw_animation_change('%@')",jsonStr];
-        [self commitWithJSText:param completion:^(NSString *value){}];
+        [self animationChangeDoc:jsonDict];
         self.currentStep = step;
     }
 }
@@ -358,47 +156,7 @@
 #pragma mark method
 - (void)setDrawFrame:(CGRect)drawFrame
 {
-    [self setDrawFrame_Teacher:drawFrame];
-    //如果是视频暂停就保持在DOC全屏铺满
-    CCDocManager *ma = [CCDocManager sharedManager];
-    if (ma.videoSuspend || [self.docID isEqualToString:@"WhiteBorad"])
-    {
-        self.frame = drawFrame;
-    }
-}
-
-
-#pragma mark method
-- (void)setDrawFrame_Teacher:(CGRect)drawFrame
-{
-    self.frame = drawFrame;
-    if (self.imageWidth == 0 || self.imageHeight == 0)
-    {
-        if (!CGRectEqualToRect(self.pptFrame, CGRectZero))
-        {
-            self.imageWidth = self.pptFrame.size.width;
-            self.imageHeight = self.pptFrame.size.height;
-        }
-        else
-        {
-            self.imageWidth = drawFrame.size.width;
-            self.imageHeight = drawFrame.size.height;
-        }
-    }
-    CGFloat width = self.imageWidth;
-    CGFloat height = self.imageHeight;
-    CGFloat widthScale = self.frame.size.width/width;
-    CGFloat heightScale = self.frame.size.height/height;
-    CGFloat scale = widthScale < heightScale ? widthScale : heightScale;
-    CGRect frame = CGRectMake(self.frame.origin.x + self.frame.size.width / 2 - width * scale / 2,
-                              self.frame.origin.y + self.frame.size.height / 2 - height * scale / 2,
-                              width * scale,
-                              height * scale);
-    self.frame = frame;
-    self.initFrame = drawFrame;
-    [self setPPTFrameAll:frame newFrame:drawFrame];
-    [self setNeedsDisplay];
-    [self.webView reload];
+    [self docCaculateLocalChangeSize:drawFrame];
 }
 
 - (void)gotoLastStep
@@ -438,10 +196,6 @@
     {
         return -1;
     }
-    if (self.currentStep == -1 || self.step == -1)
-    {
-        return -200;
-    }
     if (self.currentStep <= 0)
     {
         NSInteger step = 0;
@@ -450,7 +204,6 @@
     }
     else
     {
-        //        NSInteger step = self.currentStep - 1;
         NSInteger step = 0;
         [self gotoStep:step];
         return step;
@@ -462,10 +215,6 @@
     if (!self.useSDK)
     {
         return -1;
-    }
-    if (self.currentStep == -1 || self.step == -1)
-    {
-        return -200;
     }
     if (self.currentStep >= self.step)
     {
@@ -479,134 +228,309 @@
     }
 }
 
-#pragma mark - webview
-//- (void)webViewDidFinishLoad:(UIWebView *)webView
-//{
-//    if(webView == self.webView) {
-//        self.webView.opaque = NO;
-//        self.webView.backgroundColor = [UIColor whiteColor];
-//        NSDictionary *jsonDict = [NSDictionary dictionaryWithObjectsAndKeys:
-//                                  @"B83D400F3DE1A17E9C33DC5901307461",@"docid",
-//                                  @1, @"page",
-//                                  @(self.lastAnimationStep), @"step",
-//                                  nil];
-//
-//        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:0 error:nil];
-//        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//        __block NSString *param = [NSString stringWithFormat:@"on_cc_live_dw_animation_change('%@')",jsonStr];
-//        __weak typeof(self) weakSelf = self;
-//        [self commitWithJSText:param completion:^(NSString *value) {
-//
-//            [weakSelf getAnimationStep];
-//
-//        }];
-//    }
-//}
-//
-//-(UIWebView *)loadWebView:(NSString *)path
-//{
-//    if (_webView)
-//    {
-//        [_webView stopLoading];
-//        [_webView removeFromSuperview];
-//        _webView = nil;
-//    }
-//    if(!_webView)
-//    {
-//        _webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-//        _webView.scalesPageToFit = YES;
-//        [self addSubview:self.webView];
-//        WS(ws);
-//        [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                    make.edges.mas_equalTo(ws);
-//                }];
-//        NSURL *url = [NSURL URLWithString:path];
-//        NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
-//        [_webView loadRequest:request];
-//        _webView.delegate = self;
-//    }
-//    return _webView;
-//}
-//-(void)commitWithJSText:(NSString *)JSText completion:(void (^)(NSString *value))block
-//{
-//
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//       NSString *value = [_webView stringByEvaluatingJavaScriptFromString:JSText];
-//        if (block)
-//        {
-//            block(value);
-//        }
-//    });
-//}
-
-#pragma mark - wkwebview
-- (void)loadWebView:(NSString *)path
+#pragma mark
+#pragma mark -- WebView 初始化
+- (UIWebView *)loadWebView
 {
-    if (_webView)
-    {
-        [_webView removeFromSuperview];
-        _webView = nil;
+    if (!_webView) {
+        _webView = [[UIWebView alloc] init];
+        _webView.userInteractionEnabled = NO;
+        _webView.scalesPageToFit = YES;
+        _webView.opaque = NO;
+        _webView.backgroundColor = [UIColor clearColor];
+        _webView.delegate = self;
+        [CCDocManager sharedManager].isDocNeedDelay = YES;
+        
+        if (@available(iOS 11.0, *)) {
+            _webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            // Fallback on earlier versions
+        }
+        NSString *urlStri = @"https://image.csslcloud.net/dp/dp.html?displayMode=2";
+        NSString *urlString  = [NSString stringWithFormat:@"%@&t=%@",urlStri,[self getCurrentTimes]];
+        
+        NSURL *urlL = [NSURL URLWithString:urlString];
+        NSLog(@"webView imageUrl = %@",urlL);
+        NSURLRequest *request = [NSURLRequest requestWithURL:urlL];
+        [_webView loadRequest:request];
+        WS(weakSelf);
+        [self addSubview:_webView];
+        [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(weakSelf);
+        }];
     }
-    WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
-    [config.userContentController addScriptMessageHandler:self name:@"js_funcname"];
+    return _webView;
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString *url = request.URL.host;
+    NSLog(@"cccc--:%@",url);
+    return YES;
+}
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
     
-    _webView = [[WKWebView alloc] initWithFrame:self.frame];
-    NSURL *url = [NSURL URLWithString:path];
-    NSLog(@"---111   imageUrl = %@",url);
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:10];
-    [_webView loadRequest:request];
-    _webView.navigationDelegate = self;
-    [self addSubview:self.webView];
-    WS(ws);
-    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(ws);
-    }];
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    WS(weakSelf);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf getAnimationStep];
+        [CCDocManager sharedManager].isDocNeedDelay = NO;
+    });
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    CCLog(@"_%s_%@_",__func__,error);
 }
 
 -(void)commitWithJSText:(NSString *)JSText completion:(void (^)(NSString *value))block
 {
+    NSLog(@"dispatch_time___:%@",JSText);
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.webView evaluateJavaScript:JSText completionHandler:^(id value, NSError * _Nullable error) {
-            if (block)
-            {
-                block(value);
-            }
-        }];
+        NSString *result = [weakSelf.webView stringByEvaluatingJavaScriptFromString:JSText];
+        CCLog(@"commitWithJSText----:<%@>",result);
+        //处理返回结果
+        NSString *res = @"";
+        if ([result isEqualToString:@""] || [result isEqualToString:@"-1"])
+        {
+            res = @"0";
+        }
+        else
+        {
+            res = result;
+        }
+        if (block)
+        {
+            block(res);
+        }
     });
 }
 
-#pragma mark - WKNavigationDelegate
-- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
+-(NSString*)getCurrentTimes
 {
-    NSLog(@"webView 加载失败:%@", error);
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    //设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    [formatter setDateFormat:@"YYYY-MM-dd-HH:mm:ss"];
+    //现在时间,你可以输出来看下是什么格式
+    NSDate *datenow = [NSDate date];
+    //将nsdate按formatter格式转成nsstring
+    NSString *currentTimeString = [formatter stringFromDate:datenow];
+    //NSLog(@"currentTimeString =  %@",currentTimeString);
+    return currentTimeString;
 }
 
-- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
+//文档翻页功能
+//pusher返回数据格式
+- (void)pageChangeHistory:(NSDictionary *)dicPage
 {
-    if(webView == self.webView) {
-        self.webView.opaque = NO;
-        self.webView.backgroundColor = [UIColor whiteColor];
-        NSDictionary *jsonDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  @"B83D400F3DE1A17E9C33DC5901307461",@"docid",
-                                  @1, @"page",
-                                  @(self.lastAnimationStep), @"step",
-                                  nil];
-        
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:0 error:nil];
-        NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        __block NSString *param = [NSString stringWithFormat:@"on_cc_live_dw_animation_change('%@')",jsonStr];
-        __weak typeof(self) weakSelf = self;
-        [self commitWithJSText:param completion:^(NSString *value) {
-            
-            [weakSelf getAnimationStep];
-            
-        }];
+    if (!dicPage || !self.webView)
+    {
+        return;
     }
-}
-#pragma mark - WKScriptMessageHandler
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
-{
+    [CCDocManager sharedManager].isDocPusher = YES;
+    NSLog(@"pageChangeHistory___:%@",dicPage);
     
+    NSDictionary *dicNew = [self dicCalcuteScaleSize:dicPage];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dicNew options:0 error:nil];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *param = [NSString stringWithFormat:@"pageChange('%@')",jsonStr];
+    
+    //延迟调用，防止卡死
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self commitWithJSText:param completion:nil];
+    });
+    //获取执行动画步数要晚于翻页
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self getAnimationStep];
+    });
 }
+
+- (void)pageChangePusher:(NSDictionary *)dicPage
+{
+    if (!dicPage || !self.webView)
+    {
+        return;
+    }
+    NSLog(@"pageChangePusher___:%@",dicPage);
+    //调整视频尺寸
+    NSMutableDictionary *dicNew = [self dicCalcuteScaleSize:dicPage];
+    
+    NSMutableDictionary *dicNN = [NSMutableDictionary dictionaryWithCapacity:2];
+    [dicNN setValue:@"page_change" forKey:@"action"];
+    [dicNN setValue:@0 forKey:@"time"];
+    [dicNN setValue:dicNew forKey:@"value"];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dicNN options:0 error:nil];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *param = [NSString stringWithFormat:@"pageChange('%@')",jsonStr];
+    
+//    //延迟调用，防止卡死
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self commitWithJSText:param completion:nil];
+//    });
+//    //获取执行动画步数要晚于翻页
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self getAnimationStep];
+//    });
+    
+    //延迟调用，防止卡死
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([self timePushDelay] * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self commitWithJSText:param completion:nil];
+    });
+    //获取执行动画步数要晚于翻页
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([self timeAnimationDelay] * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self getAnimationStep];
+    });
+
+}
+
+//触发动画
+- (void)animationChangeDoc:(NSDictionary *)dicAnimation
+{
+    if (_isLoadHistory)
+    {
+        _isLoadHistory = NO;
+        [self animationChangeHistory:dicAnimation];
+        return;
+    }
+    [self animationChangePusher:dicAnimation];
+}
+
+- (void)animationChangeHistory:(NSDictionary *)dicAnimation
+{
+    if (!dicAnimation || !self.webView)
+    {
+        return;
+    }
+    NSLog(@"dicAnimationHistory___:%@",dicAnimation);
+    //获取的历史数据
+    CCDocManager *docManager = [CCDocManager sharedManager];
+    NSDictionary *dicAnim = docManager.dicDocHistoryAnimation;
+    if (!dicAnim)
+    {
+        dicAnim = dicAnimation;
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dicAnim options:0 error:nil];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *param = [NSString stringWithFormat:@"animationChange('%@')",jsonStr];
+    
+    //延迟调用，防止卡死
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self commitWithJSText:param completion:nil];
+    });
+}
+
+//触发动画
+- (void)animationChangePusher:(NSDictionary *)dicAnimation
+{
+    if (!dicAnimation || !self.webView)
+    {
+        return;
+    }
+    NSLog(@"dicAnimationPusher___:%@",dicAnimation);
+    int stepReceive = [dicAnimation[@"step"]intValue];
+    if (stepReceive == 0 || stepReceive < 0)
+    {
+        stepReceive = 0;
+    }
+    //调整视频尺寸
+    NSMutableDictionary *dicNew = [dicAnimation mutableCopy];
+    [dicNew setValue:@(self.frame.size.width) forKey:@"width"];
+    [dicNew setValue:@(self.frame.size.height) forKey:@"height"];
+    
+    [dicNew setValue:@(stepReceive) forKey:@"step"];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dicNew options:0 error:nil];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *param = [NSString stringWithFormat:@"animationChange('%@')",jsonStr];
+    
+    //延迟调用，防止卡死
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self commitWithJSText:param completion:nil];
+    });
+}
+
+//处理PPT的尺寸
+- (NSMutableDictionary *)dicCalcuteScaleSize:(NSDictionary *)dic
+{
+    NSString *docId = dic[@"docid"];
+    NSString *urlString = dic[@"url"];
+    if ([docId isEqualToString:@"WhiteBorad"] || !urlString || urlString.length == 0)
+    {
+        self.frame = self.initFrame;
+        return [dic mutableCopy];
+    }
+    
+    NSURL *imageUrl = [NSURL URLWithString:urlString];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+    
+    self.imageWidth = image.size.width;
+    self.imageHeight = image.size.height;
+    
+    CGSize im_size = [self docCaculateLocalChangeSize:CGRectZero];
+    NSMutableDictionary *dicNew = [dic mutableCopy];
+    
+    [dicNew setValue:@(im_size.width) forKey:@"width"];
+    [dicNew setValue:@(im_size.height) forKey:@"height"];
+    
+    return dicNew;
+}
+
+
+- (CGSize)docCaculateLocalChangeSize:(CGRect)drawFrame
+{
+    if (!CGRectEqualToRect(drawFrame, CGRectZero))
+    {
+        self.initFrame = drawFrame;
+    }
+    if (self.imageWidth == 0)
+    {
+        self.frame = self.initFrame;
+        return CGSizeZero;
+    }
+    if ([self.docID isEqualToString:@"WhiteBorad"])
+    {
+        self.frame = self.initFrame;
+        return drawFrame.size;
+    }
+    NSLog(@"____%f__",self.initFrame.size.width);
+    CGFloat width = self.imageWidth;
+    CGFloat height = self.imageHeight;
+    CGFloat widthScale = self.initFrame.size.width/width;
+    CGFloat heightScale = self.initFrame.size.height/height;
+    CGFloat scale = widthScale < heightScale ? widthScale : heightScale;
+    CGRect frame = CGRectMake(self.initFrame.origin.x + self.initFrame.size.width / 2 - width * scale / 2,
+                              self.initFrame.origin.y + self.initFrame.size.height / 2 - height * scale / 2,
+                              width * scale,
+                              height * scale);
+    self.frame = frame;
+    
+    return frame.size;
+}
+
+- (float)timePushDelay
+{
+    BOOL docDelay = [CCDocManager sharedManager].isDocNeedDelay;
+    if (docDelay)
+    {
+        return 1.0;
+    }
+    return 0.2;
+}
+- (float)timeAnimationDelay
+{
+    BOOL docDelay = [CCDocManager sharedManager].isDocNeedDelay;
+    if (docDelay)
+    {
+        return 0.5;
+    }
+    return 0.15;
+}
+
+
+
 @end

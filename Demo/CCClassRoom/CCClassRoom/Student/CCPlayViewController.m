@@ -37,6 +37,9 @@
 #import "CCBrainView.h"
 #import "CCTicketVoteView.h"
 #import "CCTickeResultView.h"
+#import "CCRewardView.h"
+#import "CCTipsView.h"
+#import "CCLoadingView.h"
 
 #define infomationViewClassRoomIconLeft 3
 #define infomationViewErrorwRight 9.f
@@ -45,8 +48,6 @@
 #define infomationViewHostNamelabelRight 0.f
 
 #define TeacherNamedDelTime 0
-
-
 
 @interface CCPlayViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate, UIGestureRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CCDrawMenuViewDelegate>
 @property(nonatomic,strong)CCStreamerView     *streamView;
@@ -63,6 +64,7 @@
 @property(nonatomic,strong)CustomTextField      *chatTextField;
 @property(nonatomic,strong)UIButton             *sendButton;
 @property(nonatomic,strong)UIButton             *sendPicButton;
+@property(nonatomic,strong)UIButton             *sendFlowerButton;
 @property(nonatomic,strong)UIView               *contentView;
 @property(nonatomic,strong)UIButton             *rightView;
 
@@ -131,6 +133,11 @@
 @property(nonatomic,strong)UIButton *windowFullScreenBtn;
 @property(nonatomic,copy)NSString *warmPlayUrlString;
 
+#pragma mark strong
+@property(nonatomic,strong)CCRoom *room;
+#pragma mark strong -- 判断是否展示reward view
+@property(nonatomic,assign)BOOL willShowRewardView;
+
 @end
 
 @implementation CCPlayViewController
@@ -157,8 +164,15 @@
     }
 }
 
+- (CCRoom *)room
+{
+    return [[CCStreamer sharedStreamer]getRoomInfo];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [CCDocManager sharedManager].isDocPusher = NO;
+
     [self contentImageViewDealShow];
     
     if (self.isLandSpace)
@@ -230,7 +244,7 @@
     NSInteger count = [CCStreamer sharedStreamer].getRoomInfo.room_userList.count;
     if (count == 0)
     {
-        UIAlertView *alert = [UIAlertView bk_alertViewWithTitle:@"正在初始化"];
+        UIAlertView *alert = [UIAlertView bk_alertViewWithTitle:@"正在登录"];
         [alert show];
         _loginAlertView = alert;
     }
@@ -308,12 +322,66 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    WS(weakSelf);
+    _willShowRewardView = YES;
     [self.streamView viewDidAppear];
     
     [self reAttachVideoAndShareScreenView];
     
     [self contentImageViewDealShow];
+    [[CCStreamer sharedStreamer]onStreamStatsListener:^(BOOL result, NSError *error, id info) {
+        NSLog(@"__result_%d__error__%@__info__%@",result,error,info);
+        [weakSelf postStreamStatusMessage:info];
+    }];
 }
+- (void)postStreamStatusMessage:(id)obj
+{
+    NSLog(@"AAAAAAAAAAAAAAAAA___%@",obj);
+    NSDictionary *dicReceive = obj;
+    int status = [dicReceive[@"status"]intValue];
+    BOOL isRemote = [dicReceive[@"type"]boolValue];
+    CCStream *stream = dicReceive[@"stream"];
+    NSDictionary *dicNew = @{@"streamID":stream.streamID,@"role":@(CCRole_Student)};
+    
+    if (status == 1003 && isRemote)
+    {   //重新订阅
+        NSNotification *nofity = [NSNotification notificationWithName:@"black" object:nil userInfo:dicNew];
+        [self reSub:nofity];
+        NSLog(@"re_re_substream");
+    }
+    if (status == 1003 && !isRemote)
+    {   //重新推流
+        [self rePublish];
+        NSLog(@"re_re_publish");
+    }
+    [[NSNotificationCenter defaultCenter]postNotificationName:KKEY_Loading_changed object:obj];
+}
+#pragma mark
+#pragma mark -- 重新推流
+- (void)rePublish
+{
+    __weak typeof(self) weakSelf = self;
+    [[CCStreamer sharedStreamer] stopPublish:^(BOOL result, NSError *error, id info) {
+        if (result)
+        {
+            NSLog(@"%s", __func__);
+            weakSelf.micStatus = 0;
+            [weakSelf.streamView removeStreamView:weakSelf.preView];
+            //重新推流
+            [weakSelf publish];
+        }
+        else
+        {
+            if (error.code != 4002)
+            {
+                [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                    
+                }];
+            }
+        }
+    }];
+}
+
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
@@ -357,6 +425,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    _willShowRewardView = NO;
     if (self.voteView)
     {
         [self.voteView removeFromSuperview];
@@ -739,10 +808,18 @@
         make.size.mas_equalTo(image.size);
     }];
     
+    [self.contentView addSubview:self.sendFlowerButton];
+    CGSize sizeIm = CGSizeMake(25, 25);
+    [self.sendFlowerButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(ws.contentView.mas_centerY);
+        make.left.mas_equalTo(ws.sendPicButton.mas_right).offset(CCGetRealFromPt(1));
+        make.size.mas_equalTo(sizeIm);
+    }];
+    
     [self.contentView addSubview:self.chatTextField];
     [_chatTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(ws.contentView.mas_centerY);
-        make.left.mas_equalTo(ws.sendPicButton.mas_right).offset(CCGetRealFromPt(0));
+        make.left.mas_equalTo(ws.sendFlowerButton.mas_right).offset(CCGetRealFromPt(5));
         make.height.mas_equalTo(CCGetRealFromPt(78));
     }];
     
@@ -1046,7 +1123,8 @@
                 {
                     //不做处理
                     weakSelf.micStatus = 0;
-                    [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:@[] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                    NSString *message = [CCTool toolErrorMessage:error];
+                    [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:@[] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                         
                     }];
                 }
@@ -1091,7 +1169,8 @@
                         }
                         else
                         {
-                            [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:@[] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                            NSString *message = [CCTool toolErrorMessage:error];
+                            [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:@[] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                 
                             }];
                         }
@@ -1215,6 +1294,56 @@
 -(void)sendPicBtnClicked {
     [_chatTextField resignFirstResponder];
     [self selectImage];
+}
+
+- (UIButton *)sendFlowerButton
+{
+    if (!_sendFlowerButton)
+    {
+        _sendFlowerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_sendFlowerButton setBackgroundImage:[UIImage imageNamed:@"flower_small"] forState:UIControlStateNormal];
+        [_sendFlowerButton setBackgroundImage:[UIImage imageNamed:@"flower_small"] forState:UIControlStateHighlighted];
+        [_sendFlowerButton addTarget:self action:@selector(rewardSendFlower) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _sendFlowerButton;
+}
+- (void)rewardSendFlower
+{
+    CCShareObject *shareObj = [CCShareObject sharedObj];
+    BOOL allowSend = shareObj.isAllowSendFlower;
+    if (!allowSend)
+    {
+        [[CCTipsView new] showMessage:@"鲜花生长中，3分钟后才可以送出哟！"];
+        return;
+    }
+    
+    [self.chatTextField resignFirstResponder];
+    CCRoom *room = [[CCStreamer sharedStreamer]getRoomInfo];
+    if (room.live_status != CCLiveStatus_Start)
+    {
+        return;
+    }
+    NSArray *userArr = room.room_userList;
+    CCUser *uNow = nil;
+    for (CCUser *user in userArr)
+    {
+        if (user.user_role == CCRole_Teacher)
+        {
+            uNow = user;
+            break;
+        }
+    }
+    if (!uNow)
+    {
+        return;
+    }
+    NSString *uid = uNow.user_id;
+    NSString *uname = uNow.user_name;
+    NSString *type = @"flower";
+    NSString *sid = room.user_id;
+    
+    [[CCStreamer sharedStreamer]rewardUid:uid uName:uname type:type sender:sid];
+    [CCRewardView addTimeLimit];
 }
 
 -(UIImageView *)contentBtnView {
@@ -1840,6 +1969,11 @@
     }
     else if (event == CCSocketEvent_TeacherNamed)
     {
+        if ([self roleIsInspector])
+        {
+            //隐身者不能参加互动
+            return;
+        }
         _chatTextField.text = nil;
         [_chatTextField resignFirstResponder];
         NSLog(@"%d", __LINE__);
@@ -1926,6 +2060,7 @@
     else if (event == CCSocketEvent_TemplateChanged)
     {
         NSLog(@"%d", __LINE__);
+        [CCDocManager sharedManager].isDocPusher = NO;
         CCRoomTemplate template = (CCRoomTemplate)[[noti.userInfo objectForKey:@"value"] integerValue];
         if (self.isLandSpace && template == CCRoomTemplateSpeak)
         {
@@ -2012,6 +2147,11 @@
     }
     else if (event == CCSocketEvent_ReciveVote)
     {
+        if ([self roleIsInspector])
+        {
+            //隐身者不能参加互动
+            return;
+        }
         _chatTextField.text = nil;
         [_chatTextField resignFirstResponder];
         //答题开始
@@ -2073,6 +2213,11 @@
     }
     else if (event == CCSocketEvent_ReciveVoteAns)
     {
+        if ([self roleIsInspector])
+        {
+            //隐身者不能参加互动
+            return;
+        }
         _chatTextField.text = nil;
         [_chatTextField resignFirstResponder];
         if (self.voteView)
@@ -2193,7 +2338,7 @@
     else if (event == CCSocketEvent_ReciveInterCutAudioOrVideo)
     {
         NSDictionary *info = [noti.userInfo objectForKey:@"value"];
-        NSString *from = [noti.userInfo objectForKey:@"type"];
+        __unused NSString *from = [noti.userInfo objectForKey:@"type"];
         NSString *type = [info objectForKey:@"type"];
         if ([type isEqualToString:@"audioMedia"])
         {
@@ -2349,6 +2494,15 @@
     {
         [self socketVote:2 value:value];
     }
+    //奖杯、鲜花
+    else if(event == CCSocketEvent_Flower)
+    {
+        [self rewardFlower:value];
+    }
+    else if(event == CCSocketEvent_Cup)
+    {
+        [self rewardCup:value];
+    }
 }
 
 //头脑风暴
@@ -2391,6 +2545,7 @@
     NSDictionary *dicData = obj[@"data"];
     NSString *markId = dicData[@"id"];
     if (type == 0) {
+        self.ticketResult = @"";
         self.dicTicketsContents = dicData;
         NSString *title = dicData[@"title"];
         NSNumber *type = dicData[@"type"];
@@ -2415,6 +2570,106 @@
         self.ticketResultView = [[CCTickeResultView alloc]initWithChoiceContent:self.dicTicketsContents result:self.dicTicketsResult select:self.ticketResult];
         [self.ticketResultView show];
     }
+}
+
+/*
+ {
+    action = flower;
+    data =     {
+        id = "4F86DB46-D229-422B-B701-86A4B1FC2BED";
+        sender = 3d985c9170044606b6721faede3dfe88;
+        uid = ce276d11525e4fa6b371c0469dc2513d;
+        uname = e123;
+        };
+    time = "1533527052.039108";
+    type = reward;
+    }
+ */
+//reward 奖励、鲜花
+- (void)rewardFlower:(id)obj
+{
+    CCLog(@"rewardFlower__%@",obj);
+    NSDictionary *dicData = obj[@"data"];
+    NSString *uid = dicData[@"uid"];
+    NSString *uname = dicData[@"uname"];
+    NSString *sid = dicData[@"sender"];
+
+    CCUser *user = [self getCurrentUser:uid];
+    if (!user)
+    {
+        return;
+    }
+    CCMemberType mType = [self getRewardType:user];
+    NSString *title = [self getRewardTitle:uid user:uname];
+    
+    [self showRewardView:mType msg:title];
+}
+- (void)rewardCup:(id)obj
+{
+    CCLog(@"rewardCup%@",obj);
+    NSDictionary *dicData = obj[@"data"];
+    NSString *uid = dicData[@"uid"];
+    NSString *uname = dicData[@"uname"];
+    NSString *sid = dicData[@"sender"];
+
+    CCUser *user = [self getCurrentUser:uid];
+    if (!user)
+    {
+        return;
+    }
+    CCMemberType mType = [self getRewardType:user];
+    NSString *title = [self getRewardTitle:uid user:uname];
+    
+    [self showRewardView:mType msg:title];
+}
+
+//获取当前学员
+- (CCUser *)getCurrentUser:(NSString *)uid
+{
+    NSArray *arrayUser = self.room.room_userList;
+    CCUser *userNew = nil;
+    for (CCUser *user in arrayUser)
+    {
+        if ([user.user_id isEqualToString:uid])
+        {
+            userNew = user;
+            break;
+        }
+    }
+    return userNew;
+}
+//获取配型
+- (CCMemberType)getRewardType:(CCUser *)user
+{
+    CCMemberType mType = CCMemberType_Teacher;
+    if (user.user_role == CCRole_Teacher)
+    {
+        mType = CCMemberType_Teacher;
+    }
+    else
+    {
+        mType = CCMemberType_Student;
+    }
+    return mType;
+}
+//获取展示标题
+- (NSString *)getRewardTitle:(NSString *)uid user:(NSString *)uname
+{
+    if ([self.room.user_id isEqualToString:uid])
+    {
+        return @"你";
+    }
+    else
+        return uname;
+}
+
+- (void)showRewardView:(CCMemberType)type msg:(NSString *)user
+{
+    if (!_willShowRewardView)
+    {
+        return;
+    }
+    [[CCRewardView shareReward]showRole:type user:user withTarget:self isTeacher:NO];
 }
 
 - (void)receiveInvite:(NSNotification *)noti
@@ -2542,7 +2797,8 @@
         }
         else
         {
-            [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            NSString *message = [CCTool toolErrorMessage:error];
+            [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 
             }];
         }
@@ -2565,7 +2821,8 @@
         {
             if (error.code != 4002)
             {
-                [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                NSString *message = [CCTool toolErrorMessage:error];
+                [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                     
                 }];
             }
@@ -2591,30 +2848,15 @@
     [[CCStreamer sharedStreamer] stopPreview];
     self.preView = nil;
     __weak typeof(self) weakSelf = self;
-    //    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-    
-    dispatch_time_t time=dispatch_time(DISPATCH_TIME_NOW, 10*NSEC_PER_SEC);
-    dispatch_after(time, dispatch_get_main_queue(), ^{
-        [weakSelf popToScanVC];
-    });
-    if (weakSelf.micStatus == 2)
-    {
-        [[CCStreamer sharedStreamer] stopPublish:^(BOOL result, NSError *error, id info) {
-            [[CCStreamer sharedStreamer] leaveRoom:^(BOOL result, NSError *error, id info) {
-                [weakSelf.loadingView removeFromSuperview];
-                [weakSelf popToScanVC];
-            }];
-        }];
-    }
-    else
-    {
+
+    CCLog(@"__leave_status__%ld",(long)weakSelf.micStatus);
+  
+    [[CCStreamer sharedStreamer] stopPublish:^(BOOL result, NSError *error, id info) {
         [[CCStreamer sharedStreamer] leaveRoom:^(BOOL result, NSError *error, id info) {
-            [_loadingView removeFromSuperview];
+            [weakSelf.loadingView removeFromSuperview];
             [weakSelf popToScanVC];
         }];
-    }
-    //    });
-    //    [self popToScanVC];
+    }];
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -2705,7 +2947,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     Dialogue *dialogue = [self.tableArray objectAtIndex:indexPath.row];
-    return dialogue.msgSize.height + 10;
+    return dialogue.msgSize.height + 10 + 8;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -3477,10 +3719,11 @@
 
 - (void)popToScanVC
 {
+    /*
     [[CCStreamer sharedStreamer] realsesAllStream];
     [[CCDocManager sharedManager] clearData];
     [self removeObserver];
-    
+    */
     if (self.navigationController.topViewController == self.navigationController.visibleViewController)
     {
         //是push的
@@ -3610,5 +3853,21 @@
         CCLog(@"warm_play_error!");
     }];
 }
+
+//用户角色判断
+- (BOOL)roleIsInspector
+{
+    if (self.roleType == CCRole_Inspector) {
+        return YES;
+    }
+    return NO;
+}
+
+//调整鲜花奖杯，聊天视图层次
+- (void)changeKeyboardViewUp
+{
+    [self.view bringSubviewToFront:self.contentView];
+}
+
 
 @end

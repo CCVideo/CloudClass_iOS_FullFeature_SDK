@@ -18,6 +18,8 @@
 @property (assign, nonatomic) float size;
 @property (strong, nonatomic) NSString *picDomain;
 @property (assign, nonatomic) BOOL isReleatedDoc;
+@property (assign, nonatomic) long mode;
+
 
 - (id)initWithDic:(NSDictionary *)dic picDomain:(NSString *)domain;
 - (NSString *)getPicUrl:(NSInteger)picNum;

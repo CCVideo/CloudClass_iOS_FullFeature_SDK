@@ -9,6 +9,9 @@
 #import "Dialogue.h"
 #import "Utility.h"
 
+//替换空格符
+#define CCKEY_SPACE_REPLACE @"|xCCx|"
+
 @implementation Dialogue
 
 - (NSString *)description {
@@ -142,8 +145,9 @@
     return size;
 }
 
-+ (NSString *)addLinkTag:(NSString *)str
++ (NSString *)addLinkTag:(NSString *)string
 {
+    NSString *str = [string stringByReplacingOccurrencesOfString:@" " withString:CCKEY_SPACE_REPLACE];
     NSString *pattern = @"(([hH][tT]{2}[pP]|[hH][tT]{2}[pP][sS]|[fF][tT][pP])://)(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\\&%_\\./-~-]*)?";
     NSRegularExpression *regular = [[NSRegularExpression alloc]initWithPattern:pattern options:NSRegularExpressionDotMatchesLineSeparators error:nil];
     NSArray *splitStrs = [str componentsSeparatedByString:@" "];
@@ -163,11 +167,13 @@
         }
         [newStr appendString:newSplitStr];
     }
-    return [NSString stringWithString:newStr];
+    NSString *news = [newStr stringByReplacingOccurrencesOfString:CCKEY_SPACE_REPLACE withString:@" "];
+    return [NSString stringWithString:news];
 }
 
-+ (NSString *)removeLinkTag:(NSString *)str
++ (NSString *)removeLinkTag:(NSString *)string
 {
+    NSString *str = [string stringByReplacingOccurrencesOfString:@" " withString:CCKEY_SPACE_REPLACE];
     NSArray *splitStrs = [str componentsSeparatedByString:@" "];
     NSMutableString *newStr = [NSMutableString string];
     for (NSString *str in splitStrs)
@@ -180,6 +186,7 @@
         }
         [newStr appendString:newSplitStr];
     }
-    return [NSString stringWithString:newStr];
+    NSString *news = [newStr stringByReplacingOccurrencesOfString:CCKEY_SPACE_REPLACE withString:@" "];
+    return [NSString stringWithString:news];
 }
 @end

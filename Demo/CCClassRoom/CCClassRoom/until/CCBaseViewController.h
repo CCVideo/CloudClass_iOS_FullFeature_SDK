@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CCTool.h"
 
 //角色定义
 #define KKEY_CCRole_Teacher         @"presenter"

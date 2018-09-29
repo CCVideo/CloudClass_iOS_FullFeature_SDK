@@ -28,6 +28,12 @@
 @property (strong, nonatomic) LSDrawView *drawView;
 @property (assign, nonatomic) NSInteger animationStep;
 @property (assign, nonatomic) BOOL videoSuspend;//视频暂停在文档区显示
+@property(nonatomic,strong)NSDictionary *dicDocData; //PPT Pusher数据
+@property(nonatomic,strong)NSDictionary *dicDocHistoryAnimation; //PPT history animation数据
+#pragma mark assign
+@property(nonatomic,assign)BOOL isDocPusher; //当前那种数据处于活跃模式
+@property(assign, nonatomic)BOOL isDocNeedDelay;//文档翻页是否需要延迟执行
+@property(nonatomic,assign)int docMode; //当前那种数据处于活跃模式
 
 +(instancetype)sharedManager;
 - (void)setDocParentView:(UIView *)view;
@@ -84,7 +90,9 @@
 - (BOOL)changeToDoc:(NSString *)docid page:(NSString *)page;
 //恢复播放之后再次切换回原来的docid显示
 - (BOOL)clearDoc:(NSString *)docid;
-
+//判断当前用户是否可编辑（被授权标注或者被授权为讲师后可编辑）
 - (BOOL)user_can_edit;
+#pragma mark - 被设为讲师
+- (BOOL)user_teacher_copy;
 
 @end

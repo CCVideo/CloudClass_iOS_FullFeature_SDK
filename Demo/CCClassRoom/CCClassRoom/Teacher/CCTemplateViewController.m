@@ -11,6 +11,7 @@
 #import <CCClassRoom/CCClassRoom.h>
 #import <UIAlertView+BlocksKit.h>
 #import "LoadingView.h"
+#import "CCDocManager.h"
 
 #define DEL 15
 
@@ -153,6 +154,7 @@
     BOOL result = [[CCStreamer sharedStreamer] changeRoomTemplateMode:template completion:^(BOOL result, NSError *error, id info) {
         if (result)
         {
+            [CCDocManager sharedManager].isDocPusher = NO;
             //修改成功
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (weakSelf.loadingView)
@@ -180,7 +182,8 @@
             {
                 self.twoBtn.selected = YES;
             }
-            [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            NSString *message = [CCTool toolErrorMessage:error];
+            [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 
             }];
         }

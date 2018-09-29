@@ -10,6 +10,7 @@
 #import <CCClassRoom/CCClassRoom.h>
 #import <BlocksKit+UIKit.h>
 #import "LCActionSheet.h"
+#import "CCRewardView.h"
 
 #define ACTIONSHEETTAGONE 1001
 #define ACTIONSHEETTAGTWO 1002
@@ -18,6 +19,8 @@
 #define ACTIONSHEETTAGFIVE 1005
 #define ACTIONSHEETTAGSIX 1006
 #define ACTIONSHEETTAGSEVEN 1007
+//学生用tag
+#define ACTIONSHEETTAGEIGHT 1008
 
 @interface CCStudentActionManager()<UIActionSheetDelegate>
 {
@@ -41,6 +44,7 @@
 {
     self.showModel = model;
     block = completion;
+#define CC_Cup  @"奖励奖杯"
     __weak typeof(self) weakSelf = self;
     NSArray *titleArray;
     NSInteger tag = 0;
@@ -49,9 +53,6 @@
         //旁听
         BOOL mute = [[CCStreamer sharedStreamer] getAudienceChatStatus:model.userID];
         NSString *title = mute ? @"解除禁言" : @"禁言";
-//        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:title, @"踢出房间", nil];
-//        sheet.tag = ACTIONSHEETTAGSIX;
-//        [sheet showInView:view];
         titleArray = @[title, @"踢出房间"];
         tag = ACTIONSHEETTAGSIX;
     }
@@ -79,12 +80,7 @@
                     }
                 }
             }
-//            NSString *audioTitle = audioOpened ? @"关闭麦克风" : @"开启麦克风";
-//            UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:drawtitle, @"踢下麦", title, @"踢出房间", nil];
-//            sheet.tag = ACTIONSHEETTAGONE;
-//            [sheet showInView:view];
-            
-            titleArray = @[drawtitle, @"踢下麦", title, @"踢出房间"];
+            titleArray = @[CC_Cup,drawtitle, @"踢下麦", title, @"踢出房间"];
             tag = ACTIONSHEETTAGONE;
         }
         else
@@ -93,10 +89,7 @@
             if (mode == CCClassType_Auto)
             {
                 NSString *title = model.isMute ? @"解除禁言" : @"禁言";
-//                UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:drawtitle, title, @"踢出房间", nil];
-//                sheet.tag = ACTIONSHEETTAGFIVE;
-//                [sheet showInView:view];
-                titleArray = @[drawtitle, title, @"踢出房间"];
+                titleArray = @[CC_Cup, drawtitle, title, @"踢出房间"];
                 tag = ACTIONSHEETTAGFIVE;
             }
             else if(mode == CCClassType_Named)
@@ -106,10 +99,7 @@
                     //邀请上麦
                     //禁言,取消
                     NSString *title = model.isMute ? @"解除禁言" : @"禁言";
-//                    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:drawtitle, @"邀请上麦", title, @"踢出房间", nil];
-//                    sheet.tag = ACTIONSHEETTAGTWO;
-//                    [sheet showInView:view];
-                    titleArray = @[drawtitle, @"邀请上麦", title, @"踢出房间"];
+                    titleArray = @[CC_Cup,drawtitle, @"邀请上麦", title, @"踢出房间"];
                     tag = ACTIONSHEETTAGTWO;
                 }
                 else if (model.micType == CCUserMicStatus_Wait)
@@ -117,20 +107,14 @@
                     //同意上麦
                     //禁言,取消
                     NSString *title = model.isMute ? @"解除禁言" : @"禁言";
-//                    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:drawtitle, @"同意上麦", title, @"踢出房间", nil];
-//                    sheet.tag = ACTIONSHEETTAGTHTREE;
-//                    [sheet showInView:view];
-                    titleArray = @[drawtitle, @"同意上麦", title, @"踢出房间"];
+                    titleArray = @[CC_Cup,drawtitle, @"同意上麦", title, @"踢出房间"];
                     tag = ACTIONSHEETTAGTHTREE;
                 }
                 else if (model.micType == CCUserMicStatus_Inviteing)
                 {
                     //取消邀请 禁言 取消
                     NSString *title = model.isMute ? @"解除禁言" : @"禁言";
-//                    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:drawtitle, @"取消邀请", title, @"踢出房间", nil];
-//                    sheet.tag = ACTIONSHEETTAGFOUR;
-//                    [sheet showInView:view];
-                    titleArray = @[drawtitle, @"取消邀请", title, @"踢出房间"];
+                    titleArray = @[CC_Cup,drawtitle, @"取消邀请", title, @"踢出房间"];
                     tag = ACTIONSHEETTAGFOUR;
                 }
             }
@@ -139,10 +123,7 @@
                 //邀请上麦
                 //禁言,取消
                 NSString *title = model.isMute ? @"解除禁言" : @"禁言";
-//                UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:drawtitle, @"拉上麦", title, @"踢出房间", nil];
-//                sheet.tag = ACTIONSHEETTAGSEVEN;
-//                [sheet showInView:view];
-                titleArray = @[drawtitle, @"拉上麦", title, @"踢出房间"];
+                titleArray = @[CC_Cup,drawtitle, @"拉上麦", title, @"踢出房间"];
                 tag = ACTIONSHEETTAGSEVEN;
             }
         }
@@ -177,8 +158,21 @@
     }
 }
 
+//数据偏移
+#define Index_Offset    1
+
 - (void)actionSheet:(LCActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    //学生事件
+    if ([[CCStreamer sharedStreamer] getRoomInfo].user_role != CCRole_Teacher)
+    {
+        if (buttonIndex == 0)
+        {
+            [self student_reward];
+        }
+        return;
+    }
+    //老师事件
     //防止学生下线取数据失败或者错误
     CCMemberModel *nowModel = [self selectedModelIsOnLine];
     CCUser *user = [[CCStreamer sharedStreamer] getUSerInfoWithUserID:nowModel.userID];
@@ -187,7 +181,11 @@
         CCMemberModel *model = self.showModel;
         if (actionSheet.tag == ACTIONSHEETTAGONE)
         {
-            if (buttonIndex == 0)
+            if (buttonIndex == (-1 + Index_Offset))
+            {
+                [self rewardCup];
+            }
+            else if (buttonIndex == (0 + Index_Offset))
             {
                 for (CCUser *user in [[CCStreamer sharedStreamer] getRoomInfo].room_userList)
                 {
@@ -204,7 +202,7 @@
                     }
                 }
             }
-            else if (buttonIndex == 1)
+            else if (buttonIndex == (1 + Index_Offset))
             {
                 if (nowModel.micType == CCUserMicStatus_Connected || nowModel.micType == CCUserMicStatus_Connecting)
                 {
@@ -226,7 +224,7 @@
                     [view show];
                 }
             }
-            else if(buttonIndex == 2)
+            else if(buttonIndex == (2 + Index_Offset))
             {
                 if (model.isMute)
                 {
@@ -237,11 +235,11 @@
                     [[CCStreamer sharedStreamer] gagUser:model.userID];
                 }
             }
-            else if (buttonIndex == 3)
+            else if (buttonIndex == (3 + + Index_Offset))
             {
                 [[CCStreamer sharedStreamer] kickUserFromRoom:model.userID];
             }
-            else if (buttonIndex == 4)
+            else if (buttonIndex == (4+ Index_Offset))
             {
                 if (user.user_AssistantState)
                 {
@@ -255,7 +253,11 @@
         }
         else if (actionSheet.tag == ACTIONSHEETTAGTWO)
         {
-            if (buttonIndex == 0)
+            if (buttonIndex == (-1 + Index_Offset))
+            {
+                [self rewardCup];
+            }
+            else if (buttonIndex == (0+ Index_Offset))
             {
                 for (CCUser *user in [[CCStreamer sharedStreamer] getRoomInfo].room_userList)
                 {
@@ -272,7 +274,7 @@
                     }
                 }
             }
-            else if (buttonIndex == 1)
+            else if (buttonIndex == (1+ Index_Offset))
             {
                 if (nowModel.micType == CCUserMicStatus_None)
                 {
@@ -280,7 +282,8 @@
                         NSLog(@"%s__%@__%@__%@", __func__, @(result), error, info);
                         if (!result)
                         {
-                            [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:@[] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                            NSString *message = [CCTool toolErrorMessage:error];
+                            [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:@[] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                 
                             }];
                         }
@@ -292,14 +295,15 @@
                         NSLog(@"%s__%@__%@__%@", __func__, @(result), error, info);
                         if (!result)
                         {
-                            [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:@[] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                            NSString *message = [CCTool toolErrorMessage:error];
+                            [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:@[] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                 
                             }];
                         }
                     }];
                 }
             }
-            else if (buttonIndex == 2)
+            else if (buttonIndex == (2+ Index_Offset))
             {
                 if (model.isMute)
                 {
@@ -310,11 +314,11 @@
                     [[CCStreamer sharedStreamer] gagUser:model.userID];
                 }
             }
-            else if (buttonIndex == 3)
+            else if (buttonIndex == (3+ Index_Offset))
             {
                 [[CCStreamer sharedStreamer] kickUserFromRoom:model.userID];
             }
-            else if (buttonIndex == 4)
+            else if (buttonIndex == (4+ Index_Offset))
             {
                 if (user.user_AssistantState)
                 {
@@ -328,7 +332,11 @@
         }
         else if (actionSheet.tag == ACTIONSHEETTAGTHTREE)
         {
-            if (buttonIndex == 0)
+            if (buttonIndex == (-1 + Index_Offset))
+            {
+                [self rewardCup];
+            }
+            else if (buttonIndex == (0+ Index_Offset))
             {
                 for (CCUser *user in [[CCStreamer sharedStreamer] getRoomInfo].room_userList)
                 {
@@ -345,7 +353,7 @@
                     }
                 }
             }
-            else if (buttonIndex == 1)
+            else if (buttonIndex == (1+ Index_Offset))
             {
                 if (nowModel.micType == CCUserMicStatus_Wait)
                 {
@@ -353,7 +361,8 @@
                         NSLog(@"%s__%@__%@__%@", __func__, @(result), error, info);
                         if (!result)
                         {
-                            [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:@[] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                            NSString *message = [CCTool toolErrorMessage:error];
+                            [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:@[] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                 
                             }];
                         }
@@ -366,7 +375,7 @@
                     [view show];
                 }
             }
-            else if (buttonIndex == 2)
+            else if (buttonIndex == (2+ Index_Offset))
             {
                 if (model.isMute)
                 {
@@ -377,11 +386,11 @@
                     [[CCStreamer sharedStreamer] gagUser:model.userID];
                 }
             }
-            else if (buttonIndex == 3)
+            else if (buttonIndex == (3+ Index_Offset))
             {
                 [[CCStreamer sharedStreamer] kickUserFromRoom:model.userID];
             }
-            else if (buttonIndex == 4)
+            else if (buttonIndex == (4+ Index_Offset))
             {
                 if (user.user_AssistantState)
                 {
@@ -395,7 +404,11 @@
         }
         else if (actionSheet.tag == ACTIONSHEETTAGFOUR)
         {
-            if (buttonIndex == 0)
+            if (buttonIndex == (-1 + Index_Offset))
+            {
+                [self rewardCup];
+            }
+            else if (buttonIndex == (0+ Index_Offset))
             {
                 for (CCUser *user in [[CCStreamer sharedStreamer] getRoomInfo].room_userList)
                 {
@@ -412,7 +425,7 @@
                     }
                 }
             }
-            else if (buttonIndex == 1)
+            else if (buttonIndex == (1+ Index_Offset))
             {
                 if (nowModel.micType == CCUserMicStatus_Inviteing)
                 {
@@ -427,7 +440,7 @@
                     [view show];
                 }
             }
-            else if (buttonIndex == 2)
+            else if (buttonIndex == (2+ Index_Offset))
             {
                 if (model.isMute)
                 {
@@ -438,11 +451,11 @@
                     [[CCStreamer sharedStreamer] gagUser:model.userID];
                 }
             }
-            else if (buttonIndex == 3)
+            else if (buttonIndex == (3+ Index_Offset))
             {
                 [[CCStreamer sharedStreamer] kickUserFromRoom:model.userID];
             }
-            else if (buttonIndex == 4)
+            else if (buttonIndex == (4+ Index_Offset))
             {
                 if (user.user_AssistantState)
                 {
@@ -456,7 +469,11 @@
         }
         else if (actionSheet.tag == ACTIONSHEETTAGFIVE)
         {
-            if (buttonIndex == 0)
+            if (buttonIndex == (-1 + Index_Offset))
+            {
+                [self rewardCup];
+            }
+            else if (buttonIndex == (0+ Index_Offset))
             {
                 for (CCUser *user in [[CCStreamer sharedStreamer] getRoomInfo].room_userList)
                 {
@@ -473,7 +490,7 @@
                     }
                 }
             }
-            else if (buttonIndex == 1)
+            else if (buttonIndex == (1+ Index_Offset))
             {
                 BOOL mute = [[CCStreamer sharedStreamer] getAudienceChatStatus:model.userID];
                 if (mute)
@@ -485,11 +502,11 @@
                     [[CCStreamer sharedStreamer] gagUser:model.userID];
                 }
             }
-            else if (buttonIndex == 2)
+            else if (buttonIndex == (2+ Index_Offset))
             {
                 [[CCStreamer sharedStreamer] kickUserFromRoom:model.userID];
             }
-            else if (buttonIndex == 3)
+            else if (buttonIndex == (3+ Index_Offset))
             {
                 if (user.user_AssistantState)
                 {
@@ -533,7 +550,11 @@
         }
         else if (actionSheet.tag == ACTIONSHEETTAGSEVEN)
         {
-            if (buttonIndex == 0)
+            if (buttonIndex == (-1 + Index_Offset))
+            {
+                [self rewardCup];
+            }
+            else if (buttonIndex == (0+ Index_Offset))
             {
                 for (CCUser *user in [[CCStreamer sharedStreamer] getRoomInfo].room_userList)
                 {
@@ -550,19 +571,20 @@
                     }
                 }
             }
-            else if (buttonIndex == 1)
+            else if (buttonIndex == (1+ Index_Offset))
             {
                 [[CCStreamer sharedStreamer] certainHandup:model.userID completion:^(BOOL result, NSError *error, id info) {
                     NSLog(@"%s__%@__%@__%@", __func__, @(result), error, info);
                     if (!result)
                     {
-                        [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:@[] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                        NSString *message = [CCTool toolErrorMessage:error];
+                        [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:@[] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                             
                         }];
                     }
                 }];
             }
-            else if (buttonIndex == 2)
+            else if (buttonIndex == (2+ Index_Offset))
             {
                 if (model.isMute)
                 {
@@ -573,11 +595,11 @@
                     [[CCStreamer sharedStreamer] gagUser:model.userID];
                 }
             }
-            else if (buttonIndex == 3)
+            else if (buttonIndex == (3+ Index_Offset))
             {
                 [[CCStreamer sharedStreamer] kickUserFromRoom:model.userID];
             }
-            else if (buttonIndex == 4)
+            else if (buttonIndex == (4+ Index_Offset))
             {
                 if (user.user_AssistantState)
                 {
@@ -600,6 +622,19 @@
         UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"" message:@"学生已经下线" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
         [view show];
     }
+}
+
+//发送奖杯
+- (void)rewardCup
+{
+    CCMemberModel *nowModel = [self selectedModelIsOnLine];
+    CCUser *user = [[CCStreamer sharedStreamer] getUSerInfoWithUserID:nowModel.userID];
+
+    NSString *uid = user.user_id;
+    NSString *uname = user.user_name;
+    NSString *type = @"cup";
+    NSString *sid = [[CCStreamer sharedStreamer]getRoomInfo].user_id;
+    [[CCStreamer sharedStreamer]rewardUid:uid uName:uname type:type sender:sid];
 }
 
 - (NSString *)getDrawTitleWithModel:(CCMemberModel *)model
@@ -650,4 +685,66 @@
     model.userID = userID;
     return model;
 }
+
+
+//========
+/*处理老师的actionsheet操作*/
+- (void)studentCallWithUserID:(NSString *)userID inView:(UIView *)view dismiss:(CCStudentActionManagerBlock)completion
+{
+    if ([[CCStreamer sharedStreamer] getRoomInfo].user_role == CCRole_Teacher)
+    {
+        return;
+    }
+    CCMemberModel *model = [self modelWithUserID:userID];
+    if (model.type != CCMemberType_Teacher)
+    {
+        return;
+    }
+    [self studentCallWithModel:model inView:view dismiss:completion];
+}
+- (void)studentCallWithModel:(CCMemberModel *)model inView:(UIView *)view dismiss:(CCStudentActionManagerBlock)completion
+{
+    self.showModel = model;
+    block = completion;
+#define CC_Flower  @"赠送鲜花"
+    __weak typeof(self) weakSelf = self;
+    NSArray *titleArray;
+   
+    titleArray = @[CC_Flower];
+ 
+    if (titleArray.count > 0)
+    {
+        [LCActionSheetConfig shared].buttonColor = CCRGBColor(242, 124, 25);
+        [LCActionSheetConfig shared].cancleBtnColor = [UIColor blackColor];
+        [LCActionSheetConfig shared].buttonFont = [UIFont systemFontOfSize:FontSizeClass_16];
+        LCActionSheet *actionSheet = [LCActionSheet sheetWithTitle:nil cancelButtonTitle:@"取消" clicked:^(LCActionSheet *actionSheet, NSInteger buttonIndex) {
+            buttonIndex--;
+            [weakSelf actionSheet:actionSheet clickedButtonAtIndex:buttonIndex];
+        } otherButtonTitleArray:titleArray];
+        actionSheet.tag = ACTIONSHEETTAGEIGHT;
+        actionSheet.scrolling          = YES;
+        actionSheet.visibleButtonCount = 3.6f;
+        [actionSheet show];
+    }
+}
+//学生发送鲜花
+- (void)student_reward
+{
+    CCRoom *room = [[CCStreamer sharedStreamer]getRoomInfo];
+    if (room.user_role != CCRole_Student || room.live_status != CCLiveStatus_Start)
+    {
+        return;
+    }
+    CCMemberModel *nowModel = [self selectedModelIsOnLine];
+    CCUser *user = [[CCStreamer sharedStreamer] getUSerInfoWithUserID:nowModel.userID];
+
+    NSString *uid = user.user_id;
+    NSString *uname = user.user_name;
+    NSString *type = @"flower";
+    NSString *sid = room.user_id;
+    
+    [[CCStreamer sharedStreamer]rewardUid:uid uName:uname type:type sender:sid];
+    [CCRewardView addTimeLimit];
+}
+
 @end

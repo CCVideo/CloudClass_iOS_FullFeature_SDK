@@ -91,7 +91,8 @@
             }
             else
             {
-                [UIAlertView bk_showAlertViewWithTitle:@"" message:error.domain cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:nil];
+                NSString *message = [CCTool toolErrorMessage:error];
+                [UIAlertView bk_showAlertViewWithTitle:@"" message:message cancelButtonTitle:@"知道了" otherButtonTitles:nil handler:nil];
             }
         }];
     }

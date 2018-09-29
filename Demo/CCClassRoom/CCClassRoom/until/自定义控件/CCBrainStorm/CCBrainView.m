@@ -210,7 +210,10 @@
 
 #pragma mark-delegate
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    self.textView.text = @"";
+    if ([self.textView.text isEqualToString:@"请输入内容"])
+    {
+        self.textView.text = @"";
+    }
     _isEdit = YES;
     return YES;
 }

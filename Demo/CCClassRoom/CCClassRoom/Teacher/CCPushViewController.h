@@ -29,5 +29,7 @@
 @property(nonatomic,assign)BOOL                  isLandSpace;
 @property(nonatomic,assign)CCVideoOriMode       videoOriMode;
 - (void)docPageChange;
+//调整鲜花奖杯，聊天视图层次
+- (void)changeKeyboardViewUp;
 
 @end
